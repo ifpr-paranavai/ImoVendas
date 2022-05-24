@@ -14,41 +14,53 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/js/bootstrap.min.js' %}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
-<body class="container">
+<body class="backgroundColor">
     <header class="py-3 mb-5 shadow bg-mainColor">
-        <div class="d-flex align-items-center justify-content-around">
-            <a href="#" class="d-flex hover-transition">
-                <i class="fas fa-house text-black"></i>
-                <h3 >ImoVendas</h3>
+        <div class="d-flex align-items-center justify-content-between mx-4">
+            <a href="#" class="text-white hover-transition logo">
+                <i class="fa-solid fa-house fa-xl">
+                    ImoVendas
+                </i>
             </a>
             <div class="input-group w-50 opacity-75">
                 <input type="text" class="form-control" placeholder="Buscar anúncio por cidade">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary border-0" type="button">
+                    <button class="btn btn-outline-secondary" type="button">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
             </div>
             <a href="">
-                <i class="fas fa-user text-black"></i>
+                <i class="fas fa-user iconCircle text-white hover-transition"></i>
             </a>
         </div>
     </header>
-    {% block content %}
-    <div class="shadow rounded mx-5">
-        <div class="px-4 py-1 cardTitle hover-transition">
-            <h4>Titulo</h4>
+    
+    <div class="contentBlock container">
+        {% block content %}
+        <div class="shadow rounded bg-light">
+            <div class="px-4 py-1 cardTitle hover-transition text-white">
+                <h4>Titulo</h4>
+            </div>
+            <div class="d-flex p-5">
+                <h4>Conteúdo</h4>
+            </div>
         </div>
-        <div class="d-flex p-5">
-            <h4>Conteúdo</h4>
+    
+        <div class="shadow rounded bg-light">
+            <div class="px-4 py-1 cardTitle hover-transition text-white">
+                <h4>Titulo 2</h4>
+            </div>
+            <div class="d-flex p-5">
+                <h4>Conteúdo 2</h4>
+            </div>
         </div>
+        {% endblock %}
     </div>
-    {% endblock %}
 </body>
 
 </html>
