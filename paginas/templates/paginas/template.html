@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>ImoVendas</title>
+    {% endblock %}
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/js/bootstrap.min.js' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+
+</head>
+
+<body class="container">
+    <header class="py-3 mb-5 shadow bg-mainColor">
+        <div class="d-flex align-items-center justify-content-around">
+            <a href="#" class="d-flex hover-transition">
+                <i class="fas fa-house text-black"></i>
+                <h3 >ImoVendas</h3>
+            </a>
+            <div class="input-group w-50 opacity-75">
+                <input type="text" class="form-control" placeholder="Buscar anúncio por cidade">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary border-0" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <a href="">
+                <i class="fas fa-user text-black"></i>
+            </a>
+        </div>
+    </header>
+    {% block content %}
+    <div class="shadow rounded mx-5">
+        <div class="px-4 py-1 cardTitle hover-transition">
+            <h4>Titulo</h4>
+        </div>
+        <div class="d-flex p-5">
+            <h4>Conteúdo</h4>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+:root {
+    --mainColor: #00FFAB
+}
+
+body {
+    color: white;
+}
+
+header {
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+a:link {
+    color: inherit;
+    text-decoration: none;
+}
+
+a {
+    color: inherit;
+}
+
+.bg-mainColor {
+    background-color: var(--mainColor);
+}
+
+.mainColor {
+    color: var(--mainColor);
+}
+
+.cardTitle {
+    width: fit-content;
+    background-color: var(--mainColor);
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.hover-transition {
+    filter: contrast(100%);
+    transition: ease-in();
+    transition-duration: 250ms;
+}
+
+.hover-transition:hover {
+    filter: contrast(200%);
+}
