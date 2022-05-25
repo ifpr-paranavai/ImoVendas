@@ -12,47 +12,68 @@
     {% endblock %}
 
     <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'bootstrap/js/bootstrap.min.js' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- Bootstrap v5.2.0-beta1 -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Font Awesome Free 6.1.1 by @fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="backgroundColor">
-    <header class="py-3 mb-5 shadow bg-mainColor">
+    <header class="py-3 mb-5 shadow bgMainColor">
         <div class="d-flex align-items-center justify-content-between mx-4">
-            <a href="#" class="text-white hover-transition logo">
+            <a href="#" class="text-white iconTextButton hoverTransition">
                 <i class="fa-solid fa-house fa-xl">
                     ImoVendas
                 </i>
             </a>
-            <div class="input-group w-50 opacity-75">
-                <input type="text" class="form-control" placeholder="Buscar anúncio por cidade">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">
+            <div class="input-group w-50">
+                <input type="text" class="form-control opacity-75" placeholder="Buscar anúncio por cidade">
+                <div class="input-group-append my-auto">
+                    <a class="text-white border border-light iconTextButton hoverTransition" type="button">
                         <i class="fas fa-search"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
-            <a href="">
-                <i class="fas fa-user iconCircle text-white hover-transition"></i>
+            <a class="text-white border border-light iconTextButton hoverTransition" href="#" role="button" id="dropdownMenuLink"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user">
+                    Conta
+                </i>
             </a>
+
+            <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">
+                    <i class="fas fas fa-sign-in">Entrar</i>
+                </a>
+
+                <hr />
+
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-sign-in">Cadastrar-se</i>
+                </a>
+            </div>
+
         </div>
     </header>
-    
+
     <div class="contentBlock container">
         {% block content %}
         <div class="shadow rounded bg-light">
-            <div class="px-4 py-1 cardTitle hover-transition text-white">
+            <div class="px-4 py-1 cardTitle hoverTransition text-white">
                 <h4>Titulo</h4>
             </div>
             <div class="d-flex p-5">
                 <h4>Conteúdo</h4>
             </div>
         </div>
-    
+
         <div class="shadow rounded bg-light">
-            <div class="px-4 py-1 cardTitle hover-transition text-white">
+            <div class="px-4 py-1 cardTitle hoverTransition text-white">
                 <h4>Titulo 2</h4>
             </div>
             <div class="d-flex p-5">
