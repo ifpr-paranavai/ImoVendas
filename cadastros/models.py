@@ -1,6 +1,11 @@
 from django.db import models
+from multiselectfield import MultiSelectField
+from django.contrib.auth.models import User
 
-
+FINALIDADE_CHOICES = (
+    (1, "Vender"),
+    (2, "Alugar"),
+)
 
 # Create your models here.
 class Estado(models.Model):
@@ -17,11 +22,6 @@ class Cidade(models.Model):
     def __str__(self):
         return f"{self.nome}-{self.estado.sigla}"
 
-class Finalidade(models.Model):
-    nome = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.nome
 
 class Tipo(models.Model):
     nome = models.CharField(max_length=50)
@@ -37,6 +37,8 @@ class Perfil(models.Model):
     cpf = models.CharField(verbose_name="CPF", help_text="Informe seu CPF", max_length=11, null=True, blank=True, unique=True)
     cidade = models.ForeignKey(Cidade, on_delete=models.PROTECT, help_text="Informe a sua cidade")
 
+    usuario = models.OneToOneField(User, on_delete=models.PROTECT)
+
     def __str__(self):
         return self.nome
 
@@ -48,20 +50,22 @@ class Imovel(models.Model):
     cep = models.CharField(verbose_name="CEP", help_text="Informe o CEP do imóvel", max_length=10)
     rua = models.CharField(help_text="Informe a rua do imóvel", max_length=80)
     bairro = models.CharField(help_text="Informe o bairro do imóvel", max_length=30)
+    numero = models.CharField(verbose_name="Número", help_text="Informe o número ou lote", max_length=30, blank=True, null=True)
     cidade = models.ForeignKey(Cidade, on_delete=models.PROTECT, help_text="Cidade do imóvel")
 
     quantidade_quartos = models.IntegerField(verbose_name="Quantidade de quartos")
     quantidade_banheiros = models.IntegerField(verbose_name="Quantidade de banheiros")
     area = models.DecimalField(verbose_name="Área", help_text="Digite a área total do imóvel", max_digits=10, decimal_places=2)
     tipo = models.ForeignKey(Tipo, on_delete=models.PROTECT, help_text="Informe o tipo do imóvel")
-    finalidade = models.ForeignKey(Finalidade, on_delete=models.PROTECT, help_text="Informe a finalidade do imóvel")
+    finalidade = MultiSelectField(choices=FINALIDADE_CHOICES, help_text="Informe a finalidade do imóvel")
     
     cadastrado_em = models.DateTimeField(auto_now_add=True)
-    # expira_em = models.DateTimeField()
+    expira_em = models.DateTimeField()
 
-    # usuario = user
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     publicado = models.BooleanField(default=True)
     negociado = models.BooleanField(default=False)
+
     comprovante = models.FileField(null=True, blank=True)
     destacado = models.BooleanField(default=False)
 
@@ -70,11 +74,12 @@ class Imovel(models.Model):
 
 
 class Foto(models.Model):
-    imovel = models.ForeignKey(Imovel ,on_delete=models.PROTECT)
-    # foto = models.ImageField()
+    imovel = models.ForeignKey(Imovel, on_delete=models.CASCADE)
+    foto = models.ImageField()
+
 
 class Historico(models.Model):
-    imovel = models.ForeignKey(Imovel ,on_delete=models.PROTECT)
+    imovel = models.ForeignKey(Imovel, on_delete=models.CASCADE)
     movimentado_em = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20)
     motivo = models.CharField(max_length=100)

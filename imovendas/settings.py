@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_cleanup.apps.CleanupConfig',
+
     'paginas.apps.PaginasConfig',
     'cadastros.apps.CadastrosConfig',
 ]
@@ -113,6 +115,15 @@ TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 
 USE_TZ = True
+
+
+# Formatação de números
+# https://docs.djangoproject.com/en/4.0/ref/settings/
+# USE_L10N = True
+
+USE_THOUSAND_SEPARATOR = True
+
+DECIMAL_SEPARATOR = ','
 
 
 # Static files (CSS, JavaScript, Images)
