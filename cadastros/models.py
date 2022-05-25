@@ -7,6 +7,14 @@ FINALIDADE_CHOICES = (
     (2, "Alugar"),
 )
 
+STATUS_CHOICES = (
+    (1, "Publicado"),
+    (2, "Destacado"),
+    (3, "A retificar"),
+)
+
+
+
 # Create your models here.
 class Estado(models.Model):
     nome = models.CharField(max_length=30, unique=True)
@@ -68,6 +76,7 @@ class Imovel(models.Model):
 
     comprovante = models.FileField(null=True, blank=True)
     destacado = models.BooleanField(default=False)
+    valor_pago_destaque = models.DecimalField(decimal_places=2, max_digits=7)
 
     def __str__(self):
         return f"{self.titulo} | {self.cidade} | {self.preco}"
@@ -81,5 +90,5 @@ class Foto(models.Model):
 class Historico(models.Model):
     imovel = models.ForeignKey(Imovel, on_delete=models.CASCADE)
     movimentado_em = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20)
-    motivo = models.CharField(max_length=100)
+    status = models.CharField(choices=STATUS_CHOICES, max_length=2)
+    motivo = models.TextField()
