@@ -1,6 +1,9 @@
-from django.views.generic import TemplateView
+from django.views.generic.list import ListView
+
+from cadastros.models import Imovel
 
 
 
-class Index(TemplateView):
+class Index(ListView):
+    model = Imovel
     template_name = 'paginas/index.html'

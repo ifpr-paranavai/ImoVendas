@@ -9,7 +9,7 @@ header {
   border-bottom-right-radius: 30px;
 }
 
-a:link{
+a:link {
   text-decoration: none;
 }
 
@@ -21,11 +21,11 @@ a:link{
   color: var(--mainColor);
 }
 
-.backgroundColor{
+.backgroundColor {
   background-color: var(--bgColor);
 }
 
-.iconTextButton{
+.iconTextButton {
   padding: 1rem;
   padding-top: 0.6rem;
   padding-bottom: 0.6rem;
@@ -67,4 +67,18 @@ a:link{
 .hoverTransition:hover {
   background-color: var(--mainColor);
   filter: hue-rotate(45deg);
+}
+
+.biggerTransition {
+  transition: ease-out();
+  transition-duration: 250ms;
+  transform: scale(1);
+}
+
+.biggerTransition:hover {
+  transform: scale(1.05);
+}
+
+.propertyCard{
+  min-width: 30vh;
 }
