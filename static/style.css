@@ -1,5 +1,6 @@
 :root {
   --mainColor: #00e699;
+  --secondaryColor: #24d0ff;
 
   --bgColor: #eaeaea;
 }
@@ -65,8 +66,7 @@ a:link {
 }
 
 .hoverTransition:hover {
-  background-color: var(--mainColor);
-  filter: hue-rotate(45deg);
+  background-color: var(--secondaryColor);
 }
 
 .biggerTransition {
@@ -80,5 +80,6 @@ a:link {
 }
 
 .propertyCard{
-  min-width: 30vh;
+  min-width: 20vh;
+  max-width: 20vw;
 }

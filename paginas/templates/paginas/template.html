@@ -39,25 +39,47 @@
                     </a>
                 </div>
             </div>
-            <a class="text-white border border-light iconTextButton hoverTransition" href="#" role="button" id="dropdownMenuLink"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-user">
-                    Conta
-                </i>
+            {% if request.user.is_authenticated %}
+            <a class="text-white border border-light iconTextButton hoverTransition" href="#" role="button"
+                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user"></i>
             </a>
 
             <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="#">
-                    <i class="fas fas fa-sign-in">Entrar</i>
+                    <i class="fas fas fa-address-card"></i> 
+                    Perfil
+                </a>
+
+                <hr />
+
+                <a class="dropdown-item" href="logout">
+                    <i class="fas fa-right-from-bracket"></i>
+                    Sair
+                </a>
+            </div>
+
+            {% else %}
+            <a class="text-white border border-light iconTextButton hoverTransition" href="#" role="button"
+                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user"></i>
+            </a>
+
+            <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-right-to-bracket"></i>
+                    Entrar
                 </a>
 
                 <hr />
 
                 <a class="dropdown-item" href="#">
-                    <i class="fas fa-sign-in">Cadastrar-se</i>
+                    <i class="fas fa-file-pen"></i>
+                    Cadastrar-se
                 </a>
             </div>
 
+            {% endif %}
         </div>
     </header>
 
