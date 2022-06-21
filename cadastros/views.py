@@ -2,6 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Imovel
+from datetime import date, timedelta
 
 # Create your views here.
 
@@ -16,6 +17,7 @@ class ImovelCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
 
         form.instance.usuario = self.request.user
+        form.instance.expira_em = date.today() + timedelta(days=30)
 
         url = super().form_valid(form)
 
