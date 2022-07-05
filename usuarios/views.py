@@ -1,39 +1,47 @@
-from tabnanny import verbose
-from django.urls import reverse_lazy
+from cadastros.models import Cidade, Perfil
 from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
-from django.forms import CharField, PasswordInput, ModelForm
 
-from cadastros.models import Perfil
+from usuarios.forms import UsuarioForm
+
+from dal import autocomplete
 
 # Create your views here.
 
-class PerfilForm(ModelForm):
-    nome_de_usuario = CharField(help_text="Digite o seu nome de usuário", max_length=80)
-    senha = CharField(widget=PasswordInput, help_text="Digite sua senha")
-    senha_repetida = CharField(widget=PasswordInput, help_text="Repita a senha digitada")
+class CidadeAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
 
-    class Meta:
-        model = Perfil
-        exclude = ["usuario"]
-        
+        cidades = Cidade.objects.all().select_related("estado")
+
+        if self.q:
+            cidades = cidades.filter(nome__icontains=self.q).order_by("nome")
+
+        return cidades
 
 
 class PerfilCreate(CreateView):
-    form_class = PerfilForm
+    form_class = UsuarioForm
     template_name = "usuarios/cadastro-form.html"
-    success_url = reverse_lazy('index')
-    model = Perfil
+    success_url = reverse_lazy("index")
+    model = User
 
 
     def form_valid(self, form):
 
-        if form.cleaned_data["senha"] == form.cleaned_data["senha_repetida"]:
-            usuario = User.objects.create_user(form.cleaned_data["nome_de_usuario"], form.instance.email, form.cleaned_data["senha"])
-        
-
-        form.instance.usuario = usuario
-
         url = super().form_valid(form)
+
+        try:
+            perfil = Perfil.objects.create(
+                usuario=self.object,
+                nome=form.cleaned_data["nome"],
+                cpf=form.cleaned_data["cpf"],
+                celular=form.cleaned_data["celular"],
+                cidade=form.cleaned_data["cidade"],
+            )
+        except:
+            self.object.delete()
+            form.add_error(None, 'Ocorreu um erro ao cadastrar o usuário')
+            return self.form_invalid(form)
 
         return url
