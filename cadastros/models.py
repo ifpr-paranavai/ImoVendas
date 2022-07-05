@@ -40,7 +40,6 @@ class Tipo(models.Model):
 
 class Perfil(models.Model):
     nome = models.CharField(help_text="Informe seu nome completo", max_length=100)
-    email = models.EmailField(verbose_name="E-mail", help_text="Informe seu E-mail", max_length=50, unique=True)
     celular = models.CharField(help_text="Informe seu número de celular", max_length=12)
     cpf = models.CharField(verbose_name="CPF", help_text="Informe seu CPF", max_length=11, null=True, blank=True, unique=True)
     cidade = models.ForeignKey(Cidade, on_delete=models.PROTECT, help_text="Informe a sua cidade")
