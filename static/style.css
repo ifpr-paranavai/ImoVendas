@@ -5,11 +5,6 @@
   --bgColor: #eaeaea;
 }
 
-header {
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-}
-
 a:link {
   text-decoration: none;
 }
@@ -80,6 +75,6 @@ a:link {
 }
 
 .propertyCard{
-  min-width: 20vh;
-  max-width: 20vw;
+  min-width: 18vw;
+  max-width: 18vw;
 }
