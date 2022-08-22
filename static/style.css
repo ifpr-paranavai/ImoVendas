@@ -9,6 +9,10 @@ a:link {
   text-decoration: none;
 }
 
+p{
+  font-size: large;
+}
+
 .bgMainColor {
   background-color: var(--mainColor);
 }
