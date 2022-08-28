@@ -8,28 +8,49 @@
     <div class="px-4 py-1 cardTitle hoverTransition text-white">
         <h4>Imóvel</h4>
     </div>
-    <div class="d-flex flex-column p-5 overflow-auto">
+    <div class="d-flex flex-column px-5 py-2 overflow-auto">
         <h1>{{ object.titulo }}</h1>
         <div class="d-flex"> 
 
             <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8aG91c2V8ZW58MHx8MHx8&w=1000&q=80"
                     class="img-fluid w-75 rounded" />
 
-            <div class="d-flex flex-column p-4 mx-auto"> 
-
-                <a href="#" class="btn btn-lg bgMainColor mb-5" role="button">Comprar</a>
+            <div class="d-flex flex-column w-25 mx-auto px-3 py-2"> 
+                
+                <a href="#" class="btn btn-lg btn btn-outline-success mb-3" role="button">Contatar Vendedor</a>
 
                 <h2>R${{ object.preco }}</h2>
                 
                 <p> {{ object.descricao }}</p>
+
                 <p> {{ object.cidade }}</p>
-                <p> {{ object.cep }}</p>
+
                 <p> {{ object.finalidade }}</p>
 
+                <p> {{ object.tipo }}</p>
+
+                <p> {{ object.usuario }}</p>
+            </div>
+        </div>
+
+        <div class="m-2 p-2">
+
+            <h3>Informações</h3>
+            <div class="p-3">
+                <p> {{ object.quantidade_quartos }} Quarto(s)</p>
+                <p> {{ object.quantidade_banheiros }} Banheiro(s)</p>
+                <p>Área: {{ object.area }}m<sup>2</sup> </p>
             </div>
 
+            <h3>Endereço</h3>
+            <div class="p-3">
+                <p>Rua: {{ object.rua }}</p>
+                <p>Bairro: {{ object.bairro }}</p>
+                <p>Número: {{ object.numero }}</p>
+                <p>CEP: {{ object.cep }}</p>
+            </div>     
+               
         </div>
-        
     </div>
 </div>
 
