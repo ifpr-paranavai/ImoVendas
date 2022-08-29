@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'paginas.apps.PaginasConfig',
     'cadastros.apps.CadastrosConfig',
     'usuarios.apps.UsuariosConfig',
+    'autocomplete.apps.AutocompleteConfig',
 
     'debug_toolbar',
 ]

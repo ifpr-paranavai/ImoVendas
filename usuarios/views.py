@@ -1,23 +1,10 @@
-from cadastros.models import Cidade, Perfil
+from cadastros.models import Perfil
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 
 from usuarios.forms import UsuarioForm
 
-from dal import autocomplete
-
-# Create your views here.
-
-class CidadeAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-
-        cidades = Cidade.objects.all().select_related("estado")
-
-        if self.q:
-            cidades = cidades.filter(nome__icontains=self.q).order_by("nome")
-
-        return cidades
 
 
 class PerfilCreate(CreateView):
