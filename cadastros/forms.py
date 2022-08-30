@@ -22,6 +22,14 @@ class ImovelForm(forms.ModelForm):
         fields = ["titulo", "descricao", "preco", "cep", "rua", "bairro", "numero",
               "cidade", "quantidade_quartos", "quantidade_banheiros", "area", "tipo", "finalidade"]
 
+
+class ImovelFotoForm(ImovelForm):
+    fotos = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={'multiple': True}))
+
+    class Meta(ImovelForm.Meta):
+        fields = ImovelForm.Meta.fields + ["fotos"]
+
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -62,19 +70,18 @@ class ImovelForm(forms.ModelForm):
                     Column('quantidade_banheiros', css_class='form-group col-lg mb-0'),
                     Column('area', css_class='form-group col-sm mb-0'),
                 ),
+                Column('fotos', css_class='form-group col-sm mb-0'),
                 css_class="mb-5"
             ),
             
             ButtonHolder(
-                    Div(
-                        HTML("""
-                            <button type="submit" class="btn btn-lg btn-success w-100 fs-4">
-                                Salvar
-                            </button>
-                        """),
-                        css_class="w-50 mx-auto"
-                    ),
-                )
-            )  
-            
-        
+                Div(
+                    HTML("""
+                        <button type="submit" class="btn btn-lg btn-success w-100 fs-4">
+                            Salvar
+                        </button>
+                    """),
+                    css_class="w-50 mx-auto"
+                ),
+            )
+        )

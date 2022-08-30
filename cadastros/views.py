@@ -2,14 +2,14 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from cadastros.forms import ImovelForm
+from cadastros.forms import ImovelFotoForm
 from datetime import date, timedelta
 
 # Create your views here.
 
 
 class ImovelCreate(LoginRequiredMixin, CreateView):
-    form_class = ImovelForm
+    form_class = ImovelFotoForm
     template_name = "cadastros/imovel-form.html"
     success_url = reverse_lazy('index')
 
