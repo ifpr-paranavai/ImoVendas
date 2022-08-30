@@ -17,6 +17,10 @@ p{
   background-color: var(--mainColor);
 }
 
+.bgSecondColor {
+  background-color: var(--secondaryColor);
+}
+
 .mainColor {
   color: var(--mainColor);
 }

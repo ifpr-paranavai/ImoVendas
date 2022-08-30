@@ -30,9 +30,17 @@
                 
                 <p> {{ object.cidade }}</p>
 
-                <p> {{ object.finalidade }}</p>
-                
                 <p> {{ object.tipo }}</p>
+
+                <div class="d-flex">
+                    {% for f in imovel.finalidade_as_list %}
+                        {% if f == "Vender" %}
+                            <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
+                        {% else %}
+                            <p class="mx-2 px-3 py-1 rounded bgSecondColor text-white">{{f}}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
                 
                 <p> {{ object.usuario }}</p>
             </div>

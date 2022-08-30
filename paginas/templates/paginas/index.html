@@ -18,7 +18,16 @@
                     <h4>{{imovel.titulo}}</h4>
                     <p>{{imovel.preco}}</p>
                     <p>{{imovel.cidade}}</p>
-                    <p>{{imovel.finalidade}}</p>
+                    <div class="d-flex">
+                        {% for f in imovel.finalidade_as_list %}
+                            {% if f == "Vender" %}
+                                <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
+                            {% else %}
+                                <p class="mx-2 px-3 py-1 rounded bgSecondColor text-white">{{f}}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    
                 </div>
                 <a href="ver/imovel/{{imovel.pk}}" class="stretched-link"></a>
             </div>
@@ -46,7 +55,15 @@
                     <h4>{{imovel.titulo}}</h4>
                     <p>{{imovel.preco}}</p>
                     <p>{{imovel.cidade}}</p>
-                    <p>{{imovel.finalidade}}</p>
+                    <div class="d-flex">
+                        {% for f in imovel.finalidade_as_list %}
+                            {% if f == "Vender" %}
+                                <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
+                            {% else %}
+                                <p class="mx-2 px-3 py-1 rounded bgSecondColor text-white">{{f}}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
                 <a href="" class="stretched-link"></a>
             </div>
@@ -74,7 +91,15 @@
                     <h4>{{imovel.titulo}}</h4>
                     <p>{{imovel.preco}}</p>
                     <p>{{imovel.cidade}}</p>
-                    <p>{{imovel.finalidade}}</p>
+                    <div class="d-flex">
+                        {% for f in imovel.finalidade_as_list %}
+                            {% if f == "Vender" %}
+                                <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
+                            {% else %}
+                                <p class="mx-2 px-3 py-1 rounded bgSecondColor text-white">{{f}}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
                 <a href="" class="stretched-link"></a>
             </div>
