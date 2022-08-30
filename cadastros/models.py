@@ -80,6 +80,9 @@ class Imovel(models.Model):
     def __str__(self):
         return f"{self.titulo} | {self.cidade} | {self.preco}"
 
+    def finalidade_as_list(self):
+        return self.finalidade.split(",")
+
 
 class Foto(models.Model):
     imovel = models.ForeignKey(Imovel, on_delete=models.CASCADE)
