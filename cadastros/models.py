@@ -81,7 +81,7 @@ class Imovel(models.Model):
         return f"{self.titulo} | {self.cidade} | {self.preco}"
 
     def finalidade_as_list(self):
-        return self.finalidade.split(",")
+        return self.get_finalidade_display().split(", ")
 
 
 class Foto(models.Model):
