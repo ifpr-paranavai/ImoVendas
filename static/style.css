@@ -47,6 +47,13 @@ a:link{
   border-bottom-right-radius: 5px;
 }
 
+.cardTitleButton {
+  width: fit-content;
+  background-color: var(--mainColor);
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
 .iconCircle {
   background-color: var(--mainColor);
   padding: 1em;
