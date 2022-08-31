@@ -22,6 +22,10 @@ class ImovelForm(forms.ModelForm):
         fields = ["titulo", "descricao", "preco", "cep", "rua", "bairro", "numero",
               "cidade", "quantidade_quartos", "quantidade_banheiros", "area", "tipo", "finalidade"]
 
+        widgets = {
+            'cep': forms.TextInput(attrs={'data-mask':"00000-000"}),
+        }
+
 
 class ImovelFotoForm(ImovelForm):
     fotos = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={'multiple': True}))
