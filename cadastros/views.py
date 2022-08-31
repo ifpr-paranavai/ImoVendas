@@ -1,11 +1,11 @@
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from cadastros.forms import ImovelFotoForm
+from cadastros.models import Imovel
 from datetime import date, timedelta
-
-# Create your views here.
 
 
 class ImovelCreate(LoginRequiredMixin, CreateView):
@@ -21,3 +21,11 @@ class ImovelCreate(LoginRequiredMixin, CreateView):
         url = super().form_valid(form)
 
         return url
+
+class ImovelList(LoginRequiredMixin, ListView):
+    model = Imovel
+    template_name = "cadastros/imovel-list.html"
+
+    def get_queryset(self):
+        self.object_list = Imovel.objects.filter(usuario=self.request.user)
+        return self.object_list

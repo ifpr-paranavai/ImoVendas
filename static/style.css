@@ -68,3 +68,19 @@ a:link{
   background-color: var(--mainColor);
   filter: hue-rotate(45deg);
 }
+
+
+.biggerTransition {
+  transition: ease-out();
+  transition-duration: 250ms;
+  transform: scale(1);
+}
+
+.biggerTransition:hover {
+  transform: scale(1.05);
+}
+
+.propertyCard{
+  min-width: 18vw;
+  max-width: 18vw;
+}
