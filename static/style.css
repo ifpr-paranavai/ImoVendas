@@ -4,6 +4,16 @@
 
   --bgColor: #eaeaea;
 }
+ 
+.hide-mobile{
+  display: block;
+}
+
+@media screen and (max-width: 750px) {
+  .hide-mobile{
+    display: none !important;
+  }
+}
 
 a:link {
   text-decoration: none;
