@@ -9,7 +9,7 @@
         <h4>Imóvel</h4>
     </div>
 
-    <h1 class="mx-4 mt-4">{{ object.titulo }}</h1>
+    <h1 class="mx-4 mt-4">{{ object.0.titulo }}</h1>
 
     <div class="row p-4">
 
@@ -21,19 +21,19 @@
             <div class="text-center mb-3">
                 <a href="#" class="btn btn-lg btn btn-outline-success mb-3 w-75" role="button">Contatar Vendedor</a>
                 
-                <h2>R${{ object.preco }}</h2>
+                <h2>R${{ object.0.preco }}</h2>
             </div>
             
 
             <div class="text-left shadow-sm p-4">
-                <p> {{ object.descricao }}</p>
+                <p> {{ object.0.descricao }}</p>
                 
-                <p> {{ object.cidade }}</p>
+                <p> {{ object.0.cidade }}</p>
 
-                <p> {{ object.tipo }}</p>
+                <p> {{ object.0.tipo }}</p>
 
                 <div class="d-flex">
-                    {% for f in imovel.finalidade_as_list %}
+                    {% for f in object.0.finalidade_as_list %}
                         {% if f == "Vender" %}
                             <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
                         {% else %}
@@ -42,7 +42,7 @@
                     {% endfor %}
                 </div>
                 
-                <p> {{ object.usuario }}</p>
+                <p>Publicado por: {{ object.0.usuario }} ({{ object.1 }} anúncios) </p>
             </div>
         </div>
 
@@ -54,9 +54,9 @@
             <div class="w-75 shadow-sm p-4 h-100"> 
                 <h3>Informações</h3>
                 <div class="p-3">
-                    <p> {{ object.quantidade_quartos }} Quarto(s)</p>
-                    <p> {{ object.quantidade_banheiros }} Banheiro(s)</p>
-                    <p>Área: {{ object.area }}m<sup>2</sup> </p>
+                    <p> {{ object.0.quantidade_quartos }} Quarto(s)</p>
+                    <p> {{ object.0.quantidade_banheiros }} Banheiro(s)</p>
+                    <p>Área: {{ object.0.area }}m<sup>2</sup> </p>
                 </div>
             </div>
 
@@ -65,10 +65,10 @@
             <div class="w-75 shadow-sm p-4 h-100"> 
                 <h3>Endereço</h3>
                 <div class="p-3">
-                    <p>Rua: {{ object.rua }}</p>
-                    <p>Bairro: {{ object.bairro }}</p>
-                    <p>Número: {{ object.numero }}</p>
-                    <p>CEP: {{ object.cep }}</p>
+                    <p>Rua: {{ object.0.rua }}</p>
+                    <p>Bairro: {{ object.0.bairro }}</p>
+                    <p>Número: {{ object.0.numero }}</p>
+                    <p>CEP: {{ object.0.cep }}</p>
                 </div>
             </div>
         </div>
