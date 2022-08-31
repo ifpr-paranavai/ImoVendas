@@ -5,13 +5,19 @@
 
 {% block content %}
 <div class="shadow-sm rounded bg-light mb-5">
-    <div class="px-4 py-1 cardTitle hoverTransition text-white">
-        <h4>Recomendado</h4>
+    <div class="d-flex justify-content-between">
+        <div class="px-4 py-1 cardTitle hoverTransition text-white">
+            <h4>Recomendado</h4>
+        </div>
+        <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardTitleButton" href="">
+            <h4>Ver Mais</h4>
+            &ensp;
+            <i class="fa-solid fa-angles-right"></i>
+        </a>
     </div>
-    <div class="d-flex p-5 overflow-auto">
+    <div class="row justify-content-center p-5">
         {% for imovel in object_list %}
-        
-            <div class="mx-3 shadow-sm rounded position-relative propertyCard biggerTransition">
+            <div class="col-lg-3 m-3 shadow-sm rounded position-relative propertyCard biggerTransition">
                 <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NHx8fGVufDB8fHx8&w=1000&q=80"
                     class="img-thumbnail p-0"/>
                 <div class="p-3">
@@ -31,7 +37,6 @@
                 </div>
                 <a href="ver/imovel/{{imovel.pk}}" class="stretched-link"></a>
             </div>
-        </a>
 
         {% empty %}
         <h4>Não foram encontrados registros.</h4>
@@ -42,13 +47,19 @@
 </div>
 
 <div class="shadow-sm rounded bg-light mb-5">
-    <div class="px-4 py-1 cardTitle hoverTransition text-white">
-        <h4>Destaques</h4>
+    <div class="d-flex justify-content-between">
+        <div class="px-4 py-1 cardTitle hoverTransition text-white">
+            <h4>Destaques</h4>
+        </div>
+        <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardTitleButton" href="">
+            <h4>Ver Mais</h4>
+            &ensp;
+            <i class="fa-solid fa-angles-right"></i>
+        </a>
     </div>
-    <div class="d-flex p-5 overflow-auto">
+    <div class="row justify-content-center p-5">
         {% for imovel in object_list %}
-        
-            <div class="mx-3 shadow-sm rounded position-relative propertyCard biggerTransition">
+            <div class="col-lg-3 m-3 shadow-sm rounded position-relative propertyCard biggerTransition">
                 <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG91c2V8ZW58MHx8MHx8&w=1000&q=80"
                     class="img-thumbnail p-0"/>
                 <div class="p-3">
@@ -64,10 +75,10 @@
                             {% endif %}
                         {% endfor %}
                     </div>
+                    
                 </div>
-                <a href="" class="stretched-link"></a>
+                <a href="ver/imovel/{{imovel.pk}}" class="stretched-link"></a>
             </div>
-        </a>
 
         {% empty %}
         <h4>Não foram encontrados registros.</h4>
@@ -78,13 +89,19 @@
 </div>
 
 <div class="shadow-sm rounded bg-light mb-5">
-    <div class="px-4 py-1 cardTitle hoverTransition text-white">
-        <h4>Novos Imóveis</h4>
+    <div class="d-flex justify-content-between">
+        <div class="px-4 py-1 cardTitle hoverTransition text-white">
+            <h4>Novos</h4>
+        </div>
+        <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardTitleButton" href="">
+            <h4>Ver Mais</h4>
+            &ensp;
+            <i class="fa-solid fa-angles-right"></i>
+        </a>
     </div>
-    <div class="d-flex p-5 overflow-auto">
+    <div class="row justify-content-center p-5">
         {% for imovel in object_list %}
-        
-            <div class="mx-3 shadow-sm rounded position-relative propertyCard biggerTransition">
+            <div class="col-lg-3 m-3 shadow-sm rounded position-relative propertyCard biggerTransition">
                 <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8aG91c2V8ZW58MHx8MHx8&w=1000&q=80"
                     class="img-thumbnail p-0" />
                 <div class="p-3">
@@ -100,10 +117,10 @@
                             {% endif %}
                         {% endfor %}
                     </div>
+                    
                 </div>
-                <a href="" class="stretched-link"></a>
+                <a href="ver/imovel/{{imovel.pk}}" class="stretched-link"></a>
             </div>
-        </a>
 
         {% empty %}
         <h4>Não foram encontrados registros.</h4>
