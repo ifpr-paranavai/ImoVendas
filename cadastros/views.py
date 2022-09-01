@@ -30,5 +30,11 @@ class ImovelList(LoginRequiredMixin, ListView):
     template_name = "cadastros/imovel-list.html"
 
     def get_queryset(self):
-        self.object_list = Imovel.objects.filter(usuario=self.request.user)
-        return self.object_list
+        lista = []
+        imoveis = Imovel.objects.filter(usuario=self.request.user)
+
+        for imovel in imoveis:
+            lista.append([imovel, Foto.objects.filter(imovel=imovel)])
+
+        
+        return lista

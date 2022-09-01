@@ -19,14 +19,13 @@
     <div class="row justify-content-center p-3">
         {% for imovel in object_list %}
             <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">
-                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NHx8fGVufDB8fHx8&w=1000&q=80"
-                    class="img-thumbnail p-0"/>
+                <img class="img-thumbnail p-0" src={{imovel.1.0.foto.url}}/>
                 <div class="p-3">
-                    <h4>{{imovel.titulo}}</h4>
-                    <p>{{imovel.preco}}</p>
-                    <p>{{imovel.cidade}}</p>
+                    <h4>{{imovel.0.titulo}}</h4>
+                    <p>{{imovel.0.preco}}</p>
+                    <p>{{imovel.0.cidade}}</p>
                     <div class="d-flex">
-                        {% for f in imovel.finalidade_as_list %}
+                        {% for f in imovel.0.finalidade_as_list %}
                             {% if f == "Vender" %}
                                 <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
                             {% else %}
@@ -36,7 +35,7 @@
                     </div>
                     
                 </div>
-                <a href="ver/imovel/{{imovel.pk}}" class="stretched-link"></a>
+                {% comment %} <a href="{% url 'imovel-view/{{imovel.0.pk}}' %}" class="stretched-link"></a> {% endcomment %}
             </div>
         {% empty %}
         <h4>Não foram encontrados registros.</h4>
