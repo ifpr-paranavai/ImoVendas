@@ -1,4 +1,4 @@
-from cadastros.models import Imovel
+from cadastros.models import Foto, Imovel
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -9,13 +9,22 @@ class Index(ListView):
     template_name = 'paginas/index.html'
 
     def get_queryset(self):
-        proximos = Imovel.objects.all()[:6]
+        lista = [[], [], []]
+
+        proximos = Imovel.objects.filter(publicado=True)[:6]
         destaques = Imovel.objects.filter(destacado=True, publicado=True)[:6]
-        novos = Imovel.objects.filter(destacado=True).order_by('cadastrado_em')[:6]
+        novos = Imovel.objects.filter(publicado=True).order_by('cadastrado_em')[:6]
 
-        self.object_list = [proximos, destaques, novos]
+        for imovel in proximos:
+            lista[0].append([imovel, Foto.objects.filter(imovel=imovel)])
 
-        return self.object_list
+        for imovel in destaques:
+            lista[1].append([imovel, Foto.objects.filter(imovel=imovel)])
+            
+        for imovel in novos:
+            lista[2].append([imovel, Foto.objects.filter(imovel=imovel)])
+
+        return lista
 
 
 class ImovelView(DetailView):
@@ -24,7 +33,8 @@ class ImovelView(DetailView):
 
     def get_object(self):
         imovel = get_object_or_404(Imovel, pk=self.kwargs['pk'])
+        fotos = Foto.objects.filter(imovel=imovel)
         imovel_count = Imovel.objects.filter(usuario=imovel.usuario).count()
-        return [imovel, imovel_count]
+        return [imovel, fotos, imovel_count]
         
     
