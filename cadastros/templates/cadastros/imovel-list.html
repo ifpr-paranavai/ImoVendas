@@ -9,11 +9,11 @@
         <div class="px-4 py-1 cardTitle hoverTransition text-white">
             <h4>Meus Imóveis</h4>
         </div>
-        <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardTitleButton" href="">
+        {% comment %} <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardTitleButton" href="{% url 'criar-imovel' %}">
             <i class="fa-solid fa-plus"></i>
             &ensp;
             <h4>Adicionar</h4>
-        </a>
+        </a> {% endcomment %}
     </div>
     
     <div class="row justify-content-center p-3">
@@ -35,7 +35,7 @@
                     </div>
                     
                 </div>
-                {% comment %} <a href="{% url 'imovel-view/{{imovel.0.pk}}' %}" class="stretched-link"></a> {% endcomment %}
+                {% comment %} <a href="{% url 'imovel-view' pk=imovel.0.pk %}" class="stretched-link"></a> {% endcomment %}
             </div>
         {% empty %}
         <h4>Não foram encontrados registros.</h4>

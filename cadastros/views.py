@@ -1,11 +1,14 @@
+from datetime import date, timedelta
+import uuid
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.template.defaultfilters import slugify
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 from cadastros.forms import ImovelFotoForm
 from cadastros.models import Foto, Imovel
-from datetime import date, timedelta
 
 
 class ImovelCreate(LoginRequiredMixin, CreateView):
@@ -21,6 +24,8 @@ class ImovelCreate(LoginRequiredMixin, CreateView):
         
         arquivos = self.request.FILES.getlist("fotos")
         for foto in arquivos:
+            ext = foto.name.split(".")[-1]
+            foto.name = f"{uuid.uuid4()}.{ext}" 
             Foto.objects.create(imovel=form.instance, foto=foto)
 
         return url
