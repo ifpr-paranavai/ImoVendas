@@ -16,13 +16,16 @@
         <div class="col-lg-8 my-2">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="img-fluid rounded" src={{imovel.1.0.foto.url}} />
-                    </div>
                     {% for f in object.1 %}
-                    <div class="carousel-item">
-                        <img class="img-fluid rounded" src={{f.foto.url}} />
-                    </div>
+                        {% if forloop.counter == 1 %}
+                            <div class="carousel-item active">
+                                <img class="img-fluid rounded" src={{f.foto.url}} />
+                            </div>
+                        {% else %}
+                            <div class="carousel-item">
+                                <img class="img-fluid rounded" src={{f.foto.url}} />
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
