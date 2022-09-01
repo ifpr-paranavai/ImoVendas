@@ -19,7 +19,7 @@
                     {% for f in object.1 %}
                         {% if forloop.counter == 1 %}
                             <div class="carousel-item active">
-                                <img class="img-fluid rounded" src={{f.foto.url}} />
+                                <img class="img-fluid rounded  mx-auto d-block" src={{f.foto.url}} />
                             </div>
                         {% else %}
                             <div class="carousel-item">
@@ -29,11 +29,11 @@
                     {% endfor %}
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-prev-icon rounded bgMainColor" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-next-icon rounded bgMainColor" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
