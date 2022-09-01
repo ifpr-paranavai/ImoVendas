@@ -11,7 +11,7 @@
         <h4>Cadastro de Imóvel</h4>
     </div>
     <div class="px-5 py-4 mx-auto">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% crispy form %}
         </form>

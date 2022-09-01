@@ -4,7 +4,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from cadastros.forms import ImovelFotoForm
-from cadastros.models import Imovel
+from cadastros.models import Foto, Imovel
 from datetime import date, timedelta
 
 
@@ -17,8 +17,11 @@ class ImovelCreate(LoginRequiredMixin, CreateView):
 
         form.instance.usuario = self.request.user
         form.instance.expira_em = date.today() + timedelta(days=30)
-
         url = super().form_valid(form)
+        
+        arquivos = self.request.FILES.getlist("fotos")
+        for foto in arquivos:
+            Foto.objects.create(imovel=form.instance, foto=foto)
 
         return url
 

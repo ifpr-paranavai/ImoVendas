@@ -28,7 +28,7 @@ class ImovelForm(forms.ModelForm):
 
 
 class ImovelFotoForm(ImovelForm):
-    fotos = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    fotos = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}), help_text="Insira as multiplas fotos do imóvel")
 
     class Meta(ImovelForm.Meta):
         fields = ImovelForm.Meta.fields + ["fotos"]
@@ -74,10 +74,13 @@ class ImovelFotoForm(ImovelForm):
                     Column('quantidade_banheiros', css_class='form-group col-lg mb-0'),
                     Column('area', css_class='form-group col-sm mb-0'),
                 ),
-                Column('fotos', css_class='form-group col-sm mb-0'),
-                css_class="mb-5"
+                css_class="mb-5",
             ),
-            
+            Fieldset(
+                "Fotos do imóvel",
+                Column('fotos', css_class='form-group col-sm mb-0'),
+                css_class="mb-5",
+            ),
             ButtonHolder(
                 Div(
                     HTML("""
