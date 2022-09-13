@@ -2,7 +2,7 @@ from datetime import date, timedelta
 import uuid
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.template.defaultfilters import slugify
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
@@ -43,3 +43,16 @@ class ImovelList(LoginRequiredMixin, ListView):
 
         
         return lista
+
+
+def imovelDelete(request, pk=None):
+    user = request.user
+    if user.is_authenticated:
+        imovel = Imovel.objects.get(usuario=user, pk=pk)
+        
+        if imovel:
+            imovel.publicado = False
+            imovel.save()
+            return redirect("listar-imovel")
+    
+        
