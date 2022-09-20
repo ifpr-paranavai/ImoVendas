@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'paginas.apps.PaginasConfig',
     'cadastros.apps.CadastrosConfig',
+    'administrativo.apps.AdministrativoConfig',
 ]
 
 MIDDLEWARE = [
