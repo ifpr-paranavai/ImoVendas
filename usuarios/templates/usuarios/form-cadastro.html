@@ -23,16 +23,26 @@
 {% endblock %}
 
 {% block scripts %}
-{{ form.media }}
-<style>
-    .select2-container .select2-selection--single {
-        height: calc(1.5em + .75rem + 2px);
-        width: 100%;
-        border: 1px solid #ced4da;
-    }
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        display: none;
-    }
-</style>
+    {{ form.media }}
+    <style>
+        .select2-container .select2-selection--single {
+            height: calc(1.5em + .75rem + 2px);
+            width: 100%;
+            border: 1px solid #ced4da;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            display: none;
+        }
+    </style>
+
+    <script src="{% static 'jquery.mask.min.js' %}"></script>
+
+    <script>
+        $(document).ready(() => {
+            $("#id_celular").mask("(00) 00000-0000");
+            $("#id_cpf").mask("000.000.000-00");
+        });
+
+    </script>
 {% endblock %}
 
