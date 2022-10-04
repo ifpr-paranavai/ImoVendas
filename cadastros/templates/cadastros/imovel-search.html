@@ -1,0 +1,44 @@
+{% extends 'paginas/template.html' %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="shadow-sm rounded bg-light mb-5">
+    <div class="d-flex justify-content-between">
+        <div class="px-4 py-1 cardTitle hoverTransition text-white">
+            <h4>Resultados</h4>
+        </div>
+    </div>
+    
+    <div class="row justify-content-center p-3">
+        {% for imovel in object_list %}
+
+            <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">
+                <img class="img-thumbnail p-0" src={{imovel.1.0.foto.url}}/>
+                <div class="p-3">
+                    <h4>{{imovel.0.titulo}}</h4>
+                    <p>{{imovel.0.preco}}</p>
+                    <p>{{imovel.0.cidade}}</p>
+                    <div class="d-flex">
+                        {% for f in imovel.0.finalidade_as_list %}
+                            {% if f == "Vender" %}
+                                <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
+                            {% else %}
+                                <p class="mx-2 px-3 py-1 rounded bgSecondColor text-white">{{f}}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+        {% empty %}
+        <h4>Não foram encontrados registros.</h4>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock content %}

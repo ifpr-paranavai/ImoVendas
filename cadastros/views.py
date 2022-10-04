@@ -56,3 +56,24 @@ def imovelDelete(request, pk=None):
             return redirect("listar-imovel")
     
         
+class ImovelSearch(ListView):
+    model = Imovel
+    template_name = "cadastros/imovel-search.html"
+    
+    def get_queryset(self):
+        lista = []
+        cidade = self.request.GET.get("cidade", None)
+        quartos = self.request.GET.get("quartos", None)
+        
+        imoveis = Imovel.objects.filter(publicado=True, negociado=False)
+        
+        if cidade:
+            imoveis = imoveis.filter(cidade__nome=cidade)
+            
+        if quartos:
+            imoveis = imoveis.filter(quantidade_quartos=quartos)
+
+        for imovel in imoveis:
+            lista.append([imovel, Foto.objects.filter(imovel=imovel)])
+            
+        return lista
