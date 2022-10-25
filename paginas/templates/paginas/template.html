@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
     <!-- Font Awesome Free 6.1.1 by @fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -32,9 +35,9 @@
                 </i>
             </a>
             <div class="input-group w-50 hide-mobile">
-                <input type="text" class="form-control opacity-75" placeholder="Buscar anúncio por cidade">
+                <input type="text" class="form-control opacity-75" placeholder="Buscar anúncio por cidade" id="search-bar">
                 <div class="input-group-append my-auto">
-                    <a class="text-white border border-light iconTextButton hoverTransition" type="button">
+                    <a class="text-white border border-light iconTextButton hoverTransition" type="button" id="search">
                         <i class="fas fa-search"></i>
                     </a>
                 </div>
@@ -104,6 +107,14 @@
         </div>
         {% endblock %}
     </div>
+    <script>
+        $(document).ready(() => {
+            $("#search").click(() => {
+                var cidade = $("#search-bar").val()
+                window.location.replace("/buscar/imovel?cidade="+cidade)
+            })
+        })
+    </script>
 </body>
 
 </html>
