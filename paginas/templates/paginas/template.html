@@ -26,42 +26,64 @@
 <body class="backgroundColor">
     <header class="py-3 mb-5 shadow bgMainColor">
         <div class="d-flex align-items-center justify-content-between mx-4">
-            <a href="#" class="text-white iconTextButton hoverTransition">
+            <a href="{% url 'index' %}" class="text-white iconTextButton hoverTransition">
                 <i class="fa-solid fa-house fa-xl">
                     ImoVendas
                 </i>
             </a>
-            <div class="input-group w-50">
-                <input type="text" class="form-control opacity-75" placeholder="Buscar anúncio por cidade">
+            <div class="input-group w-50 hide-mobile">
+                <input type="text" class="form-control opacity-75" placeholder="Buscar anúncio por cidade" id="search-bar">
                 <div class="input-group-append my-auto">
-                    <a class="text-white border border-light iconTextButton hoverTransition" type="button">
+                    <a class="text-white border border-light iconTextButton hoverTransition" type="button" id="search">
                         <i class="fas fa-search"></i>
                     </a>
                 </div>
             </div>
-            <a class="text-white border border-light iconTextButton hoverTransition" href="#" role="button" id="dropdownMenuLink"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-user">
-                    Conta
-                </i>
+            {% if request.user.is_authenticated %}
+            <a class="text-white border border-light iconTextButton hoverTransition" href="#" role="button"
+                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user">&ensp;{{ request.user }}</i>
             </a>
 
             <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">
-                    <i class="fas fas fa-sign-in">Entrar</i>
-                </a>
+                {% comment %} <a class="dropdown-item" href="{% url 'listar-imovel' %}">
+                    <i class="fas fas fa-house"></i> 
+                    Meus Imóveis
+                </a> {% endcomment %}
 
                 <hr />
 
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-sign-in">Cadastrar-se</i>
-                </a>
+                {% comment %} <a class="dropdown-item" href="{% url 'logout' %}">
+                    <i class="fas fa-right-from-bracket"></i>
+                    Sair
+                </a> {% endcomment %}
             </div>
 
+            {% else %}
+            <a class="text-white border border-light iconTextButton hoverTransition" href="#" role="button"
+                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user"></i>
+            </a>
+
+            <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuLink">
+                {% comment %} <a class="dropdown-item" href="{% url 'login' %}">
+                    <i class="fas fa-right-to-bracket"></i>
+                    Entrar
+                </a> {% endcomment %}
+
+                <hr />
+
+                {% comment %} <a class="dropdown-item" href="{% url 'cadastro' %}">
+                    <i class="fas fa-file-pen"></i>
+                    Cadastrar-se
+                </a> {% endcomment %}
+            </div>
+
+            {% endif %}
         </div>
     </header>
 
-    <div class="contentBlock container">
+    <div class="contentBlock container my-5">
         {% block content %}
         <div class="shadow rounded bg-light">
             <div class="px-4 py-1 cardTitle hoverTransition text-white">
@@ -91,6 +113,14 @@
     {% endblock %}
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+    <script>
+        $(document).ready(() => {
+            $("#search").click(() => {
+                var cidade = $("#search-bar").val()
+                window.location.replace("/buscar/imovel?cidade="+cidade)
+            })
+        })
+    </script>
 </body>
 
 </html>

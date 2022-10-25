@@ -1,31 +1,45 @@
 :root {
   --mainColor: #00e699;
+  --secondaryColor: #24d0ff;
 
   --bgColor: #eaeaea;
 }
-
-header {
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
+ 
+.hide-mobile{
+  display: block;
 }
 
-a:link{
+@media screen and (max-width: 750px) {
+  .hide-mobile{
+    display: none !important;
+  }
+}
+
+a:link {
   text-decoration: none;
+}
+
+p{
+  font-size: large;
 }
 
 .bgMainColor {
   background-color: var(--mainColor);
 }
 
+.bgSecondColor {
+  background-color: var(--secondaryColor);
+}
+
 .mainColor {
   color: var(--mainColor);
 }
 
-.backgroundColor{
+.backgroundColor {
   background-color: var(--bgColor);
 }
 
-.iconTextButton{
+.iconTextButton {
   padding: 1rem;
   padding-top: 0.6rem;
   padding-bottom: 0.6rem;
@@ -72,8 +86,22 @@ a:link{
 }
 
 .hoverTransition:hover {
-  background-color: var(--mainColor);
-  filter: hue-rotate(45deg);
+  background-color: var(--secondaryColor);
+}
+
+.biggerTransition {
+  transition: ease-out();
+  transition-duration: 250ms;
+  transform: scale(1);
+}
+
+.biggerTransition:hover {
+  transform: scale(1.05);
+}
+
+.propertyCard{
+  min-width: 18vw;
+  max-width: 18vw;
 }
 
 
