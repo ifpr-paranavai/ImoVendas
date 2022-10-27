@@ -37,6 +37,11 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
+                        <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardButton" href="{% url 'imovel-boost' pk=imovel.0.pk %}" class="stretched-link">
+                            <h4>Destacar anúncio</h4>
+                            &ensp;
+                            <i class="fa-solid fa-angles-right"></i>
+                        </a>
                     </div>
                 </div>
             {% endif %}

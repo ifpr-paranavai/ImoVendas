@@ -29,12 +29,22 @@ class Index(ListView):
 
 class ImovelView(DetailView):
     model = Imovel
-    template_name = 'paginas/ver_imovel.html'
+    template_name = 'paginas/imovel-view.html'
 
     def get_object(self):
         imovel = get_object_or_404(Imovel, pk=self.kwargs['pk'])
         fotos = Foto.objects.filter(imovel=imovel)
         imovel_count = Imovel.objects.filter(usuario=imovel.usuario).count()
         return [imovel, fotos, imovel_count]
+
+
+class ImovelBoost(DetailView):
+    model = Imovel
+    template_name = 'paginas/imovel-boost.html'
+
+    def get_object(self):
+        imovel = get_object_or_404(Imovel, pk=self.kwargs['pk'], usuario=self.request.user)
+        fotos = Foto.objects.filter(imovel=imovel)
+        return [imovel, fotos]
         
     

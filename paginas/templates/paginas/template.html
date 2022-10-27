@@ -46,17 +46,17 @@
             </a>
 
             <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuLink">
-                {% comment %} <a class="dropdown-item" href="{% url 'listar-imovel' %}">
+                <a class="dropdown-item" href="{% url 'listar-imovel' %}">
                     <i class="fas fas fa-house"></i> 
                     Meus Imóveis
-                </a> {% endcomment %}
+                </a> 
 
                 <hr />
 
-                {% comment %} <a class="dropdown-item" href="{% url 'logout' %}">
+                <a class="dropdown-item" href="{% url 'logout' %}">
                     <i class="fas fa-right-from-bracket"></i>
                     Sair
-                </a> {% endcomment %}
+                </a> 
             </div>
 
             {% else %}
@@ -66,17 +66,17 @@
             </a>
 
             <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuLink">
-                {% comment %} <a class="dropdown-item" href="{% url 'login' %}">
+                <a class="dropdown-item" href="{% url 'login' %}">
                     <i class="fas fa-right-to-bracket"></i>
                     Entrar
-                </a> {% endcomment %}
+                </a> 
 
                 <hr />
 
-                {% comment %} <a class="dropdown-item" href="{% url 'cadastro' %}">
+                <a class="dropdown-item" href="{% url 'cadastro' %}">
                     <i class="fas fa-file-pen"></i>
                     Cadastrar-se
-                </a> {% endcomment %}
+                </a> 
             </div>
 
             {% endif %}
@@ -106,7 +106,6 @@
     </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
     
     {% block scripts %}
     

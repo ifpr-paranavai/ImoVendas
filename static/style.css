@@ -68,6 +68,13 @@ p{
   border-bottom-left-radius: 5px;
 }
 
+
+.cardButton {
+  width: fit-content;
+  background-color: var(--mainColor);
+  border-radius: 5px;
+}
+
 .iconCircle {
   background-color: var(--mainColor);
   padding: 1em;
