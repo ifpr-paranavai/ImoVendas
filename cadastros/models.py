@@ -70,7 +70,7 @@ class Imovel(models.Model):
     expira_em = models.DateTimeField()
 
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
-    publicado = models.BooleanField(default=True)
+    publicado = models.BooleanField(default=False)
     negociado = models.BooleanField(default=False)
 
     comprovante = models.FileField(null=True, blank=True)
@@ -92,5 +92,6 @@ class Foto(models.Model):
 class Historico(models.Model):
     imovel = models.ForeignKey(Imovel, on_delete=models.CASCADE)
     movimentado_em = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(choices=STATUS_CHOICES, max_length=2)
+    movimentado_por = models.ForeignKey(User, on_delete=models.PROTECT)
+    status = models.CharField(choices=STATUS_CHOICES, max_length=2, default=STATUS_CHOICES[2])
     motivo = models.TextField()
