@@ -19,16 +19,28 @@
     <div class="row justify-content-center p-3">
         {% for imovel in object_list %}
             {% if imovel.0.publicado %}
-                <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">
+            
+                {% if imovel.0.destacado %}
+                <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition boostBorder">  
+                {% else %}
+                <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">  
+                {% endif %}
+
                     <a href="{% url 'excluir-imovel' pk=imovel.0.pk %}">
-                        <i class="fa-solid fa-trash position-absolute p-3 text-white rounded hoverTransition bgMainColor"></i>
+                        <i class="fa-solid fa-trash p-3 text-white rounded hoverTransition bgMainColor position-absolute" 
+                        style="left: 0;"></i>
                     </a>
+                    {% if imovel.0.destacado %}
+                        <i class="fa-solid fa-star p-3 text-white rounded bgBoostColor position-absolute" 
+                        style="right: 0;"></i>
+                    {% endif %}
+                    
                     <img class="img-thumbnail p-0" src={{imovel.1.0.foto.url}}/>
                     <div class="p-3">
                         <h4>{{imovel.0.titulo}}</h4>
                         <p>{{imovel.0.preco}}</p>
                         <p>{{imovel.0.cidade}}</p>
-                        <div class="d-flex">
+                        <div class="d-flex mb-4">
                             {% for f in imovel.0.finalidade_as_list %}
                                 {% if f == "Vender" %}
                                     <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
@@ -37,11 +49,14 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
-                        <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardButton" href="{% url 'imovel-boost' pk=imovel.0.pk %}" class="stretched-link">
-                            <h4>Destacar anúncio</h4>
+
+                        {% if not imovel.0.destacado %}
+                        <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardButton fixed-bottom" href="{% url 'imovel-boost' pk=imovel.0.pk %}" class="stretched-link">
+                            <h5>Destacar anúncio</h5>
                             &ensp;
                             <i class="fa-solid fa-angles-right"></i>
                         </a>
+                        {% endif %}
                     </div>
                 </div>
             {% endif %}
@@ -63,23 +78,41 @@
     <div class="row justify-content-center p-3">
         {% for imovel in object_list %}
             {% if not imovel.0.publicado %}
-            <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">
-                <img class="img-thumbnail p-0" src={{imovel.1.0.foto.url}} />
-                <div class="p-3">
-                    <h4>{{imovel.0.titulo}}</h4>
-                    <p>{{imovel.0.preco}}</p>
-                    <p>{{imovel.0.cidade}}</p>
-                    <div class="d-flex">
-                        {% for f in imovel.0.finalidade_as_list %}
-                        {% if f == "Vender" %}
-                        <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
-                        {% else %}
-                        <p class="mx-2 px-3 py-1 rounded bgSecondColor text-white">{{f}}</p>
+            
+                {% if imovel.0.destacado %}
+                <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition boostBorder">  
+                {% else %}
+                <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">  
+                {% endif %}
+                    {% if imovel.0.destacado %}
+                        <i class="fa-solid fa-star p-3 text-white rounded bgBoostColor position-absolute" 
+                        style="right: 0;"></i>
+                    {% endif %}
+                    
+                    <img class="img-thumbnail p-0" src={{imovel.1.0.foto.url}}/>
+                    <div class="p-3">
+                        <h4>{{imovel.0.titulo}}</h4>
+                        <p>{{imovel.0.preco}}</p>
+                        <p>{{imovel.0.cidade}}</p>
+                        <div class="d-flex mb-4">
+                            {% for f in imovel.0.finalidade_as_list %}
+                                {% if f == "Vender" %}
+                                    <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
+                                {% else %}
+                                    <p class="mx-2 px-3 py-1 rounded bgSecondColor text-white">{{f}}</p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        {% if True %}
+                        <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardButton fixed-bottom" href="{% url 'imovel-renew' pk=imovel.0.pk %}" class="stretched-link">
+                            <h5>Renovar anúncio</h5>
+                            &ensp;
+                            <i class="fa-solid fa-angles-right"></i>
+                        </a>
                         {% endif %}
-                        {% endfor %}
                     </div>
                 </div>
-            </div>
             {% endif %}
         {% empty %}
         <h4>Não foram encontrados registros.</h4>

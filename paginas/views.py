@@ -1,4 +1,5 @@
-from cadastros.models import Foto, Imovel
+from datetime import datetime, timedelta
+from cadastros.models import Foto, Historico, Imovel
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -45,6 +46,35 @@ class ImovelBoost(DetailView):
     def get_object(self):
         imovel = get_object_or_404(Imovel, pk=self.kwargs['pk'], usuario=self.request.user)
         fotos = Foto.objects.filter(imovel=imovel)
+        
+        imovel.destacado = True    
+        imovel.save()
+        
+        historico = Historico.objects.create(imovel=imovel, movimentado_por=self.request.user)
+        historico.motivo = "Destaque de imóvel"
+        historico.save()
+
         return [imovel, fotos]
+
+
+class ImovelRenew(DetailView):
+    model = Imovel
+    template_name = 'paginas/imovel-renew.html'
+
+    def get_object(self):
+        imovel = get_object_or_404(Imovel, pk=self.kwargs['pk'], usuario=self.request.user)
+        fotos = Foto.objects.filter(imovel=imovel)
+
+        imovel.publicado = True
+        imovel.expira_em = datetime.now() + timedelta(30)
+        imovel.save()
+        
+        historico = Historico.objects.create(imovel=imovel, movimentado_por=self.request.user)
+        historico.motivo = "Renovação de imóvel"
+        historico.save()
+
+        return [imovel, fotos]
+        
+        
         
     

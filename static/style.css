@@ -1,6 +1,7 @@
 :root {
   --mainColor: #00e699;
   --secondaryColor: #24d0ff;
+  --boostColor:#fffd6b;
 
   --bgColor: #eaeaea;
 }
@@ -31,6 +32,14 @@ p{
   background-color: var(--secondaryColor);
 }
 
+.bgBoostColor {
+  background-color: var(--boostColor);
+}
+
+.boostBorder {
+  border: 2px solid var(--boostColor);
+}
+
 .mainColor {
   color: var(--mainColor);
 }
@@ -52,6 +61,7 @@ p{
   flex-direction: column;
   justify-content: space-around;
   min-height: 500px;
+  min-width: 500px;
 }
 
 .cardTitle {
@@ -62,7 +72,6 @@ p{
 }
 
 .cardTitleButton {
-  width: fit-content;
   background-color: var(--mainColor);
   border-top-right-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -70,7 +79,6 @@ p{
 
 
 .cardButton {
-  width: fit-content;
   background-color: var(--mainColor);
   border-radius: 5px;
 }

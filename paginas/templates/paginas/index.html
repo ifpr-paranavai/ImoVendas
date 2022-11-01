@@ -18,7 +18,18 @@
     
     <div class="row justify-content-center p-3">
         {% for imovel in object_list.0 %}
-            <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">
+            
+            {% if imovel.0.destacado %}
+            <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition boostBorder">  
+            {% else %}
+            <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">  
+            {% endif %}
+            
+                {% if imovel.0.destacado %}
+                    <i class="fa-solid fa-star p-3 text-white rounded bgBoostColor position-absolute" 
+                    style="right: 0;"></i>
+                {% endif %}
+
                 <img class="img-thumbnail p-0" src={{imovel.1.0.foto.url}}/>
                 <div class="p-3">
                     <h4>{{imovel.0.titulo}}</h4>
@@ -58,7 +69,17 @@
     </div>
     <div class="row justify-content-center p-3">
         {% for imovel in object_list.1 %}
-            <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">
+                        
+            {% if imovel.0.destacado %}
+            <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition boostBorder">  
+            {% else %}
+            <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">  
+            {% endif %}
+            
+                {% if imovel.0.destacado %}
+                    <i class="fa-solid fa-star p-3 text-white rounded bgBoostColor position-absolute" 
+                    style="right: 0;"></i>
+                {% endif %}
                 <img class="img-thumbnail p-0" src={{imovel.1.0.foto.url}}/>
                 <div class="p-3">
                     <h4>{{imovel.0.titulo}}</h4>
@@ -98,7 +119,16 @@
     </div>
     <div class="row justify-content-center p-3">
         {% for imovel in object_list.2 %}
-            <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">
+            {% if imovel.0.destacado %}
+            <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition boostBorder">  
+            {% else %}
+            <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">  
+            {% endif %}
+            
+                {% if imovel.0.destacado %}
+                    <i class="fa-solid fa-star p-3 text-white rounded bgBoostColor position-absolute" 
+                    style="right: 0;"></i>
+                {% endif %}
                 <img class="img-thumbnail p-0" src={{imovel.1.0.foto.url}}/>
                 <div class="p-3">
                     <h4>{{imovel.0.titulo}}</h4>
