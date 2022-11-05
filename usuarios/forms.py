@@ -8,9 +8,10 @@ from django.core.exceptions import ValidationError
 
 class UsuarioForm(UserCreationForm):
     nome = forms.CharField(max_length=100)
-    celular = forms.CharField(max_length=11)
+    celular = forms.CharField(max_length=15, widget=forms.TextInput(attrs={'data-mask':"(00) 00000-0000"}))
     email = forms.EmailField(max_length=100)
-    cpf = forms.CharField(max_length=15, label="CPF")
+    cpf = forms.CharField(max_length=15, label="CPF", widget=forms.TextInput(attrs={'data-mask':"000.000.000-00"}))
+    
     cidade = forms.ModelChoiceField(
         queryset=Cidade.objects.all().order_by("nome").select_related("estado"),
         widget=autocomplete.ModelSelect2(
@@ -36,6 +37,8 @@ class UsuarioForm(UserCreationForm):
             "password1",
             "password2",
         ]
+        
+        
 
     def clean_email(self):
         e = self.cleaned_data["email"]

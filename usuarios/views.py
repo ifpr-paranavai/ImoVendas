@@ -1,5 +1,5 @@
 from cadastros.models import Perfil
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 
@@ -26,7 +26,15 @@ class PerfilCreate(CreateView):
                 celular=form.cleaned_data["celular"],
                 cidade=form.cleaned_data["cidade"],
             )
+
+            grupo_usuario = Group.objects.get_or_create(name="Usuario")
+
+            self.object.groups.add(grupo_usuario[0])
+            self.object.save()
+
+
         except:
+            perfil.delete()
             self.object.delete()
             form.add_error(None, 'Ocorreu um erro ao cadastrar o usuário')
             return self.form_invalid(form)
