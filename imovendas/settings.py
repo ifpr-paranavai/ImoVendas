@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'autocomplete.apps.AutocompleteConfig',
 
     'debug_toolbar',
+    'administrativo.apps.AdministrativoConfig',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
