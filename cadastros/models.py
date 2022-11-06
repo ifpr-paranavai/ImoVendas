@@ -7,12 +7,6 @@ FINALIDADE_CHOICES = (
     (2, "Alugar"),
 )
 
-STATUS_CHOICES = (
-    (1, "Publicado"),
-    (2, "Destacado"),
-    (3, "A retificar"),
-)
-
 
 
 # Create your models here.
@@ -93,5 +87,5 @@ class Historico(models.Model):
     imovel = models.ForeignKey(Imovel, on_delete=models.CASCADE)
     movimentado_em = models.DateTimeField(auto_now_add=True)
     movimentado_por = models.ForeignKey(User, on_delete=models.PROTECT)
-    status = models.CharField(choices=STATUS_CHOICES, max_length=2, default=STATUS_CHOICES[2])
+    pendente = models.BooleanField(default=True)
     motivo = models.TextField()
