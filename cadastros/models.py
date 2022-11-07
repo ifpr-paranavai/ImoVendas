@@ -67,7 +67,6 @@ class Imovel(models.Model):
     publicado = models.BooleanField(default=False)
     negociado = models.BooleanField(default=False)
 
-    comprovante = models.FileField(null=True, blank=True)
     destacado = models.BooleanField(default=False)
     valor_pago_destaque = models.DecimalField(decimal_places=2, max_digits=7, null=True, blank=True)
 
@@ -83,9 +82,10 @@ class Foto(models.Model):
     foto = models.ImageField()
 
 
-class Historico(models.Model):
+class Movimentacao(models.Model):
     imovel = models.ForeignKey(Imovel, on_delete=models.CASCADE)
     movimentado_em = models.DateTimeField(auto_now_add=True)
     movimentado_por = models.ForeignKey(User, on_delete=models.PROTECT)
     pendente = models.BooleanField(default=True)
     motivo = models.TextField()
+    comprovante = models.FileField(null=True, blank=True)

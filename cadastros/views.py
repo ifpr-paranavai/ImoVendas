@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 
 from cadastros.forms import ImovelFotoForm
-from cadastros.models import Foto, Historico, Imovel
+from cadastros.models import Foto, Movimentacao, Imovel
 
 
 class ImovelCreate(LoginRequiredMixin, CreateView):
@@ -28,7 +28,7 @@ class ImovelCreate(LoginRequiredMixin, CreateView):
             foto.name = f"{uuid.uuid4()}.{ext}" 
             Foto.objects.create(imovel=form.instance, foto=foto)
 
-        historico = Historico.objects.create(imovel=form.instance, movimentado_por=self.request.user)
+        historico = Movimentacao.objects.create(imovel=form.instance, movimentado_por=self.request.user)
         historico.motivo = "Publicação de imóvel"
         historico.save()
 
@@ -58,7 +58,7 @@ def imovelDelete(request, pk=None):
             imovel.publicado = False
             imovel.save()
 
-            historico = Historico.objects.create(imovel=imovel, movimentado_por=user)
+            historico = Movimentacao.objects.create(imovel=imovel, movimentado_por=user)
             historico.motivo = "Imóvel desativado"
             historico.save()
             

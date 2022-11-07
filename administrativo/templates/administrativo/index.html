@@ -27,7 +27,11 @@
                   <div class="accordion-body">
                     <h5>Motivo: {{imovel.2.motivo}} </h5>
                     <h5>Comprovante: 
-                      <img class="img-fluid rounded mx-auto d-block w-25" src={{imovel.0.comprovante}}  />
+                      {% if imovel.2.comprovante %}
+                        <img class="img-fluid rounded mx-auto d-block w-25" src={{imovel.2.comprovante}}  />
+                      {% else %}
+                        Sem Comprovante 
+                      {% endif %}
                     </h5>
 
                     <div class="d-flex justify-content-end">

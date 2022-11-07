@@ -5,7 +5,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from geocoder import ip
 
-from cadastros.models import Foto, Historico, Imovel
+from cadastros.models import Foto, Movimentacao, Imovel
 
 
 class Index(ListView):
@@ -57,7 +57,7 @@ class ImovelBoost(DetailView):
         imovel.destacado = True    
         imovel.save()
         
-        historico = Historico.objects.create(imovel=imovel, movimentado_por=self.request.user)
+        historico = Movimentacao.objects.create(imovel=imovel, movimentado_por=self.request.user)
         historico.motivo = "Destaque de imóvel"
         historico.save()
 
@@ -76,7 +76,7 @@ class ImovelRenew(DetailView):
         imovel.expira_em = datetime.now() + timedelta(30)
         imovel.save()
         
-        historico = Historico.objects.create(imovel=imovel, movimentado_por=self.request.user)
+        historico = Movimentacao.objects.create(imovel=imovel, movimentado_por=self.request.user)
         historico.motivo = "Renovação de imóvel"
         historico.save()
 
