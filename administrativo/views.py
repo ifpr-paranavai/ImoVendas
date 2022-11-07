@@ -1,4 +1,5 @@
 from braces.views import GroupRequiredMixin
+from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.views.generic.list import ListView
 
@@ -53,6 +54,12 @@ class Movimentacoes(GroupRequiredMixin, ListView):
             ])
 
         return lista
+
+class Usuarios(GroupRequiredMixin, ListView):
+    group_required = u"Administrador"
+    model = User
+    template_name = "administrativo/users.html"
+
 
 
 def temPermissao(request):

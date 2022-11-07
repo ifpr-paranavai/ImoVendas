@@ -1,0 +1,44 @@
+{% extends 'administrativo/admin_template.html' %}
+
+{% load static %}
+
+{% load admin_tags %}
+
+{% block content %}
+<div class="shadow-sm rounded bg-light mb-5">
+    <div class="d-flex justify-content-between">
+        <div class="px-4 py-1 cardTitle hoverTransition text-white">
+            <h4>Usuários</h4>
+        </div>
+    </div>
+
+    <div class="row justify-content-center p-3">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Grupo</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            {% for usuario in object_list %}
+            <tr>
+                <td> {{usuario}} </td>
+                <td> {{usuario.email}} </td>
+                <td> {{usuario|get_group}} </td>
+                <td> 
+                    <a href="" class="btn btn-danger">
+                        Promover
+                    </a>
+                    <a href="" class="btn btn-warning">
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+    </div>
+</div>
+
+{% endblock content %}
