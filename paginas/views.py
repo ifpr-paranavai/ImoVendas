@@ -36,7 +36,11 @@ class ImovelView(DetailView):
     template_name = 'paginas/imovel-view.html'
 
     def get_object(self):
-        imovel = get_object_or_404(Imovel, pk=self.kwargs['pk'])
+        if self.request.user.groups.filter(name="Administrador").exists():
+            imovel = get_object_or_404(Imovel, pk=self.kwargs['pk'])
+        else:
+            imovel = get_object_or_404(Imovel, pk=self.kwargs['pk'], publicado=True)
+
         fotos = Foto.objects.filter(imovel=imovel)
         imovel_count = Imovel.objects.filter(usuario=imovel.usuario).count()
         return [imovel, fotos, imovel_count]
