@@ -31,14 +31,12 @@
                     ImoVendas
                 </i>
             </a>
-            <div class="input-group w-50 hide-mobile">
-                <input type="text" class="form-control opacity-75" placeholder="Buscar anúncio por cidade" id="search-bar">
-                <div class="input-group-append my-auto">
-                    <a class="text-white border border-light iconTextButton hoverTransition" type="button" id="search">
-                        <i class="fas fa-search"></i>
-                    </a>
-                </div>
-            </div>
+            <form class="input-group w-50 hide-mobile" id="search-form">
+                <input type="text" class="form-control opacity-75" placeholder="Buscar anúncio por cidade" id="search-bar" >
+                <button class="text-white border border-light iconTextButton hoverTransition" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
             {% if request.user.is_authenticated %}
             <a class="text-white border border-light iconTextButton hoverTransition" href="#" role="button"
                 id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -114,12 +112,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
     <script>
         $(document).ready(() => {
-            $("#search").click(() => {
+            $("#search-form").submit(() => {
                 var cidade = $("#search-bar").val()
                 window.location.replace("/buscar/imovel?cidade="+cidade)
+                event.preventDefault()
             })
         })
     </script>
+
 </body>
 
 </html>
