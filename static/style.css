@@ -23,6 +23,9 @@ a:link {
 p{
   font-size: large;
 }
+strong {
+  font-size: large;
+}
 
 .bgMainColor {
   background-color: var(--mainColor);

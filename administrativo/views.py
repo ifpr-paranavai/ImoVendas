@@ -1,13 +1,13 @@
-from django.http import HttpResponseNotFound
+from braces.views import GroupRequiredMixin
 from django.shortcuts import redirect
 from django.views.generic.list import ListView
-from braces.views import GroupRequiredMixin
+
 from cadastros.models import Foto, Historico, Imovel
 
 
-class Adm(ListView, GroupRequiredMixin):
+class Adm(GroupRequiredMixin, ListView):
+    group_required = u"Administrador"
     model = Imovel
-    group_required = "Administrador"
     template_name = "administrativo/index.html"
 
     def get_queryset(self):
@@ -32,9 +32,10 @@ class Adm(ListView, GroupRequiredMixin):
 
 def temPermissao(request):
     user = request.user
-    grupo = user.groups.values_list('name', flat=True)
     if user:
-        return True
+        return user.groups.filter(name="Administrador").exists()
+
+    return False
 
 
 def aprovarImovel(request, pk=None, historico_pk=None, destaque=False):

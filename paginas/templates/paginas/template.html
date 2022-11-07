@@ -1,5 +1,7 @@
 {% load static %}
 
+{% load template_filters %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -24,102 +26,139 @@
 </head>
 
 <body class="backgroundColor">
-    <header class="py-3 mb-5 shadow bgMainColor">
-        <div class="d-flex align-items-center justify-content-between mx-4">
-            <a href="{% url 'index' %}" class="text-white iconTextButton hoverTransition">
-                <i class="fa-solid fa-house fa-xl">
+
+    <main class="d-flex flex-nowrap">
+        <div class="d-flex flex-column flex-shrink-0 p-3 sticky-top shadow rounded-right bgMainColor"
+            style="width: 340px; height: 100vh;">
+            <a href="{% url 'index' %}" class="text-white mx-auto iconTextButton hoverTransition">
+                <i class="fa-solid fa-house fa-2xl">
                     ImoVendas
                 </i>
             </a>
-            <form class="input-group w-50 hide-mobile" id="search-form">
-                <input type="text" class="form-control opacity-75" placeholder="Buscar anúncio por cidade" id="search-bar" >
-                <button class="text-white border border-light iconTextButton hoverTransition" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
+            <hr style="border-width: 2px; opacity: 1; color: white;">
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item mb-3">
+                    <form class="input-group hide-mobile" id="search-form">
+                        <input type="text" class="form-control opacity-75" placeholder="Buscar cidade" id="search-bar">
+                        <button class="text-white border border-light iconTextButton hoverTransition" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </li>
+                
+                <li class="nav-item rounded hoverTransition">
+                    <a href="" class="nav-link text-white">
+                        <i class="fa-solid fa-star fa-lg"></i>
+                        <p class="">Destaques</p>
+                    </a>
+                </li>
+
+                <li class="nav-item rounded hoverTransition">
+                    <a href="" class="nav-link text-white">
+                        <i class="fa-solid fa-location-dot fa-lg"></i>
+                        <p class="">Para Você</p>
+                    </a>
+                </li>
+
+                <li class="nav-item rounded hoverTransition">
+                    <a href="" class="nav-link text-white">
+                        <i class="fa-solid fa-fire fa-lg"></i>
+                        <p class="">Recentes</p>
+                    </a>
+                </li>
+
+                {% if request.user.is_authenticated %}
+                <li class="nav-item rounded hoverTransition">
+                    <a href="{% url 'listar-imovel' %}" class="nav-link text-white">
+                        <i class="fa-solid fa-clipboard-list fa-lg"></i>
+                        <p class="">Meus Imóveis</p>
+                    </a>
+                </li>
+                {% endif %}
+
+                {% if request.user|is_admin %}
+                <li class="nav-item rounded hoverTransition">
+                    <a href="{% url 'adm' %}" class="nav-link text-white">
+                        <i class="fa-solid fa-screwdriver-wrench fa-lg"></i>
+                        <p class="">Administrativo</p>
+                    </a>
+                </li>
+                {% endif %}
+
+            </ul>
+            <hr style="border-width: 2px; opacity: 1; color: white;">
             {% if request.user.is_authenticated %}
-            <a class="text-white border border-light iconTextButton hoverTransition" href="#" role="button"
-                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-user">&ensp;{{ request.user }}</i>
-            </a>
-
-            <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{% url 'listar-imovel' %}">
-                    <i class="fas fas fa-house"></i> 
-                    Meus Imóveis
-                </a> 
-
-                <hr />
-
-                <a class="dropdown-item" href="{% url 'logout' %}">
-                    <i class="fas fa-right-from-bracket"></i>
-                    Sair
-                </a> 
+            <div class="dropdown">
+                <a href="#"
+                    class="d-flex align-items-center justify-content-between text-white dropdown-toggle rounded p-2 hoverTransition"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user fa-xl rounded-circle me-2"></i>
+                    <strong>{{ request.user }}</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
+                </ul>
             </div>
-
             {% else %}
-            <a class="text-white border border-light iconTextButton hoverTransition" href="#" role="button"
-                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-user"></i>
-            </a>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item rounded hoverTransition">
+                    <a href="{% url 'login' %}" class="nav-link text-white">
+                        <i class="fa-solid fa-right-to-bracket fa-lg"></i>
+                        <p>Entrar</p>
+                    </a>
+                </li>
+                <li class="nav-item rounded hoverTransition">
+                    <a href="{% url 'cadastro' %}" class="nav-link text-white">
+                        <i class="fa-solid fa-file-pen fa-lg"></i>
+                        <p>Cadastrar-se</p>
+                    </a>
+                </li>
 
-            <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{% url 'login' %}">
-                    <i class="fas fa-right-to-bracket"></i>
-                    Entrar
-                </a> 
 
-                <hr />
-
-                <a class="dropdown-item" href="{% url 'cadastro' %}">
-                    <i class="fas fa-file-pen"></i>
-                    Cadastrar-se
-                </a> 
-            </div>
+            </ul>
 
             {% endif %}
         </div>
-    </header>
 
-    <div class="contentBlock container my-5">
-        {% block content %}
-        <div class="shadow rounded bg-light">
-            <div class="px-4 py-1 cardTitle hoverTransition text-white">
-                <h4>Titulo</h4>
+        <div class="contentBlock container my-5">
+            {% block content %}
+            <div class="shadow rounded bg-light">
+                <div class="px-4 py-1 cardTitle hoverTransition text-white">
+                    <h4>Titulo</h4>
+                </div>
+                <div class="d-flex p-5">
+                    <h4>Conteúdo</h4>
+                </div>
             </div>
-            <div class="d-flex p-5">
-                <h4>Conteúdo</h4>
+
+            <div class="shadow rounded bg-light">
+                <div class="px-4 py-1 cardTitle hoverTransition text-white">
+                    <h4>Titulo 2</h4>
+                </div>
+                <div class="d-flex p-5">
+                    <h4>Conteúdo 2</h4>
+                </div>
             </div>
+            {% endblock %}
         </div>
 
-        <div class="shadow rounded bg-light">
-            <div class="px-4 py-1 cardTitle hoverTransition text-white">
-                <h4>Titulo 2</h4>
-            </div>
-            <div class="d-flex p-5">
-                <h4>Conteúdo 2</h4>
-            </div>
-        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        {% block scripts %}
+
         {% endblock %}
-    </div>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
-    {% block scripts %}
-    
-    {% endblock %}
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
-    <script>
-        $(document).ready(() => {
-            $("#search-form").submit(() => {
-                var cidade = $("#search-bar").val()
-                window.location.replace("/buscar/imovel?cidade="+cidade)
-                event.preventDefault()
-            })
-        })
-    </script>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+        <script>
+            $(document).ready(() => {
+                $("#search-form").submit(() => {
+                    var cidade = $("#search-bar").val()
+                    window.location.replace("/buscar/imovel?cidade=" + cidade)
+                    event.preventDefault()
+                })
+            })
+        </script>
+    </main>
 </body>
 
 </html>
