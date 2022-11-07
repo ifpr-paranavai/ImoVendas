@@ -1,8 +1,11 @@
 from datetime import datetime, timedelta
-from cadastros.models import Foto, Historico, Imovel
+
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from geocoder import ip
+
+from cadastros.models import Foto, Historico, Imovel
 
 
 class Index(ListView):
@@ -11,8 +14,8 @@ class Index(ListView):
 
     def get_queryset(self):
         lista = [[], [], []]
-
-        proximos = Imovel.objects.filter(publicado=True)[:6]
+        
+        proximos = Imovel.objects.filter(publicado=True, cidade__nome=ip("me").city)[:6]
         destaques = Imovel.objects.filter(destacado=True, publicado=True)[:6]
         novos = Imovel.objects.filter(publicado=True).order_by('cadastrado_em')[:6]
 
