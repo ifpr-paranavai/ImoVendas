@@ -30,6 +30,31 @@ class Adm(GroupRequiredMixin, ListView):
 
         return lista
 
+class Movimentacoes(GroupRequiredMixin, ListView):
+    group_required = u"Administrador"
+    model = Historico
+    template_name = "administrativo/movs.html"
+
+    def get_queryset(self):
+        lista = []
+
+        imoveis = Imovel.objects.all()
+        movimentacoes = Historico.objects.all()
+
+        if len(movimentacoes) == 0:
+            return lista
+
+        for imovel in imoveis:
+            movimentacoes = movimentacoes.filter(imovel=imovel)
+            lista.append([
+                imovel,
+                Foto.objects.filter(imovel=imovel).get(),
+                movimentacoes,
+            ])
+
+        return lista
+
+
 def temPermissao(request):
     user = request.user
     if user:

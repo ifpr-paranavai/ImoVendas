@@ -1,0 +1,37 @@
+{% extends 'paginas/template.html' %}
+
+{% load static %}
+
+{% block search %}{% endblock %}
+
+
+{% block items %}
+<li class="nav-item rounded hoverTransition">
+  <a href="{% url 'adm' %}" class="nav-link text-white text-center">
+      <i class="fa-solid fa-triangle-exclamation fa-lg"></i>
+      <p class="">Anúncios Pendentes</p>
+  </a>
+</li>
+
+<li class="nav-item rounded hoverTransition">
+  <a href="{% url 'movs' %}" class="nav-link text-white text-center">
+      <i class="fa-solid fa-list-check fa-lg"></i>
+      <p class="">Movimentações</p>
+  </a>
+</li>
+
+<li class="nav-item rounded hoverTransition">
+  <a href="{% url 'index' %}" class="nav-link text-white text-center">
+      <i class="fa-solid fa-users fa-lg"></i>
+      <p class="">Usuários</p>
+  </a>
+</li>
+
+<li class="nav-item rounded hoverTransition">
+    <a href="{% url 'index' %}" class="nav-link text-white text-center">
+        <i class="fa-solid fa-arrow-left fa-lg"></i>
+        <p class="">Voltar ao site</p>
+    </a>
+</li>
+
+{% endblock %}

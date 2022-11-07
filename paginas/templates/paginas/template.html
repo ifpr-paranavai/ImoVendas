@@ -37,6 +37,7 @@
             </a>
             <hr style="border-width: 2px; opacity: 1; color: white;">
             <ul class="nav nav-pills flex-column mb-auto">
+                {% block search %}
                 <li class="nav-item mb-3">
                     <form class="input-group hide-mobile" id="search-form">
                         <input type="text" class="form-control opacity-75" placeholder="Buscar cidade" id="search-bar">
@@ -45,23 +46,26 @@
                         </button>
                     </form>
                 </li>
-                
+                {% endblock %}
+
+                {% block items %}
+                  
                 <li class="nav-item rounded hoverTransition">
-                    <a href="" class="nav-link text-white">
+                    <a href="" class="nav-link text-white text-center">
                         <i class="fa-solid fa-star fa-lg"></i>
-                        <p class="">Destaques</p>
+                        <p>Destaques</p>
                     </a>
                 </li>
 
                 <li class="nav-item rounded hoverTransition">
-                    <a href="" class="nav-link text-white">
+                    <a href="" class="nav-link text-white text-center">
                         <i class="fa-solid fa-location-dot fa-lg"></i>
                         <p class="">Para Você</p>
                     </a>
                 </li>
 
                 <li class="nav-item rounded hoverTransition">
-                    <a href="" class="nav-link text-white">
+                    <a href="" class="nav-link text-white text-center">
                         <i class="fa-solid fa-fire fa-lg"></i>
                         <p class="">Recentes</p>
                     </a>
@@ -69,7 +73,7 @@
 
                 {% if request.user.is_authenticated %}
                 <li class="nav-item rounded hoverTransition">
-                    <a href="{% url 'listar-imovel' %}" class="nav-link text-white">
+                    <a href="{% url 'listar-imovel' %}" class="nav-link text-white text-center">
                         <i class="fa-solid fa-clipboard-list fa-lg"></i>
                         <p class="">Meus Imóveis</p>
                     </a>
@@ -78,12 +82,14 @@
 
                 {% if request.user|is_admin %}
                 <li class="nav-item rounded hoverTransition">
-                    <a href="{% url 'adm' %}" class="nav-link text-white">
+                    <a href="{% url 'adm' %}" class="nav-link text-white text-center">
                         <i class="fa-solid fa-screwdriver-wrench fa-lg"></i>
                         <p class="">Administrativo</p>
                     </a>
                 </li>
                 {% endif %}
+
+                {% endblock %}
 
             </ul>
             <hr style="border-width: 2px; opacity: 1; color: white;">

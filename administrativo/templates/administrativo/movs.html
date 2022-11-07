@@ -7,7 +7,7 @@
 <div class="shadow-sm rounded bg-light mb-5">
     <div class="d-flex justify-content-between">
         <div class="px-4 py-1 cardTitle hoverTransition text-white">
-            <h4>Pendentes</h4>
+            <h4>Movimentações</h4>
         </div>
     </div>
     
@@ -25,21 +25,29 @@
                 </h2>
                 <div id="accordion{{forloop.counter}}" class="accordion-collapse collapse">
                   <div class="accordion-body">
-                    <h5>Motivo: {{imovel.2.motivo}} </h5>
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'imovel-view' pk=imovel.0.pk %}" target="_blank" class="btn btn-lg btn-primary">Ver detalhes</a>
+                    </div>
                     <h5>Comprovante: 
                       <img class="img-fluid rounded mx-auto d-block w-25" src={{imovel.0.comprovante}}  />
                     </h5>
-
-                    <div class="d-flex justify-content-end">
-                      <a href="{% url 'imovel-view' pk=imovel.0.pk %}" target="_blank" class="btn btn-lg btn-primary">Ver detalhes</a>
-                      <a href="{% url 'rejeitar-imovel' historico_pk=imovel.2.pk %}" class="btn btn-lg btn-danger">Rejeitar</a>
-                      
-                      {% if imovel.2.motivo == 'Publicação de imóvel' %}
-                        <a href="{% url 'aprovar-imovel' pk=imovel.0.pk historico_pk=imovel.2.pk destaque=0 %}" class="btn btn-lg btn-success">Aprovar</a>
-                      {% else %}
-                        <a href="{% url 'aprovar-imovel' pk=imovel.0.pk historico_pk=imovel.2.pk destaque=1 %}" class="btn btn-lg btn-success">Aprovar</a>
-                      {% endif %}
-                    </div>
+                    <h2>Movimentações</h2>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Motivo</th> 
+                                <th>Movimentado Por</th> 
+                                <th>Data</th> 
+                            </tr>
+                        </thead>
+                        {% for historico in imovel.2 %}
+                        <tr>
+                            <td> {{historico.motivo}} </td>
+                            <td> {{historico.movimentado_por}} </td>
+                            <td> {{historico.movimentado_em}} </td>
+                        </tr>
+                    {% endfor %}
+                    </table>
                     
                   </div>
                 </div>
@@ -47,7 +55,7 @@
         </div>
             
         {% empty %}
-        <h4>Não há imóveis pendentes.</h4>
+        <h4>Não foram encontrados registros.</h4>
 
         {% endfor %}
 

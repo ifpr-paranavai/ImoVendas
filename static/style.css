@@ -53,8 +53,8 @@ strong {
 
 .iconTextButton {
   padding: 1rem;
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   background-color: transparent;
   border-radius: 10px;
 }
