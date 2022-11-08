@@ -50,14 +50,16 @@ class ImovelView(DetailView):
         return [imovel, fotos, imovel_count]
 
 
-class ImovelBoost(CreateView):
-    template_name = 'paginas/imovel-boost.html'
+class ImovelPagar(CreateView):
+    template_name = 'paginas/imovel-pay.html'
     form_class = MovimentacaoForm
     success_url = reverse_lazy('listar-imovel')
+    modo = ""
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        context["modo"] = self.modo.capitalize()
         context["imovel"] = get_object_or_404(Imovel, pk=self.kwargs["pk"], usuario=self.request.user)
         context["ultima_mov"] = Movimentacao.objects.latest("movimentado_em")
         context["fotos"] = Foto.objects.filter(imovel=context["imovel"])
@@ -66,7 +68,14 @@ class ImovelBoost(CreateView):
 
 
     def form_valid(self, form):
-        form.instance.motivo = "Destaque de imóvel"
+        motivo = ""
+        if self.modo == "destacar":
+            motivo = "Destaque de imóvel"
+        elif self.modo == "renovar":
+            motivo = "Renovação de imóvel"
+
+        form.instance.motivo = motivo
+
         form.instance.movimentado_por = self.request.user
         form.instance.imovel = get_object_or_404(Imovel, pk=self.kwargs["pk"], usuario=self.request.user)
         
@@ -76,27 +85,3 @@ class ImovelBoost(CreateView):
         form.instance.comprovante = comprovante
 
         return super().form_valid(form)
-
-     
-
-class ImovelRenew(DetailView):
-    model = Imovel
-    template_name = 'paginas/imovel-renew.html'
-
-    def get_object(self):
-        imovel = get_object_or_404(Imovel, pk=self.kwargs['pk'], usuario=self.request.user)
-        fotos = Foto.objects.filter(imovel=imovel)
-
-        imovel.publicado = True
-        imovel.expira_em = datetime.now() + timedelta(30)
-        imovel.save()
-        
-        historico = Movimentacao.objects.create(imovel=imovel, movimentado_por=self.request.user)
-        historico.motivo = "Renovação de imóvel"
-        historico.save()
-
-        return [imovel, fotos]
-        
-        
-        
-    
