@@ -39,9 +39,6 @@ class Movimentacoes(GroupRequiredMixin, ListView):
         imoveis = Imovel.objects.all()
         movimentacoes = Movimentacao.objects.all()
 
-        if len(movimentacoes) == 0:
-            return lista
-
         for imovel in imoveis:
             movimentacoes = movimentacoes.filter(imovel=imovel)
             lista.append([

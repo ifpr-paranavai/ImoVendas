@@ -7,28 +7,117 @@
 {% block content %}
 
 <div class="shadow rounded bg-light w-75 mx-auto pb-5 mb-5">
-    <div class="px-4 py-1 cardTitle hoverTransition text-white">
-        <h4>Cadastro de Imóvel</h4>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Sobre Fotos do Imóvel</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="list-group">
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex align-items-center">
+                <i class="fa-solid fa-image fa-2xl me-4 mainColor"></i>
+                <div>
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Tire fotos na horizontal</h5>
+                  </div>
+                  <p class="mb-1">
+                    Fotos na horizontal, na maioria das vezes, mostram muito mais do local do que fotos verticais.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex align-items-center">
+                <i class="fa-solid fa-gem fa-2xl me-4 mainColor"></i>
+                <div>
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Capriche na primeira foto</h5>
+                  </div>
+                  <p class="mb-1">
+                    A primeira foto é a que os compradores veram primeiro, procure tirar uma foto da parte mais chamativa do imóvel.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex align-items-center">
+                <i class="fa-solid fa-lightbulb fa-2xl me-4 mainColor"></i>
+                <div>
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Tenha cuidado com a iluminação</h5>
+                  </div>
+                  <p class="mb-1">
+                    Garanta que as fotos estejam claras, de preferência tire as fotos de dia.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex align-items-center">
+                <i class="fa-solid fa-snowplow fa-2xl me-4 mainColor"></i>
+                <div>
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Deixe tudo organizado</h5>
+                  </div>
+                  <p class="mb-1">
+                    Garanta que tudo na casa está organizado e limpo.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary bgMainColor" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
     </div>
-    <div class="px-5 py-4 mx-auto">
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% crispy form %}
-        </form>
-    </div>
+  </div>
+
+  <div class="px-4 py-1 cardTitle hoverTransition text-white">
+    <h4>Cadastro de Imóvel</h4>
+  </div>
+  <div class="px-5 py-4 mx-auto">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% crispy form %}
+      <!-- <button id="showModal" class="btn">
+        <i class="fa-solid fa-circle-question fa-2xl mainColor"></i>
+      </button> -->
+    </form>
+    
+  </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
+<script>
+  $(document).ready(() => {
+    $('#exampleModal').modal("show")
+
+    $("#showModal").click(() => {
+      $('#exampleModal').modal("show")
+    })
+  })
+</script>
+
 {{ form.media }}
 <style>
-    .select2-container .select2-selection--single {
-        height: calc(1.5em + .75rem + 2px);
-        width: 100%;
-        border: 1px solid #ced4da;
-    }
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        display: none;
-    }
+  .select2-container .select2-selection--single {
+    height: calc(1.5em + .75rem + 2px);
+    width: 100%;
+    border: 1px solid #ced4da;
+  }
+
+  .select2-container--default .select2-selection--single .select2-selection__arrow {
+    display: none;
+  }
 </style>
 {% endblock %}

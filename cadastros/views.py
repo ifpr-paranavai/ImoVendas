@@ -96,7 +96,7 @@ class ImovelSearch(ListView):
             cidade = ip("me").city
         
         if cidade:
-            imoveis = imoveis.filter(cidade__nome=cidade)
+            imoveis = imoveis.filter(cidade__nome__icontains=cidade)
             
         if quartos:
             imoveis = imoveis.filter(quantidade_quartos=quartos)
