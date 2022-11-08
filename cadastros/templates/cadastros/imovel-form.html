@@ -38,7 +38,8 @@
                     <h5 class="mb-1">Capriche na primeira foto</h5>
                   </div>
                   <p class="mb-1">
-                    A primeira foto é a que os compradores veram primeiro, procure tirar uma foto da parte mais chamativa do imóvel.
+                    A primeira foto é a que os compradores veram primeiro, procure tirar uma foto da parte mais
+                    chamativa do imóvel.
                   </p>
                 </div>
               </div>
@@ -75,7 +76,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary bgMainColor" data-bs-dismiss="modal">OK</button>
+          <button type="button" class="btn bgMainColor text-white" data-bs-dismiss="modal">OK</button>
         </div>
       </div>
     </div>
@@ -88,11 +89,7 @@
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {% crispy form %}
-      <!-- <button id="showModal" class="btn">
-        <i class="fa-solid fa-circle-question fa-2xl mainColor"></i>
-      </button> -->
     </form>
-    
   </div>
 </div>
 {% endblock %}

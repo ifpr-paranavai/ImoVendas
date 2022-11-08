@@ -28,7 +28,7 @@ strong {
 }
 
 .bgMainColor {
-  background-color: var(--mainColor);
+  background-color: var(--mainColor) !important;
 }
 
 .bgSecondColor {
@@ -104,7 +104,7 @@ strong {
 }
 
 .hoverTransition:hover {
-  background-color: var(--secondaryColor);
+  background-color: var(--secondaryColor) ;
 }
 
 .biggerTransition {
