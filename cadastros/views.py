@@ -49,17 +49,19 @@ class ImovelList(LoginRequiredMixin, ListView):
         return lista
 
 
-def imovelDelete(request, pk=None):
+def imovelFinish(request, pk=None):
     user = request.user
     if user.is_authenticated:
         imovel = Imovel.objects.get(usuario=user, pk=pk)
         
         if imovel:
+            imovel.negociado = True
             imovel.publicado = False
             imovel.save()
 
             historico = Movimentacao.objects.create(imovel=imovel, movimentado_por=user)
-            historico.motivo = "Imóvel desativado"
+            historico.motivo = "Imóvel negociado"
+            historico.pendente = False
             historico.save()
             
             return redirect("listar-imovel")

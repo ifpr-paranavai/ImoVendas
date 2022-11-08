@@ -26,8 +26,8 @@
                 <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">  
                 {% endif %}
 
-                    <a href="{% url 'excluir-imovel' pk=imovel.0.pk %}">
-                        <i class="fa-solid fa-trash p-3 text-white rounded hoverTransition bgMainColor position-absolute" 
+                    <a href="{% url 'negociar-imovel' pk=imovel.0.pk %}">
+                        <i class="fa-solid fa-check p-3 text-white rounded hoverTransition bgMainColor position-absolute" 
                         style="left: 0;"></i>
                     </a>
                     {% if imovel.0.destacado %}

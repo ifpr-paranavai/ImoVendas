@@ -28,7 +28,9 @@
                     <h5>Motivo: {{imovel.2.motivo}} </h5>
                     <h5>Comprovante: 
                       {% if imovel.2.comprovante %}
-                        <img class="img-fluid rounded mx-auto d-block w-25" src={{imovel.2.comprovante}}  />
+                        <a href="{{imovel.2.comprovante.url}}" target="_blank" class="text-center">
+                          <i class="fa fa-solid fa-eye fa-md" ></i>
+                        </a> 
                       {% else %}
                         Sem Comprovante 
                       {% endif %}

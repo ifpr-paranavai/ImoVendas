@@ -43,8 +43,8 @@
                             <td> {{historico.movimentado_por}} </td>
                             <td> 
                                 {% if historico.comprovante %}
-                                <a href="{{historico.comprovante}}" target="_blank" class="text-center">
-                                    <i class="fa fa-solid fa-eye" ></i>
+                                <a href="{{historico.comprovante.url}}" target="_blank" class="text-center">
+                                    <i class="fa fa-solid fa-eye fa-md" ></i>
                                 </a> 
                                 {% endif %}
                             </td>
