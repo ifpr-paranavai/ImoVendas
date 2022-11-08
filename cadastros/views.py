@@ -1,14 +1,15 @@
-from datetime import date, timedelta
 import uuid
+from datetime import date, timedelta
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
+from geocoder import ip
 
 from cadastros.forms import ImovelFotoForm
-from cadastros.models import Foto, Movimentacao, Imovel
+from cadastros.models import Foto, Imovel, Movimentacao
 
 
 class ImovelCreate(LoginRequiredMixin, CreateView):
@@ -75,14 +76,38 @@ class ImovelSearch(ListView):
         lista = []
         cidade = self.request.GET.get("cidade", None)
         quartos = self.request.GET.get("quartos", None)
+        banheiros = self.request.GET.get("banheiros", None)
+        preco_max = self.request.GET.get("preco_max", None)
+        categoria = self.request.GET.get("categoria", None)
+        only_destaque = self.request.GET.get("destacado", None)
+        sort_new = self.request.GET.get("novos", None)
+        on_location = self.request.GET.get("local", None)
         
         imoveis = Imovel.objects.filter(publicado=True, negociado=False)
+
+        if on_location:
+            cidade = ip("me").city
         
         if cidade:
             imoveis = imoveis.filter(cidade__nome=cidade)
             
         if quartos:
             imoveis = imoveis.filter(quantidade_quartos=quartos)
+
+        if banheiros:
+            imoveis = imoveis.filter(quantidade_banheiros=banheiros)
+
+        if preco_max:
+            imoveis = imoveis.filter(preco__lte=float(preco_max))
+
+        if categoria:
+            imoveis = imoveis.filter(tipo=categoria)
+
+        if only_destaque:
+            imoveis = imoveis.filter(destacado=True)
+
+        if sort_new:
+            imoveis = imoveis.order_by("-cadastrado_em")
 
         for imovel in imoveis:
             lista.append([imovel, Foto.objects.filter(imovel=imovel)])
