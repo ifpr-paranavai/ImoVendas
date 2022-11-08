@@ -1,7 +1,9 @@
+from datetime import date, datetime, timedelta
 from braces.views import GroupRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.views.generic.list import ListView
+from django.views.generic.base import TemplateView
 
 from cadastros.models import Foto, Movimentacao, Imovel
 
@@ -74,6 +76,7 @@ def aprovarImovel(request, pk=None, historico_pk=None, destaque=False):
                 imovel.destacado = True
             else:
                 imovel.publicado = True
+                imovel.expira_em = date.today() + timedelta(days=30)
 
             imovel.save()
 
@@ -103,3 +106,25 @@ def rejeitarImovel(request, historico_pk=None):
         
             
             
+class RotinaImovel(GroupRequiredMixin, TemplateView):
+    group_required = u"Administrador"
+    template_name = "administrativo/rotina.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        imoveis_expirados = Imovel.objects.filter(expira_em__lt=datetime.now())
+        count = 0
+
+        for imovel in imoveis_expirados:
+            count+=1
+            imovel.publicado = False
+            imovel.save()
+
+            historico = Movimentacao.objects.create(imovel=imovel, movimentado_por=self.request.user)
+            historico.motivo = "Imóvel expirado"
+            historico.pendente = False
+            historico.save()
+
+        context["contagem"] = count
+        return context
