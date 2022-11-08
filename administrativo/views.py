@@ -14,20 +14,17 @@ class Adm(GroupRequiredMixin, ListView):
     def get_queryset(self):
         lista = []
 
-        imoveis = Imovel.objects.all()
-        movimentacoes = Movimentacao.objects.filter(pendente=True)
+        movimentacoes = Movimentacao.objects.filter(pendente=True).select_related("imovel")
 
-        if len(movimentacoes) == 0:
+        if not movimentacoes.exists():
             return lista
 
-        for imovel in imoveis:
-            ultima_movimentacao = movimentacoes.get(imovel=imovel)
-            if ultima_movimentacao:
-                lista.append([
-                    imovel,
-                    Foto.objects.filter(imovel=imovel).get(),
-                    ultima_movimentacao,
-                ])
+        for mov in movimentacoes:
+            imovel_foto = Foto.objects.get(imovel=mov.imovel),
+            lista.append([
+                mov,
+                imovel_foto[0],
+            ])
 
         return lista
 

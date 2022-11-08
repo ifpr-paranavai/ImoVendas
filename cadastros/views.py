@@ -1,5 +1,6 @@
 import uuid
 from datetime import date, timedelta
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -44,8 +45,13 @@ class ImovelList(LoginRequiredMixin, ListView):
         imoveis = Imovel.objects.filter(usuario=self.request.user)
 
         for imovel in imoveis:
-            lista.append([imovel, Foto.objects.filter(imovel=imovel)])
+            can_move = False
+            try:
+                Movimentacao.objects.get(imovel=imovel, pendente=True)
+            except ObjectDoesNotExist:
+                can_move = True
 
+            lista.append([imovel, Foto.objects.filter(imovel=imovel), can_move])
         
         return lista
 
@@ -71,6 +77,7 @@ def imovelFinish(request, pk=None):
 class ImovelSearch(ListView):
     model = Imovel
     template_name = "cadastros/imovel-search.html"
+    paginate_by = 6
     
     def get_queryset(self):
         lista = []

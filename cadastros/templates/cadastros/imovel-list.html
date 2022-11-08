@@ -50,7 +50,7 @@
                             {% endfor %}
                         </div>
 
-                        {% if not imovel.0.destacado %}
+                        {% if not imovel.0.destacado and imovel.3 %}
                         <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardButton fixed-bottom" href="{% url 'imovel-boost' pk=imovel.0.pk %}" class="stretched-link">
                             <h5>Destacar anúncio</h5>
                             &ensp;
@@ -77,7 +77,7 @@
 
     <div class="row justify-content-center p-3">
         {% for imovel in object_list %}
-            {% if not imovel.0.publicado %}
+            {% if not imovel.0.publicado or imovel.0.negociado %}
             
                 {% if imovel.0.destacado %}
                 <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition boostBorder">  
@@ -104,7 +104,7 @@
                             {% endfor %}
                         </div>
 
-                        {% if True %}
+                        {% if imovel.3 and not imovel.0.negociado %}
                         <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardButton fixed-bottom" href="{% url 'imovel-renew' pk=imovel.0.pk %}" class="stretched-link">
                             <h5>Renovar anúncio</h5>
                             &ensp;

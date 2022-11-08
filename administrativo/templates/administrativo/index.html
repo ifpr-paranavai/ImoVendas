@@ -12,23 +12,23 @@
     </div>
     
     <div class="row justify-content-center p-3">
-        {% for imovel in object_list %}
+        {% for obj in object_list %}
             
         <div class="accordion">
             <div class="accordion-item">
                 <h2 class="accordion-header" >
                   <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion{{forloop.counter}}" >
-                    <img class="img-fluid rounded mx-auto d-block w-25" src={{imovel.1.foto.url}} />
+                    <img class="img-fluid rounded mx-auto d-block w-25" src={{obj.1.foto.url}} />
 
-                    <h4>{{ imovel.0.titulo }}</h4>
+                    <h4>{{ obj.0.imovel.titulo }}</h4>
                   </button>
                 </h2>
                 <div id="accordion{{forloop.counter}}" class="accordion-collapse collapse">
                   <div class="accordion-body">
-                    <h5>Motivo: {{imovel.2.motivo}} </h5>
+                    <h5>Motivo: {{obj.0.motivo}} </h5>
                     <h5>Comprovante: 
-                      {% if imovel.2.comprovante %}
-                        <a href="{{imovel.2.comprovante.url}}" target="_blank" class="text-center">
+                      {% if obj.0.comprovante %}
+                        <a href="{{obj.0.comprovante.url}}" target="_blank" class="text-center">
                           <i class="fa fa-solid fa-eye fa-md" ></i>
                         </a> 
                       {% else %}
@@ -37,13 +37,13 @@
                     </h5>
 
                     <div class="d-flex justify-content-end">
-                      <a href="{% url 'imovel-view' pk=imovel.0.pk %}" target="_blank" class="btn btn-lg btn-primary">Ver detalhes</a>
-                      <a href="{% url 'rejeitar-imovel' historico_pk=imovel.2.pk %}" class="btn btn-lg btn-danger">Rejeitar</a>
+                      <a href="{% url 'imovel-view' pk=obj.0.imovel.pk %}" target="_blank" class="btn btn-lg btn-primary">Ver detalhes</a>
+                      <a href="{% url 'rejeitar-imovel' historico_pk=obj.0.pk %}" class="btn btn-lg btn-danger">Rejeitar</a>
                       
                       {% if imovel.2.motivo == 'Publicação de imóvel' %}
-                        <a href="{% url 'aprovar-imovel' pk=imovel.0.pk historico_pk=imovel.2.pk destaque=0 %}" class="btn btn-lg btn-success">Aprovar</a>
+                        <a href="{% url 'aprovar-imovel' pk=obj.0.imovel.pk historico_pk=obj.0.pk destaque=0 %}" class="btn btn-lg btn-success">Aprovar</a>
                       {% else %}
-                        <a href="{% url 'aprovar-imovel' pk=imovel.0.pk historico_pk=imovel.2.pk destaque=1 %}" class="btn btn-lg btn-success">Aprovar</a>
+                        <a href="{% url 'aprovar-imovel' pk=obj.0.imovel.pk historico_pk=obj.0.pk destaque=1 %}" class="btn btn-lg btn-success">Aprovar</a>
                       {% endif %}
                     </div>
                     
