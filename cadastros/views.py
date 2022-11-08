@@ -45,13 +45,7 @@ class ImovelList(LoginRequiredMixin, ListView):
         imoveis = Imovel.objects.filter(usuario=self.request.user)
 
         for imovel in imoveis:
-            can_move = False
-            try:
-                Movimentacao.objects.get(imovel=imovel, pendente=True)
-            except ObjectDoesNotExist:
-                can_move = True
-
-            lista.append([imovel, Foto.objects.filter(imovel=imovel), can_move])
+            lista.append([imovel, Foto.objects.filter(imovel=imovel)])
         
         return lista
 

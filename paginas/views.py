@@ -59,6 +59,7 @@ class ImovelBoost(CreateView):
         context = super().get_context_data(**kwargs)
 
         context["imovel"] = get_object_or_404(Imovel, pk=self.kwargs["pk"], usuario=self.request.user)
+        context["ultima_mov"] = Movimentacao.objects.latest("movimentado_em")
         context["fotos"] = Foto.objects.filter(imovel=context["imovel"])
 
         return context
