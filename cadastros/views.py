@@ -83,11 +83,15 @@ class ImovelSearch(ListView):
         only_destaque = self.request.GET.get("destacado", None)
         sort_new = self.request.GET.get("novos", None)
         on_location = self.request.GET.get("local", None)
+        from_user = self.request.GET.get("usuario", None)
         
         imoveis = Imovel.objects.filter(publicado=True, negociado=False)
 
         if on_location:
             cidade = ip("me").city
+
+        if from_user:
+            imoveis = imoveis.filter(usuario__id=from_user)
         
         if cidade:
             imoveis = imoveis.filter(cidade__nome__icontains=cidade)

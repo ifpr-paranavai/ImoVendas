@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from geocoder import ip
 
-from cadastros.models import Foto, Movimentacao, Imovel
+from cadastros.models import Foto, Movimentacao, Imovel, Perfil
 from paginas.forms import MovimentacaoForm
 
 
@@ -47,7 +47,8 @@ class ImovelView(DetailView):
 
         fotos = Foto.objects.filter(imovel=imovel)
         imovel_count = Imovel.objects.filter(usuario=imovel.usuario).count()
-        return [imovel, fotos, imovel_count]
+        perfil = Perfil.objects.get(usuario__id=imovel.usuario.id)
+        return [imovel, fotos, imovel_count, perfil]
 
 
 class ImovelPagar(CreateView):
