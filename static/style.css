@@ -59,6 +59,13 @@ strong {
   border-radius: 10px;
 }
 
+.contentCardStyle{
+  border-radius: 20px;
+  margin-bottom: 1%;
+  background-color: white;
+  min-height: 15vh;
+}
+
 .contentBlock {
   display: flex;
   flex-direction: column;
@@ -70,20 +77,20 @@ strong {
 .cardTitle {
   width: fit-content;
   background-color: var(--mainColor);
-  border-top-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .cardTitleButton {
   background-color: var(--mainColor);
-  border-top-right-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 
 .cardButton {
   background-color: var(--mainColor);
-  border-radius: 5px;
+  border-radius: 20px;
 }
 
 .iconCircle {
