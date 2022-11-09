@@ -33,22 +33,27 @@
             </div>
         </div>
         {% if not ultima_mov.pendente %}
-            <h2 class="text-center mt-5">Escaneie o código Pix para efetuar o pagamento.</h2>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png" class="img-fluid rounded mx-auto d-block w-50" >
+            {% if imovel.publicado and modo == "Renovar" %}
+                <h2 class="text-center mt-5">O imóvel ainda não expirou, aguarde até que ele tenha expirado para realizar a renovação.</h2>
 
-            <h2 class="text-center mt-5">Após o pagamento, envie o comprovante no campo abaixo.</h2>
-            <form method="post" enctype="multipart/form-data" class="w-75 mx-auto">
-                {% csrf_token %}
-                {{ form|crispy }}
+            {% elif imovel.destacado and modo == "Destacar" %}
+                <h2 class="text-center mt-5">O imóvel já se encontra destacado.</h2>
 
-                <button type="submit" class="btn btn-lg bgMainColor text-white w-100">
-                    Enviar
-                </button>
-            </form>
+            {% else %}
+                <h2 class="text-center mt-5">Escaneie o código Pix para efetuar o pagamento.</h2>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png" class="img-fluid rounded mx-auto d-block w-50" >
 
-        {% elif 'Rejeitado' in ultima_mov.motivo %}
-            <h2 class="text-center mt-5">O seu pedido foi rejeitado por um Administrador.</h2>
-            <h2 class="text-center mt-5">Motivo: {{ultima_mov.motivo}}</h2>
+                <h2 class="text-center mt-5">Após o pagamento, envie o comprovante no campo abaixo.</h2>
+                <form method="post" enctype="multipart/form-data" class="w-75 mx-auto">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+
+                    <button type="submit" class="btn btn-lg bgMainColor text-white w-100">
+                        Enviar
+                    </button>
+                </form>
+
+            {% endif %}
 
         {% else %}
             <h2 class="text-center mt-5">O seu pedido está sendo analisado por um Administrador.</h2>
