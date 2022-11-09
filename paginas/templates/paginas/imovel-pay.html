@@ -7,31 +7,31 @@
 
 {% block content %}
 <div class="contentCardStyle">
-    <div class="px-4 py-1 cardTitle hoverTransition text-white">
+    <div class="px-4 py-1 cardTitle hoverTransition text-white position-absolute" style="z-index: 2;">
         <h4>{{ modo }}</h4>
     </div>
 
-    <h1 class="mx-4 mt-4">{{ imovel.titulo }}</h1>
-
-    <div class="row p-4">
-
-        <div class="col-lg-12 my-2">
-            <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="true">
-                <div class="carousel-inner">
-                    {% for f in fotos %}
-                        {% if forloop.counter == 1 %}
-                            <div class="carousel-item active">
-                                <img class="img-fluid rounded mx-auto d-block" src={{f.foto.url}} style="margin-top: -45%;" />
-                            </div>
-                        {% else %}
-                            <div class="carousel-item">
-                                <img class="img-fluid rounded mx-auto d-block" src={{f.foto.url}} style="margin-top: -45%;" />
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
+    <div id="carouselExampleIndicators" class="carousel slide position-absolute container ps-0 pe-4" data-bs-ride="carousel">
+        <div class="carousel-inner" style="border-radius: 20px;">
+            {% for f in fotos %}
+                {% if forloop.counter == 1 %}
+                    <div class="carousel-item active" data-bs-interval="3000">
+                        <img id="imgCoverPay" class="img-fluid" src={{f.foto.url}}  />
+                    </div>
+                {% else %}
+                    <div class="carousel-item" data-bs-interval="3000">
+                        <img id="imgCoverPay" class="img-fluid" src={{f.foto.url}} />
+                    </div>
+                {% endif %}
+                
+            {% endfor %}
         </div>
+        <h1 class="mx-4 position-absolute top-50 start-50 translate-middle title-top">{{ imovel.titulo|title }}</h1>
+    </div>
+
+
+    <div class="row mb-5" style="margin-top: 50vh;">
+        
         {% if not ultima_mov.pendente %}
             {% if imovel.publicado and modo == "Renovar" %}
                 <h2 class="text-center mt-5">O imóvel ainda não expirou, aguarde até que ele tenha expirado para realizar a renovação.</h2>

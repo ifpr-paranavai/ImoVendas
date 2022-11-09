@@ -28,7 +28,7 @@
 <body class="backgroundColor">
 
     <main class="d-flex flex-nowrap">
-        <div class="d-flex flex-column flex-shrink-0 p-3 sticky-top shadow rounded-right bgMainColor"
+        <div class="flex-column flex-shrink-0 p-3 sticky-top shadow rounded-right bgMainColor sidebarSize hide-mobile"
             style="width: 340px; height: 100vh;">
             <a href="{% url 'index' %}" class="text-white mx-auto iconTextButton hoverTransition">
                 <i class="fa-solid fa-house fa-2xl">
@@ -39,7 +39,7 @@
             <ul class="nav nav-pills flex-column mb-auto">
                 {% block search %}
                 <li class="nav-item mb-3">
-                    <form class="input-group hide-mobile" id="search-form">
+                    <form class="input-group" id="search-form">
                         <input type="text" class="form-control opacity-75" placeholder="Buscar cidade" id="search-bar">
                         <button class="text-white border border-light iconTextButton hoverTransition" type="submit">
                             <i class="fas fa-search"></i>

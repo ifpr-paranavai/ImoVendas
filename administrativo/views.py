@@ -22,7 +22,7 @@ class Adm(GroupRequiredMixin, ListView):
             return lista
 
         for mov in movimentacoes:
-            imovel_foto = Foto.objects.get(imovel=mov.imovel),
+            imovel_foto = Foto.objects.filter(imovel=mov.imovel)[0],
             lista.append([
                 mov,
                 imovel_foto[0],
@@ -45,7 +45,7 @@ class Movimentacoes(GroupRequiredMixin, ListView):
             movimentacoes = movimentacoes.filter(imovel=imovel)
             lista.append([
                 imovel,
-                Foto.objects.filter(imovel=imovel).get(),
+                Foto.objects.filter(imovel=imovel)[0],
                 movimentacoes,
             ])
 
