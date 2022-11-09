@@ -10,15 +10,15 @@ Cadastrar-se
 
 {% block content %}
 
-<div class="contentCardStyle">
+<div class="contentCardStyle w-75 mx-auto">
     <div class="px-4 py-1 cardTitle hoverTransition text-white">
         <h4>Cadastro de Perfil</h4>
     </div>
-    <div class="p-5 w-75 mx-auto">
+    <div class="py-5 w-75 mx-auto">
         <form method="post">
             {% csrf_token %}
             {{ form|crispy }}
-            <button type="submit" class="btn btn-secondary w-100 mt-5">
+            <button type="submit" class="btn btn-lg bgMainColor text-white hoverTransition w-100 mt-5">
                 Cadastrar-se
             </button>
         </form>
