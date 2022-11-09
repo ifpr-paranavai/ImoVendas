@@ -27,7 +27,7 @@
                 {% endif %}
 
                     <a href="{% url 'negociar-imovel' pk=imovel.0.pk %}">
-                        <i class="fa-solid fa-check p-3 text-white rounded hoverTransition bgMainColor position-absolute" 
+                        <i class="fa-solid fa-check p-3 text-white rounded hoverTransition bgDangerColor position-absolute" 
                         style="left: 0;"></i>
                     </a>
                     {% if imovel.0.destacado %}
@@ -51,7 +51,7 @@
                         </div>
 
                         {% if not imovel.0.destacado %}
-                        <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardButton fixed-bottom" href="{% url 'imovel-boost' pk=imovel.0.pk %}" class="stretched-link">
+                        <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardButtonBottom fixed-bottom" href="{% url 'imovel-boost' pk=imovel.0.pk %}" class="stretched-link">
                             <h5>Destacar anúncio</h5>
                             &ensp;
                             <i class="fa-solid fa-angles-right"></i>
@@ -105,7 +105,7 @@
                         </div>
 
                         {% if not imovel.0.negociado %}
-                        <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardButton fixed-bottom" href="{% url 'imovel-renew' pk=imovel.0.pk %}" class="stretched-link">
+                        <a class="d-flex align-items-center px-4 py-1 text-white hoverTransition cardButtonBottom fixed-bottom" href="{% url 'imovel-renew' pk=imovel.0.pk %}" class="stretched-link">
                             <h5>Renovar anúncio</h5>
                             &ensp;
                             <i class="fa-solid fa-angles-right"></i>
