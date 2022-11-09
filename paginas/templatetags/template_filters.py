@@ -13,4 +13,4 @@ def is_admin(user):
 
 @register.filter(name="build_url")
 def build_url(url: str, obj):
-    return url + f"={obj}"
+    return url + f"{obj}"
