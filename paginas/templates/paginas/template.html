@@ -108,7 +108,12 @@
                     <strong>{{ request.user }}</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                    <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
+                    <li>
+                        <a class="dropdown-item" href="{% url 'editar-perfil' pk=request.user.id %}">Editar Perfil</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
+                    </li>
                 </ul>
             </div>
             {% else %}

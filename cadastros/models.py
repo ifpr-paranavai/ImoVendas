@@ -8,7 +8,6 @@ FINALIDADE_CHOICES = (
 )
 
 
-
 # Create your models here.
 class Estado(models.Model):
     nome = models.CharField(max_length=30, unique=True)
@@ -34,8 +33,8 @@ class Tipo(models.Model):
 
 class Perfil(models.Model):
     nome = models.CharField(help_text="Informe seu nome completo", max_length=100)
-    celular = models.CharField(help_text="Informe seu número de celular", max_length=12)
-    cpf = models.CharField(verbose_name="CPF", help_text="Informe seu CPF", max_length=11, null=True, blank=True, unique=True)
+    celular = models.CharField(help_text="Informe seu número de celular", max_length=16)
+    cpf = models.CharField(verbose_name="CPF", help_text="Informe seu CPF", max_length=18, unique=True)
     cidade = models.ForeignKey(Cidade, on_delete=models.PROTECT, help_text="Informe a sua cidade")
 
     usuario = models.OneToOneField(User, on_delete=models.PROTECT)
