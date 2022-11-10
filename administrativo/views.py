@@ -1,4 +1,5 @@
 from datetime import date, datetime, timedelta
+import json
 from braces.views import GroupRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
@@ -55,6 +56,25 @@ class Usuarios(GroupRequiredMixin, ListView):
     model = User
     template_name = "administrativo/users.html"
 
+
+class Relatorios(GroupRequiredMixin, TemplateView):
+    group_required = u"Administrador"
+    template_name = "administrativo/relatorios.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        ano = self.request.GET.get("ano", datetime.now().year)
+
+        imoveis = Imovel.objects.filter(cadastrado_em__year=ano)
+        imoveis_mes = []
+
+        for i in range(1, 13):
+            imoveis_mes.append(imoveis.filter(cadastrado_em__month=i).count())
+
+        context["imoveis"] = json.dumps(imoveis_mes)
+        return context
+    
 
 
 def temPermissao(request):

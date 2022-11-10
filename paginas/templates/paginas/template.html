@@ -58,21 +58,21 @@
                   
                 <li class="nav-item rounded-xl hoverTransition">
                     <a href="/buscar/imovel/?destacado=True" class="nav-link text-white text-center">
-                        <i class="fa-solid fa-star fa-lg"></i>
+                        <i class="fa-solid fa-star fa-xl"></i>
                         <p>Destaques</p>
                     </a>
                 </li>
 
                 <li class="nav-item rounded-xl hoverTransition">
                     <a href="/buscar/imovel/?local=True" class="nav-link text-white text-center">
-                        <i class="fa-solid fa-location-dot fa-lg"></i>
+                        <i class="fa-solid fa-location-dot fa-xl"></i>
                         <p class="">Para Você</p>
                     </a>
                 </li>
 
                 <li class="nav-item rounded-xl hoverTransition">
                     <a href="/buscar/imovel/?novos=True" class="nav-link text-white text-center">
-                        <i class="fa-solid fa-fire fa-lg"></i>
+                        <i class="fa-solid fa-fire fa-xl"></i>
                         <p class="">Recentes</p>
                     </a>
                 </li>
@@ -80,7 +80,7 @@
                 {% if request.user.is_authenticated %}
                 <li class="nav-item rounded-xl hoverTransition">
                     <a href="{% url 'listar-imovel' %}" class="nav-link text-white text-center">
-                        <i class="fa-solid fa-clipboard-list fa-lg"></i>
+                        <i class="fa-solid fa-clipboard-list fa-xl"></i>
                         <p class="">Meus Imóveis</p>
                     </a>
                 </li>
@@ -89,7 +89,7 @@
                 {% if request.user|is_admin %}
                 <li class="nav-item rounded-xl hoverTransition">
                     <a href="{% url 'adm' %}" class="nav-link text-white text-center">
-                        <i class="fa-solid fa-screwdriver-wrench fa-lg"></i>
+                        <i class="fa-solid fa-screwdriver-wrench fa-xl"></i>
                         <p class="">Administrativo</p>
                     </a>
                 </li>
@@ -120,13 +120,13 @@
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item rounded-xl hoverTransition">
                     <a href="{% url 'login' %}" class="nav-link text-white text-center">
-                        <i class="fa-solid fa-right-to-bracket fa-lg"></i>
+                        <i class="fa-solid fa-right-to-bracket fa-xl"></i>
                         <p>Entrar</p>
                     </a>
                 </li>
                 <li class="nav-item rounded-xl hoverTransition">
                     <a href="{% url 'cadastro' %}" class="nav-link text-white text-center">
-                        <i class="fa-solid fa-file-pen fa-lg"></i>
+                        <i class="fa-solid fa-file-pen fa-xl"></i>
                         <p>Cadastrar-se</p>
                     </a>
                 </li>

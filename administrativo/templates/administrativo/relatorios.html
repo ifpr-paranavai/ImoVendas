@@ -1,0 +1,89 @@
+{% extends 'administrativo/admin_template.html' %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="contentCardStyle">
+    <div class="d-flex justify-content-between">
+        <div class="px-4 py-1 cardTitle hoverTransition text-white">
+            <h4>Filtros</h4>
+        </div>
+    </div>
+    
+    <div class="row justify-content-center p-3">
+        
+        <input type="number" class="form-control" id="year-filter" aria-describedby="emailHelp">
+        <a class="btn bgMainColor" id="search-filter">Buscar</a>
+
+    </div>
+</div>
+
+<div class="contentCardStyle">
+    <div class="d-flex justify-content-between">
+        <div class="px-4 py-1 cardTitle hoverTransition text-white">
+            <h4>Relatório</h4>
+        </div>
+    </div>
+    
+    <div class="row justify-content-center p-3">
+        <canvas id="relatorio"></canvas>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var imoveis = JSON.parse('{{ imoveis }}')
+
+    const labels = [
+        'Jan',
+        'Fev',
+        'Mar',
+        'Abr',
+        'Mai',
+        'Jun',
+        'Jul',
+        'Ago',
+        'Set',
+        'Out',
+        'Nov',
+        'Dez'
+    ];
+
+    const data = {
+        labels: labels,
+        datasets: [{
+        label: 'Imóveis Cadastrados',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: imoveis,
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {}
+    };
+    const myChart = new Chart(
+        document.getElementById('relatorio'),
+        config
+    );
+
+</script>
+
+<script>
+    $(document).ready(() => {
+        $("#search-filter").click(() => {
+            year = $("#year-filter").val()
+            console.log(year)
+            window.location.replace("/administrativo/relatorios?ano=" + year)
+        })
+    })
+</script>
+
+{% endblock %}

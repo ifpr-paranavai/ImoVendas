@@ -20,35 +20,42 @@ Administrativo
 {% block items %}
 <li class="nav-item rounded-xl hoverTransition">
   <a href="{% url 'adm' %}" class="nav-link text-white text-center">
-      <i class="fa-solid fa-triangle-exclamation fa-lg"></i>
+      <i class="fa-solid fa-triangle-exclamation fa-xl"></i>
       <p class="">Anúncios Pendentes</p>
   </a>
 </li>
 
 <li class="nav-item rounded-xl hoverTransition">
   <a href="{% url 'movs' %}" class="nav-link text-white text-center">
-      <i class="fa-solid fa-list-check fa-lg"></i>
+      <i class="fa-solid fa-list-check fa-xl"></i>
       <p class="">Movimentações</p>
   </a>
 </li>
 
 <li class="nav-item rounded-xl hoverTransition">
+  <a href="{% url 'relatorios' %}" class="nav-link text-white text-center">
+      <i class="fa-solid fa-scroll fa-xl"></i>
+      <p class="">Relatórios</p>
+  </a>
+</li>
+
+<li class="nav-item rounded-xl hoverTransition">
   <a href="{% url 'usuarios' %}" class="nav-link text-white text-center">
-      <i class="fa-solid fa-users fa-lg"></i>
+      <i class="fa-solid fa-users fa-xl"></i>
       <p class="">Usuários</p>
   </a>
 </li>
 
 <li class="nav-item rounded-xl hoverTransition">
   <a href="{% url 'rotinas' %}" class="nav-link text-white text-center">
-      <i class="fa-solid fa-rotate-right fa-lg"></i>
+      <i class="fa-solid fa-rotate-right fa-xl"></i>
       <p class="">Executar Rotinas</p>
   </a>
 </li>
 
 <li class="nav-item rounded-xl hoverTransition">
     <a href="{% url 'index' %}" class="nav-link text-white text-center">
-        <i class="fa-solid fa-arrow-left fa-lg"></i>
+        <i class="fa-solid fa-arrow-left fa-xl"></i>
         <p class="">Voltar ao site</p>
     </a>
 </li>
