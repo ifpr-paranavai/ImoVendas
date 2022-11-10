@@ -13,7 +13,7 @@ from cadastros.models import Cidade
 
 class RelatorioForm(Form):
     cidade = forms.ModelChoiceField(
-        blank=True,
+        required=False,
         queryset=Cidade.objects.all().order_by("nome").select_related("estado"),
         widget=autocomplete.ModelSelect2(
             url="cidade-autocomplete",
@@ -24,7 +24,7 @@ class RelatorioForm(Form):
         ),
     )
 
-    ano = IntegerField(validators=[MinValueValidator(2000)])
+    ano = IntegerField(required=False, validators=[MinValueValidator(2000)])
 
     class Meta:
         fields = ["ano", "cidade"]

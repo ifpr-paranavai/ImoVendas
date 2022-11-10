@@ -73,7 +73,6 @@ class Relatorios(GroupRequiredMixin, FormView):
             cidade = Cidade.objects.get(pk=cidade)
             imoveis = imoveis.filter(cidade=cidade)
             cidade = cidade.nome
-            
 
         imoveis = imoveis.filter(cadastrado_em__year=ano)
         imoveis_mes = []
@@ -89,9 +88,17 @@ class Relatorios(GroupRequiredMixin, FormView):
     def form_valid(self, form):
         super().form_valid(form)
         ano = form.cleaned_data['ano']
-        cidade_pk = form.cleaned_data['cidade'].pk
+        cidade = form.cleaned_data['cidade']
 
-        return redirect(f"/administrativo/relatorios?ano={ano}&cidade={cidade_pk}")
+        url = "/administrativo/relatorios?"
+
+        if ano:
+            url += f"ano={ano}&"
+
+        if cidade:
+            url += f"cidade={cidade.pk}&"
+
+        return redirect(url)
 
 
 class Usuarios(GroupRequiredMixin, ListView):

@@ -104,14 +104,5 @@
 
 </script>
 
-<script>
-    $(document).ready(() => {
-        $("#search-filter").click(() => {
-            year = $("#year-filter").val()
-            console.log(year)
-            window.location.replace("{% url 'relatorios' %}?ano=" + year)
-        })
-    })
-</script>
 
 {% endblock %}
