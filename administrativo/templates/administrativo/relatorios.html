@@ -2,19 +2,24 @@
 
 {% load static %}
 
+{% load crispy_forms_tags %}
+
 
 {% block content %}
-<div class="contentCardStyle">
+<div class="contentCardStyle mx-5 pb-5">
     <div class="d-flex justify-content-between">
         <div class="px-4 py-1 cardTitle hoverTransition text-white">
             <h4>Filtros</h4>
         </div>
     </div>
     
-    <div class="row justify-content-center p-3">
+    <div class="row justify-content-center p-3 mx-5">
+
+        <form method="post" class="w-75 mx-auto">
+            {% csrf_token %}
+            {% crispy form %}
+        </form>
         
-        <input type="number" class="form-control" id="year-filter" aria-describedby="emailHelp">
-        <a class="btn bgMainColor" id="search-filter">Buscar</a>
 
     </div>
 </div>
@@ -25,6 +30,14 @@
             <h4>Relatório</h4>
         </div>
     </div>
+
+    <h4 class="text-center">Imóveis cadastrados em 
+        {{ ano }}
+        {% if cidade %}
+            na cidade de {{ cidade }}
+        {% endif %}
+
+    </h4>
     
     <div class="row justify-content-center p-3">
         <canvas id="relatorio"></canvas>
@@ -34,6 +47,21 @@
 {% endblock content %}
 
 {% block scripts %}
+
+{{ form.media }}
+<style>
+    .select2-container .select2-selection--single {
+        height: calc(1.5em + .75rem + 2px);
+        width: 100%;
+        border: 1px solid #ced4da;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        display: none;
+    }
+</style>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>

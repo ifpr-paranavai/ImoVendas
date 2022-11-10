@@ -1,12 +1,15 @@
-from datetime import date, datetime, timedelta
 import json
+from datetime import date, datetime, timedelta
+
 from braces.views import GroupRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
-from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import FormView
+from django.views.generic.list import ListView
 
-from cadastros.models import Foto, Movimentacao, Imovel
+from administrativo.forms import RelatorioForm
+from cadastros.models import Cidade, Foto, Imovel, Movimentacao
 
 
 class Adm(GroupRequiredMixin, ListView):
@@ -51,30 +54,51 @@ class Movimentacoes(GroupRequiredMixin, ListView):
 
         return lista
 
-class Usuarios(GroupRequiredMixin, ListView):
-    group_required = u"Administrador"
-    model = User
-    template_name = "administrativo/users.html"
 
-
-class Relatorios(GroupRequiredMixin, TemplateView):
+class Relatorios(GroupRequiredMixin, FormView):
     group_required = u"Administrador"
     template_name = "administrativo/relatorios.html"
+    form_class = RelatorioForm
+    success_url = "relatorios"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         ano = self.request.GET.get("ano", datetime.now().year)
+        cidade = self.request.GET.get("cidade", None)
 
-        imoveis = Imovel.objects.filter(cadastrado_em__year=ano)
+        imoveis = Imovel.objects
+
+        if cidade:
+            cidade = Cidade.objects.get(pk=cidade)
+            imoveis = imoveis.filter(cidade=cidade)
+            cidade = cidade.nome
+            
+
+        imoveis = imoveis.filter(cadastrado_em__year=ano)
         imoveis_mes = []
 
         for i in range(1, 13):
             imoveis_mes.append(imoveis.filter(cadastrado_em__month=i).count())
 
         context["imoveis"] = json.dumps(imoveis_mes)
+        context["ano"] = str(ano)
+        context["cidade"] = cidade
         return context
-    
+
+    def form_valid(self, form):
+        super().form_valid(form)
+        ano = form.cleaned_data['ano']
+        cidade_pk = form.cleaned_data['cidade'].pk
+
+        return redirect(f"/administrativo/relatorios?ano={ano}&cidade={cidade_pk}")
+
+
+class Usuarios(GroupRequiredMixin, ListView):
+    group_required = u"Administrador"
+    model = User
+    template_name = "administrativo/users.html"
+
 
 
 def temPermissao(request):
