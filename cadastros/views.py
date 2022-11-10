@@ -1,6 +1,6 @@
 import uuid
 from datetime import date, timedelta
-from django.core.exceptions import ObjectDoesNotExist
+
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -9,8 +9,8 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from geocoder import ip
 
-from cadastros.forms import ImovelFotoForm
-from cadastros.models import Foto, Imovel, Movimentacao
+from cadastros.forms import ImovelFotoForm, ImovelSearchForm
+from cadastros.models import Cidade, Foto, Imovel, Movimentacao
 
 
 class ImovelCreate(LoginRequiredMixin, CreateView):
@@ -69,11 +69,13 @@ def imovelFinish(request, pk=None):
     
         
 class ImovelSearch(ListView):
-    model = Imovel
     template_name = "cadastros/imovel-search.html"
-    paginate_by = 6
+    paginate_by = 2
+
+    search_form = None
     
     def get_queryset(self):
+        
         lista = []
         cidade = self.request.GET.get("cidade", None)
         quartos = self.request.GET.get("quartos", None)
@@ -89,13 +91,14 @@ class ImovelSearch(ListView):
         imoveis = Imovel.objects.filter(publicado=True, negociado=False)
 
         if on_location:
-            cidade = ip("me").city
+            ip_info = ip("me") 
+            cidade = Cidade.objects.get(nome__icontains=ip_info.city, estado__nome__icontains=ip_info.state).pk
 
         if from_user:
             imoveis = imoveis.filter(usuario__id=from_user)
         
         if cidade:
-            imoveis = imoveis.filter(cidade__nome__icontains=cidade)
+            imoveis = imoveis.filter(cidade__pk=cidade)
 
         if bairro:
             imoveis = imoveis.filter(bairro__icontains=bairro)
@@ -120,5 +123,11 @@ class ImovelSearch(ListView):
 
         for imovel in imoveis:
             lista.append([imovel, Foto.objects.filter(imovel=imovel)])
-            
+
         return lista
+
+    def get(self, request, *args, **kwargs):
+        self.search_form = ImovelSearchForm(request.GET)
+        self.object_list = self.get_queryset()
+        return self.render_to_response(self.get_context_data(form=self.search_form))
+        

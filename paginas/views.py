@@ -1,8 +1,7 @@
-from datetime import datetime, timedelta
 import uuid
 
 from django.shortcuts import get_object_or_404
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
@@ -18,10 +17,12 @@ class Index(ListView):
 
     def get_queryset(self):
         lista = [[], [], []]
+
+        imoveis_validos = Imovel.objects.filter(negociado=False, publicado=True).select_related("cidade")
         
-        proximos = Imovel.objects.filter(negociado=False, publicado=True, cidade__nome=ip("me").city)[:6]
-        destaques = Imovel.objects.filter(destacado=True, publicado=True, negociado=False)[:6]
-        novos = Imovel.objects.filter(publicado=True, negociado=False).order_by('cadastrado_em')[:6]
+        proximos = imoveis_validos.filter(cidade__nome=ip("me").city)[:3]
+        destaques = imoveis_validos.filter(destacado=True)[:3]
+        novos = imoveis_validos.filter(negociado=False).order_by('-cadastrado_em')[:3]
 
         for imovel in proximos:
             lista[0].append([imovel, Foto.objects.filter(imovel=imovel)])
