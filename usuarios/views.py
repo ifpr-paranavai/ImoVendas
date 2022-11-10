@@ -3,15 +3,25 @@ from django.contrib.auth.models import User, Group
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
+from django.contrib.auth import views as auth_views
 
 from usuarios.forms import UsuarioForm, PerfilUpdateForm
 
+class CustomLoginView(auth_views.LoginView):
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        cadastrado = self.request.GET.get("cadastrado", None)
+        context["cadastrado"] = cadastrado
+
+        return context
+    
 
 class PerfilCreate(CreateView):
     form_class = UsuarioForm
     template_name = "usuarios/cadastro-form.html"
-    success_url = reverse_lazy("index")
+    success_url = "/login?cadastrado=1"
     model = User
 
 
