@@ -78,6 +78,7 @@ class ImovelSearch(ListView):
         cidade = self.request.GET.get("cidade", None)
         quartos = self.request.GET.get("quartos", None)
         banheiros = self.request.GET.get("banheiros", None)
+        bairro = self.request.GET.get("bairro", None)
         preco_max = self.request.GET.get("preco_max", None)
         categoria = self.request.GET.get("categoria", None)
         only_destaque = self.request.GET.get("destacado", None)
@@ -95,6 +96,9 @@ class ImovelSearch(ListView):
         
         if cidade:
             imoveis = imoveis.filter(cidade__nome__icontains=cidade)
+
+        if bairro:
+            imoveis = imoveis.filter(bairro__icontains=bairro)
             
         if quartos:
             imoveis = imoveis.filter(quantidade_quartos=quartos)

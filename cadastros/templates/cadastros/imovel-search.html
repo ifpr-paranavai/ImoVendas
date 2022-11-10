@@ -41,6 +41,7 @@ Buscar Imóveis
                     {% endfor %}
                 </div>
             </div>
+            <a href="{% url 'imovel-view' pk=imovel.0.pk %}" class="stretched-link"></a>
         </div>
 
         {% empty %}
