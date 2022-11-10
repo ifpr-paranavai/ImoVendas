@@ -113,6 +113,16 @@ strong {
   }
 }
 
+.pageLinkRight{
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.pageLinkLeft{
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
 .cardIconMirror{
   color: white;
   background-color: var(--dangerColor);
