@@ -37,7 +37,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    var imoveis = JSON.parse('{{ imoveis }}')
+    var imoveis = JSON.parse('{{ imoveis|escapejs }}')
 
     const labels = [
         'Jan',
@@ -58,8 +58,8 @@
         labels: labels,
         datasets: [{
         label: 'Imóveis Cadastrados',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: '#00e699',
+        borderColor: '#00e699',
         data: imoveis,
         }]
     };
@@ -81,7 +81,7 @@
         $("#search-filter").click(() => {
             year = $("#year-filter").val()
             console.log(year)
-            window.location.replace("/administrativo/relatorios?ano=" + year)
+            window.location.replace("{% url 'relatorios' %}?ano=" + year)
         })
     })
 </script>

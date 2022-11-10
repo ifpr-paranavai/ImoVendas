@@ -57,21 +57,21 @@
                 {% block items %}
                   
                 <li class="nav-item rounded-xl hoverTransition">
-                    <a href="/buscar/imovel/?destacado=True" class="nav-link text-white text-center">
+                    <a href="{% url 'buscar-imovel' %}?destacado=True" class="nav-link text-white text-center">
                         <i class="fa-solid fa-star fa-xl"></i>
                         <p>Destaques</p>
                     </a>
                 </li>
 
                 <li class="nav-item rounded-xl hoverTransition">
-                    <a href="/buscar/imovel/?local=True" class="nav-link text-white text-center">
+                    <a href="{% url 'buscar-imovel' %}?local=True" class="nav-link text-white text-center">
                         <i class="fa-solid fa-location-dot fa-xl"></i>
                         <p class="">Para Você</p>
                     </a>
                 </li>
 
                 <li class="nav-item rounded-xl hoverTransition">
-                    <a href="/buscar/imovel/?novos=True" class="nav-link text-white text-center">
+                    <a href="{% url 'buscar-imovel' %}?novos=True" class="nav-link text-white text-center">
                         <i class="fa-solid fa-fire fa-xl"></i>
                         <p class="">Recentes</p>
                     </a>
@@ -170,7 +170,7 @@
             $(document).ready(() => {
                 $("#search-form").submit(() => {
                     var cidade = $("#search-bar").val()
-                    window.location.replace("/buscar/imovel?cidade=" + cidade)
+                    window.location.replace("{% url 'buscar-imovel' %}?cidade=" + cidade)
                     event.preventDefault()
                 })
             })

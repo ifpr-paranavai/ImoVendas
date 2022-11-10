@@ -101,7 +101,7 @@
                 </div>
                 
                 <p>Publicado por: 
-                    <a href="{{ '/buscar/imovel/?usuario='|build_url:object.0.usuario.id}}" class="btn bgMainColor text-white">
+                    <a href="{% url 'buscar-imovel' %}?usuario={{object.0.usuario.id}}" class="btn bgMainColor text-white">
                         {{ object.3.nome }} ({{ object.2 }} anúncios) 
                     </a> 
                 </p>
