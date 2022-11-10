@@ -8,36 +8,13 @@
 {% endblock %}
 
 {% block content %}
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Recipient:</label>
-              <input type="text" class="form-control" id="recipient-name">
-            </div>
-            <div class="mb-3">
-              <label for="message-text" class="col-form-label">Message:</label>
-              <textarea class="form-control" id="message-text"></textarea>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
 <div class="contentCardStyle">
     <div class="d-flex justify-content-between">
         <div class="px-4 py-1 cardTitle hoverTransition text-white">
             <h4>Imóvel</h4>
         </div>
         {% if object.0.destacado %}
-        <div class="d-flex align-items-center px-4 py-1 text-secondary rounded-xl bgBoostColor">
+        <div class="d-flex align-items-center px-4 py-1 cardIcon">
             <h4>Destacado</h4>
             &ensp;
             <i class="fa-solid fa-star"></i>
@@ -76,9 +53,9 @@
         </div>
             
         <div class="col-lg-4 my-2">
-            <div class="text-center rounded-xl position-relative mx-4 py-3 shadow-sm" 
+            <div class="text-center rounded-xl position-relative mx-4 py-3 shadow border" 
                 style="top: 5%; border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
-                <a href="#" class="btn btn-lg bgMainColor text-white hoverTransition mb-3 w-75" role="button">Contatar Vendedor</a>
+                <a href="#" class="btn btn-lg bgMainColor text-white hoverTransition mb-3 w-75 shadow fs-4" role="button">Contatar Vendedor</a>
                 
                 <h2>R${{ object.0.preco }}</h2>
             </div>
@@ -113,7 +90,7 @@
     <div class="row p-4">
         <div class="col-lg my-2">
 
-            <div class="w-75 shadow p-4 h-100 rounded-xl"> 
+            <div class="shadow p-4 h-100 rounded-xl"> 
                 <h3>Informações</h3>
                 <div class="p-3">
                     <p> {{ object.0.quantidade_quartos }} Quarto(s)</p>
@@ -124,7 +101,7 @@
 
         </div>
         <div class="col-lg my-2">
-            <div class="w-75 shadow p-4 h-100 rounded-xl"> 
+            <div class="shadow p-4 h-100 rounded-xl"> 
                 <h3>Endereço</h3>
                 <div class="p-3">
                     <p>Rua: {{ object.0.rua }}</p>
@@ -141,12 +118,3 @@
 
 {% endblock content %}
 
-
-{% block scripts %}
-<script>
-    $(document).ready(() => {
-        
-    })
-</script>
-
-{% endblock %}

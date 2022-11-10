@@ -30,9 +30,9 @@
 </head>
 
 <body class="backgroundColor">
-
     <main class="d-flex flex-nowrap">
-        <div class="flex-column flex-shrink-0 p-3 sticky-top shadow rounded-xl-right bgMainColor sidebarSize hide-mobile"
+        
+        <div class="flex-column flex-shrink-0 p-3 sticky-top rounded-xl-right bgMainColor sidebarSize shadow" id="sidebar"
             style="width: 340px; height: 100vh;">
             {% block home_button %}
             <a href="{% url 'index' %}" class="text-white mx-auto iconTextButton hoverTransition py-4">
@@ -137,6 +137,13 @@
             {% endif %}
         </div>
 
+        <div class="sticky-top d-flex align-items-center" style="height: 100vh; width: 50px; z-index: 10;">
+            <a href="" class="bgMainColor text-white h-25 d-flex align-items-center p-2 pageLinkRight hoverTransition" id="toggleSidebar">
+                <i class="fa-solid fa-left-right fa-xl"></i>
+            </a>
+        </div>
+
+
         <div class="contentBlock container my-5">
             {% block content %}
             <div class="shadow rounded-xl bg-light">
@@ -167,12 +174,44 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
         <script>
+            var showSideBar = true
+            function checkSpace () {
+                if ($(window).width() < 1200){
+                    $("#sidebar").animate({width: 'hide'},350);
+                    showSideBar = false
+                }
+                else{
+                    $("#sidebar").animate({width: 'show'},350);
+                    showSideBar = true
+                }
+            }
+
+            
             $(document).ready(() => {
+                checkSpace()
+                $(window).resize(() => {
+                    checkSpace()
+                })
+
+                $("#toggleSidebar").click(() => {
+                    if (showSideBar){
+                        $("#sidebar").animate({width: 'hide'},350);
+                        showSideBar = false
+                    }
+                    else{
+                        $("#sidebar").animate({width: 'show'},350);
+                        showSideBar = true
+                    }
+                    return false
+                })
+
+
                 $("#search-form").submit(() => {
                     var cidade = $("#search-bar").val()
                     window.location.replace("{% url 'buscar-imovel' %}?cidade=" + cidade)
                     event.preventDefault()
                 })
+
             })
         </script>
     </main>

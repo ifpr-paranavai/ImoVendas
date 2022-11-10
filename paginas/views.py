@@ -18,20 +18,20 @@ class Index(ListView):
     def get_queryset(self):
         lista = [[], [], []]
 
-        imoveis_validos = Imovel.objects.filter(negociado=False, publicado=True).select_related("cidade")
+        imoveis_validos = Imovel.objects.filter(negociado=False, publicado=True).select_related("cidade", "cidade__estado")
         
         proximos = imoveis_validos.filter(cidade__nome=ip("me").city)[:3]
         destaques = imoveis_validos.filter(destacado=True)[:3]
         novos = imoveis_validos.filter(negociado=False).order_by('-cadastrado_em')[:3]
 
         for imovel in proximos:
-            lista[0].append([imovel, Foto.objects.filter(imovel=imovel)])
+            lista[0].append([imovel, Foto.objects.filter(imovel=imovel)[:1]])
 
         for imovel in destaques:
-            lista[1].append([imovel, Foto.objects.filter(imovel=imovel)])
+            lista[1].append([imovel, Foto.objects.filter(imovel=imovel)[:1]])
             
         for imovel in novos:
-            lista[2].append([imovel, Foto.objects.filter(imovel=imovel)])
+            lista[2].append([imovel, Foto.objects.filter(imovel=imovel)[:1]])
 
         return lista
 

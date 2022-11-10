@@ -78,7 +78,7 @@ class ImovelSearchForm(Form):
                         </button>
                     """
                     ),
-                    css_class="w-50 mx-auto",
+                    css_class="w-25 mx-auto",
                 ),
             ),
         )

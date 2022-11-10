@@ -55,16 +55,14 @@ class Movimentacoes(GroupRequiredMixin, ListView):
         return lista
 
 
-class Relatorios(GroupRequiredMixin, FormView):
+class Relatorios(GroupRequiredMixin, TemplateView):
     group_required = u"Administrador"
     template_name = "administrativo/relatorios.html"
-    form_class = RelatorioForm
-    success_url = "relatorios"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        ano = self.request.GET.get("ano", datetime.now().year)
+        ano = self.request.GET.get("ano", None)
         cidade = self.request.GET.get("cidade", None)
 
         imoveis = Imovel.objects
@@ -74,7 +72,11 @@ class Relatorios(GroupRequiredMixin, FormView):
             imoveis = imoveis.filter(cidade=cidade)
             cidade = cidade.nome
 
+        if not ano:
+            ano = datetime.now().year
+        
         imoveis = imoveis.filter(cadastrado_em__year=ano)
+
         imoveis_mes = []
 
         for i in range(1, 13):
@@ -85,20 +87,11 @@ class Relatorios(GroupRequiredMixin, FormView):
         context["cidade"] = cidade
         return context
 
-    def form_valid(self, form):
-        super().form_valid(form)
-        ano = form.cleaned_data['ano']
-        cidade = form.cleaned_data['cidade']
-
-        url = "/administrativo/relatorios?"
-
-        if ano:
-            url += f"ano={ano}&"
-
-        if cidade:
-            url += f"cidade={cidade.pk}&"
-
-        return redirect(url)
+    
+    def get(self, request, *args, **kwargs):
+        self.search_form = RelatorioForm(request.GET)
+        return self.render_to_response(self.get_context_data(form=self.search_form))
+        
 
 
 class Usuarios(GroupRequiredMixin, ListView):

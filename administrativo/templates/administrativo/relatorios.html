@@ -6,7 +6,7 @@
 
 
 {% block content %}
-<div class="contentCardStyle mx-5 pb-5">
+<div class="contentCardStyle pb-5">
     <div class="d-flex justify-content-between">
         <div class="px-4 py-1 cardTitle hoverTransition text-white">
             <h4>Filtros</h4>
@@ -15,7 +15,7 @@
     
     <div class="row justify-content-center p-3 mx-5">
 
-        <form method="post" class="w-75 mx-auto">
+        <form method="get" class="mx-auto">
             {% csrf_token %}
             {% crispy form %}
         </form>

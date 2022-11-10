@@ -24,7 +24,7 @@ class RelatorioForm(Form):
         ),
     )
 
-    ano = IntegerField(required=False, validators=[MinValueValidator(2000)])
+    ano = IntegerField(required=False, validators=[MinValueValidator(2000)], help_text="Ano de publicação")
 
     class Meta:
         fields = ["ano", "cidade"]
@@ -46,7 +46,7 @@ class RelatorioForm(Form):
                             Buscar
                         </button>
                     """),
-                    css_class="w-50 mx-auto"
+                    css_class="w-25 mx-auto"
                 ),
             )
         )

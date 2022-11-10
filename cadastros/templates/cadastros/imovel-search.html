@@ -9,15 +9,15 @@ Buscar Imóveis
 {% endblock %}
 
 {% block content %}
-<div class="contentCardStyle w-75 mx-auto" style="min-height: 20px;">
+<div class="contentCardStyle w-100 mx-auto" style="min-height: 0px;">
     <div class="d-flex justify-content-between">
         <div class="px-4 py-1 cardTitle hoverTransition text-white">
             <h4>Filtros</h4>
         </div>
         
-        <button class="text-decoration-none d-flex align-items-center px-4 py-1 text-white hoverTransition cardTitleButton" id="toggleFiltros">
+        <a href="" class="text-decoration-none d-flex align-items-center px-4 py-1 text-white hoverTransition cardTitleButton" id="toggleFiltros">
             <i class="fa-solid fa-down-left-and-up-right-to-center"></i>
-        </button>
+        </a>
     </div>
     <div class="px-5 py-4 mx-auto" id="filtros">
         <form method="get" class="mx-auto">
@@ -111,7 +111,7 @@ Buscar Imóveis
     $(document).ready(() => {
         $("#toggleFiltros").click(() => {
             $("#filtros").slideToggle()
-            event.preventDefault()
+            return false
         })
     })
 </script>

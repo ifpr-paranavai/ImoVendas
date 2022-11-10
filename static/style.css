@@ -150,7 +150,6 @@ strong {
   border-bottom-left-radius: 20px;
 }
 
-
 .cardButton {
   background-color: var(--mainColor);
   border-radius: 20px;
@@ -197,6 +196,7 @@ strong {
   min-width: 18vw;
   max-width: 18vw;
   padding: 0 !important;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .rounded-xl{
@@ -234,9 +234,4 @@ img.img-thumbnail{
 
 .biggerTransition:hover {
   transform: scale(1.05);
-}
-
-.propertyCard{
-  min-width: 18vw;
-  max-width: 18vw;
 }
