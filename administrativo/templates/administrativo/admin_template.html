@@ -8,36 +8,45 @@
 Administrativo
 {% endblock %}
 
+{% block home_button %}
+<a href="{% url 'adm' %}" class="text-white mx-auto pt-4 iconTextButton hoverTransition">
+  <i class="fa-solid fa-house fa-2xl">
+      ImoVendas
+  </i>
+  <h4 class="text-end">Admin</h4>
+</a>
+{% endblock %}
+
 {% block items %}
-<li class="nav-item rounded hoverTransition">
+<li class="nav-item rounded-xl hoverTransition">
   <a href="{% url 'adm' %}" class="nav-link text-white text-center">
       <i class="fa-solid fa-triangle-exclamation fa-lg"></i>
       <p class="">Anúncios Pendentes</p>
   </a>
 </li>
 
-<li class="nav-item rounded hoverTransition">
+<li class="nav-item rounded-xl hoverTransition">
   <a href="{% url 'movs' %}" class="nav-link text-white text-center">
       <i class="fa-solid fa-list-check fa-lg"></i>
       <p class="">Movimentações</p>
   </a>
 </li>
 
-<li class="nav-item rounded hoverTransition">
+<li class="nav-item rounded-xl hoverTransition">
   <a href="{% url 'usuarios' %}" class="nav-link text-white text-center">
       <i class="fa-solid fa-users fa-lg"></i>
       <p class="">Usuários</p>
   </a>
 </li>
 
-<li class="nav-item rounded hoverTransition">
+<li class="nav-item rounded-xl hoverTransition">
   <a href="{% url 'rotinas' %}" class="nav-link text-white text-center">
       <i class="fa-solid fa-rotate-right fa-lg"></i>
       <p class="">Executar Rotinas</p>
   </a>
 </li>
 
-<li class="nav-item rounded hoverTransition">
+<li class="nav-item rounded-xl hoverTransition">
     <a href="{% url 'index' %}" class="nav-link text-white text-center">
         <i class="fa-solid fa-arrow-left fa-lg"></i>
         <p class="">Voltar ao site</p>

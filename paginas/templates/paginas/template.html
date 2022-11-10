@@ -32,19 +32,21 @@
 <body class="backgroundColor">
 
     <main class="d-flex flex-nowrap">
-        <div class="flex-column flex-shrink-0 p-3 sticky-top shadow rounded-right bgMainColor sidebarSize hide-mobile"
+        <div class="flex-column flex-shrink-0 p-3 sticky-top shadow rounded-xl-right bgMainColor sidebarSize hide-mobile"
             style="width: 340px; height: 100vh;">
-            <a href="{% url 'index' %}" class="text-white mx-auto iconTextButton hoverTransition">
+            {% block home_button %}
+            <a href="{% url 'index' %}" class="text-white mx-auto iconTextButton hoverTransition py-4">
                 <i class="fa-solid fa-house fa-2xl">
                     ImoVendas
                 </i>
             </a>
+            {% endblock %}
             <hr style="border-width: 1px; opacity: 1; color: white;">
             <ul class="nav nav-pills flex-column mb-auto">
                 {% block search %}
                 <li class="nav-item mb-3">
                     <form class="input-group" id="search-form">
-                        <input type="text" class="form-control opacity-75" placeholder="Buscar cidade" id="search-bar">
+                        <input type="text" class="form-control opacity-75 border border-light" placeholder="Buscar cidade" id="search-bar">
                         <button class="text-white border border-light iconTextButton hoverTransition" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
@@ -54,21 +56,21 @@
 
                 {% block items %}
                   
-                <li class="nav-item rounded hoverTransition">
+                <li class="nav-item rounded-xl hoverTransition">
                     <a href="/buscar/imovel/?destacado=True" class="nav-link text-white text-center">
                         <i class="fa-solid fa-star fa-lg"></i>
                         <p>Destaques</p>
                     </a>
                 </li>
 
-                <li class="nav-item rounded hoverTransition">
+                <li class="nav-item rounded-xl hoverTransition">
                     <a href="/buscar/imovel/?local=True" class="nav-link text-white text-center">
                         <i class="fa-solid fa-location-dot fa-lg"></i>
                         <p class="">Para Você</p>
                     </a>
                 </li>
 
-                <li class="nav-item rounded hoverTransition">
+                <li class="nav-item rounded-xl hoverTransition">
                     <a href="/buscar/imovel/?novos=True" class="nav-link text-white text-center">
                         <i class="fa-solid fa-fire fa-lg"></i>
                         <p class="">Recentes</p>
@@ -76,7 +78,7 @@
                 </li>
 
                 {% if request.user.is_authenticated %}
-                <li class="nav-item rounded hoverTransition">
+                <li class="nav-item rounded-xl hoverTransition">
                     <a href="{% url 'listar-imovel' %}" class="nav-link text-white text-center">
                         <i class="fa-solid fa-clipboard-list fa-lg"></i>
                         <p class="">Meus Imóveis</p>
@@ -85,7 +87,7 @@
                 {% endif %}
 
                 {% if request.user|is_admin %}
-                <li class="nav-item rounded hoverTransition">
+                <li class="nav-item rounded-xl hoverTransition">
                     <a href="{% url 'adm' %}" class="nav-link text-white text-center">
                         <i class="fa-solid fa-screwdriver-wrench fa-lg"></i>
                         <p class="">Administrativo</p>
@@ -100,9 +102,9 @@
             {% if request.user.is_authenticated %}
             <div class="dropdown">
                 <a href="#"
-                    class="d-flex align-items-center justify-content-between text-white dropdown-toggle rounded p-2 hoverTransition"
+                    class="d-flex align-items-center justify-content-between text-white dropdown-toggle rounded-xl p-2 hoverTransition"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-user fa-xl rounded-circle me-2"></i>
+                    <i class="fas fa-user fa-xl rounded-xl-circle me-2"></i>
                     <strong>{{ request.user }}</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
@@ -111,13 +113,13 @@
             </div>
             {% else %}
             <ul class="nav nav-pills flex-column">
-                <li class="nav-item rounded hoverTransition">
+                <li class="nav-item rounded-xl hoverTransition">
                     <a href="{% url 'login' %}" class="nav-link text-white text-center">
                         <i class="fa-solid fa-right-to-bracket fa-lg"></i>
                         <p>Entrar</p>
                     </a>
                 </li>
-                <li class="nav-item rounded hoverTransition">
+                <li class="nav-item rounded-xl hoverTransition">
                     <a href="{% url 'cadastro' %}" class="nav-link text-white text-center">
                         <i class="fa-solid fa-file-pen fa-lg"></i>
                         <p>Cadastrar-se</p>
@@ -132,7 +134,7 @@
 
         <div class="contentBlock container my-5">
             {% block content %}
-            <div class="shadow rounded bg-light">
+            <div class="shadow rounded-xl bg-light">
                 <div class="px-4 py-1 cardTitle hoverTransition text-white">
                     <h4>Titulo</h4>
                 </div>
@@ -141,7 +143,7 @@
                 </div>
             </div>
 
-            <div class="shadow rounded bg-light">
+            <div class="shadow rounded-xl bg-light">
                 <div class="px-4 py-1 cardTitle hoverTransition text-white">
                     <h4>Titulo 2</h4>
                 </div>

@@ -79,7 +79,7 @@ class ImovelFotoForm(ImovelForm):
             Fieldset(
                 "Fotos do imóvel",
                 HTML("""
-                    <a id="showModal" href="javascript:void(0)" class="btn text-white bgMainColor p-2">
+                    <a id="showModal" href="javascript:void(0)" class="btn text-white bgMainColor hoverTransition p-2">
                         <i class="fa-solid fa-circle-question fa-2xl"></i>
                         Ajuda
                     </a>
@@ -92,7 +92,7 @@ class ImovelFotoForm(ImovelForm):
             ButtonHolder(
                 Div(
                     HTML("""
-                        <button type="submit" class="btn btn-lg bgMainColor text-white w-100 fs-4">
+                        <button type="submit" class="btn btn-lg bgMainColor hoverTransition text-white w-100 fs-4">
                             Salvar
                         </button>
                     """),

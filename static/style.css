@@ -53,6 +53,8 @@ strong {
 
 .boostBorder {
   border: 2px solid var(--boostColor);
+
+  animation: boostAnimBorder 3s ease-out infinite;  
 }
 
 .mainColor {
@@ -76,6 +78,46 @@ strong {
   margin-bottom: 1%;
   background-color: white;
   min-height: 15vh;
+}
+
+.cardIcon{
+  color: white;
+  background-color: var(--boostColor);
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+
+  animation: boostAnim 3s ease-out infinite;  
+}
+
+@keyframes boostAnim{
+  0% {
+    background-color: var(--mainColor);
+  }
+  50%{
+    background-color: var(--boostColor);
+  }
+  100%{
+    background-color: var(--mainColor);
+  }
+}
+
+@keyframes boostAnimBorder {
+  0%{
+    border-color: var(--mainColor);
+  }
+  50%{
+    border-color: var(--boostColor);
+  }
+  100%{
+    border-color: var(--mainColor);
+  }
+}
+
+.cardIconMirror{
+  color: white;
+  background-color: var(--dangerColor);
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
 }
 
 .contentBlock {
@@ -145,6 +187,10 @@ strong {
   min-width: 18vw;
   max-width: 18vw;
   padding: 0 !important;
+}
+
+.rounded-xl{
+  border-radius: 20px;
 }
 
 img.img-thumbnail{

@@ -17,7 +17,15 @@ Buscar Imóveis
     <div class="row justify-content-center p-3">
         {% for imovel in object_list %}
 
-        <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">
+        {% if imovel.0.destacado %}
+            <div class="col-sm-3 m-3 shadow-sm rounded-xl propertyCard biggerTransition boostBorder">  
+        {% else %}
+            <div class="col-sm-3 m-3 shadow-sm rounded-xl propertyCard biggerTransition">  
+        {% endif %}
+            {% if imovel.0.destacado %}
+                <i class="fa-solid fa-star p-3 cardIcon position-absolute" 
+                style="right: 0;"></i>
+            {% endif %}
             <img class="img-thumbnail p-0" src={{imovel.1.0.foto.url}} />
             <div class="p-3">
                 <h4>{{imovel.0.titulo}}</h4>
@@ -26,9 +34,9 @@ Buscar Imóveis
                 <div class="d-flex">
                     {% for f in imovel.0.finalidade_as_list %}
                     {% if f == "Vender" %}
-                    <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
+                    <p class="mx-2 px-3 py-1 rounded-xl bgMainColor text-white">{{f}}</p>
                     {% else %}
-                    <p class="mx-2 px-3 py-1 rounded bgSecondColor text-white">{{f}}</p>
+                    <p class="mx-2 px-3 py-1 rounded-xl bgSecondColor text-white">{{f}}</p>
                     {% endif %}
                     {% endfor %}
                 </div>
@@ -43,18 +51,18 @@ Buscar Imóveis
     </div>
         <ul class="pagination" style="justify-content: center;">
             {% if page_obj.has_previous %}
-                <a class="page-link rounded" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Anterior</a>
+                <a class="page-link rounded-xl" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Anterior</a>
             {% else %}
-                <a class="page-link disabled rounded" tabindex="-1">Anterior</a>
+                <a class="page-link disabled rounded-xl" tabindex="-1">Anterior</a>
             {% endif %}
 
             <li class="page-item">
                 <a class="btn bgMainColor text-white" href="#">{{ page_obj.number }}</a>
             </li>
             {% if page_obj.has_next %}
-                <a class="page-link rounded" href="?page={{ page_obj.next_page_number }}" tabindex="-1">Proxima</a>
+                <a class="page-link rounded-xl" href="?page={{ page_obj.next_page_number }}" tabindex="-1">Proxima</a>
             {% else %}
-                <a class="page-link disabled rounded" tabindex="-1">Proxima</a>
+                <a class="page-link disabled rounded-xl" tabindex="-1">Proxima</a>
             {% endif %}
         </ul>
     

@@ -37,7 +37,7 @@
             <h4>Imóvel</h4>
         </div>
         {% if object.0.destacado %}
-        <div class="d-flex align-items-center px-4 py-1 text-secondary rounded bgBoostColor">
+        <div class="d-flex align-items-center px-4 py-1 text-secondary rounded-xl bgBoostColor">
             <h4>Destacado</h4>
             &ensp;
             <i class="fa-solid fa-star"></i>
@@ -51,7 +51,7 @@
 
         <div class="col-lg-8 my-2">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-                <div class="carousel-inner">
+                <div class="carousel-inner shadow-lg rounded-xl">
                     {% for f in object.1 %}
                         {% if forloop.counter == 1 %}
                             <div class="carousel-item active">
@@ -59,30 +59,31 @@
                             <div class="carousel-item">
                         {% endif %}
                             <a href={{f.foto.url}} target="_blank">
-                                <img class="img-fluid rounded mx-auto d-block" src={{f.foto.url}} />
+                                <img class="img-fluid mx-auto d-block" src={{f.foto.url}} />
                             </a>
                         </div>
                     {% endfor %}
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon rounded bgMainColor" aria-hidden="true"></span>
+                    <span class="carousel-control-prev-icon rounded-xl bgMainColor" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon rounded bgMainColor" aria-hidden="true"></span>
+                    <span class="carousel-control-next-icon rounded-xl bgMainColor" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
         </div>
             
         <div class="col-lg-4 my-2">
-            <div class="text-center mb-3">
-                <a href="#" class="btn btn-lg btn btn-outline-success mb-3 w-75" role="button">Contatar Vendedor</a>
+            <div class="text-center rounded-xl position-relative mx-4 py-3 shadow-sm" 
+                style="top: 5%; border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
+                <a href="#" class="btn btn-lg bgMainColor text-white hoverTransition mb-3 w-75" role="button">Contatar Vendedor</a>
                 
                 <h2>R${{ object.0.preco }}</h2>
             </div>
 
-            <div class="text-left shadow-sm p-4">
+            <div class="text-left p-4 rounded-xl position-relative bg-white" style="box-shadow: 0 .5rem .5rem rgba(0,0,0,.15);">
                 <p> {{ object.0.descricao }}</p>
                 
                 <p> {{ object.0.cidade }}</p>
@@ -92,9 +93,9 @@
                 <div class="d-flex">
                     {% for f in object.0.finalidade_as_list %}
                         {% if f == "Vender" %}
-                            <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
+                            <p class="mx-2 px-3 py-1 rounded-xl bgMainColor text-white">{{f}}</p>
                         {% else %}
-                            <p class="mx-2 px-3 py-1 rounded bgSecondColor text-white">{{f}}</p>
+                            <p class="mx-2 px-3 py-1 rounded-xl bgSecondColor text-white">{{f}}</p>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -112,7 +113,7 @@
     <div class="row p-4">
         <div class="col-lg my-2">
 
-            <div class="w-75 shadow-sm p-4 h-100"> 
+            <div class="w-75 shadow p-4 h-100 rounded-xl"> 
                 <h3>Informações</h3>
                 <div class="p-3">
                     <p> {{ object.0.quantidade_quartos }} Quarto(s)</p>
@@ -123,7 +124,7 @@
 
         </div>
         <div class="col-lg my-2">
-            <div class="w-75 shadow-sm p-4 h-100"> 
+            <div class="w-75 shadow p-4 h-100 rounded-xl"> 
                 <h3>Endereço</h3>
                 <div class="p-3">
                     <p>Rua: {{ object.0.rua }}</p>

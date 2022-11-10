@@ -24,17 +24,17 @@ Meus Imóveis
             {% if imovel.0.publicado %}
             
                 {% if imovel.0.destacado %}
-                <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition boostBorder">  
+                <div class="col-sm-3 m-3 shadow-sm rounded-xl propertyCard biggerTransition boostBorder">  
                 {% else %}
-                <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">  
+                <div class="col-sm-3 m-3 shadow-sm rounded-xl propertyCard biggerTransition">  
                 {% endif %}
 
                     <a href="{% url 'negociar-imovel' pk=imovel.0.pk %}">
-                        <i class="fa-solid fa-check p-3 text-white rounded hoverTransition bgDangerColor position-absolute" 
+                        <i class="fa-solid fa-check p-3 cardIconMirror hoverTransition position-absolute" 
                         style="left: 0;"></i>
                     </a>
                     {% if imovel.0.destacado %}
-                        <i class="fa-solid fa-star p-3 text-white rounded bgBoostColor position-absolute" 
+                        <i class="fa-solid fa-star p-3 cardIcon position-absolute" 
                         style="right: 0;"></i>
                     {% endif %}
                     
@@ -46,9 +46,9 @@ Meus Imóveis
                         <div class="d-flex mb-4">
                             {% for f in imovel.0.finalidade_as_list %}
                                 {% if f == "Vender" %}
-                                    <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
+                                    <p class="mx-2 px-3 py-1 rounded-xl bgMainColor text-white">{{f}}</p>
                                 {% else %}
-                                    <p class="mx-2 px-3 py-1 rounded bgSecondColor text-white">{{f}}</p>
+                                    <p class="mx-2 px-3 py-1 rounded-xl bgSecondColor text-white">{{f}}</p>
                                 {% endif %}
                             {% endfor %}
                         </div>
@@ -83,12 +83,12 @@ Meus Imóveis
             {% if not imovel.0.publicado or imovel.0.negociado %}
             
                 {% if imovel.0.destacado %}
-                <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition boostBorder">  
+                <div class="col-sm-3 m-3 shadow-sm rounded-xl propertyCard biggerTransition boostBorder">  
                 {% else %}
-                <div class="col-sm-3 m-3 shadow-sm rounded propertyCard biggerTransition">  
+                <div class="col-sm-3 m-3 shadow-sm rounded-xl propertyCard biggerTransition">  
                 {% endif %}
                     {% if imovel.0.destacado %}
-                        <i class="fa-solid fa-star p-3 text-white rounded bgBoostColor position-absolute" 
+                        <i class="fa-solid fa-star p-3 cardIcon position-absolute" 
                         style="right: 0;"></i>
                     {% endif %}
                     
@@ -100,9 +100,9 @@ Meus Imóveis
                         <div class="d-flex mb-4">
                             {% for f in imovel.0.finalidade_as_list %}
                                 {% if f == "Vender" %}
-                                    <p class="mx-2 px-3 py-1 rounded bgMainColor text-white">{{f}}</p>
+                                    <p class="mx-2 px-3 py-1 rounded-xl bgMainColor text-white">{{f}}</p>
                                 {% else %}
-                                    <p class="mx-2 px-3 py-1 rounded bgSecondColor text-white">{{f}}</p>
+                                    <p class="mx-2 px-3 py-1 rounded-xl bgSecondColor text-white">{{f}}</p>
                                 {% endif %}
                             {% endfor %}
                         </div>
