@@ -7,16 +7,6 @@
 
   --bgColor: #eaeaea;
 }
- 
-.hide-mobile{
-  display: block;
-}
-
-@media screen and (max-width: 1000px) {
-  .hide-mobile{
-    display: none !important;
-  }
-}
 
 .sidebarSize{
   display: flex;
@@ -75,9 +65,8 @@ strong {
 
 .contentCardStyle{
   border-radius: 20px;
-  margin-bottom: 1%;
+  margin-bottom: 5vh;
   background-color: white;
-  min-height: 15vh;
 }
 
 .cardIcon{
@@ -193,10 +182,16 @@ strong {
 }
 
 .propertyCard{
-  min-width: 18vw;
-  max-width: 18vw;
+  min-width: 40vh;
   padding: 0 !important;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+@media screen and (max-width: 500px) {
+  .propertyCard{
+    padding: 0 !important;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  }
 }
 
 .rounded-xl{
