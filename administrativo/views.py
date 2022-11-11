@@ -5,7 +5,6 @@ from braces.views import GroupRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormView
 from django.views.generic.list import ListView
 
 from administrativo.forms import RelatorioForm
@@ -16,6 +15,8 @@ class Adm(GroupRequiredMixin, ListView):
     group_required = u"Administrador"
     model = Imovel
     template_name = "administrativo/index.html"
+
+    paginate_by = 3
 
     def get_queryset(self):
         lista = []
@@ -38,6 +39,8 @@ class Movimentacoes(GroupRequiredMixin, ListView):
     group_required = u"Administrador"
     model = Movimentacao
     template_name = "administrativo/movs.html"
+
+    paginate_by = 3
 
     def get_queryset(self):
         lista = []
