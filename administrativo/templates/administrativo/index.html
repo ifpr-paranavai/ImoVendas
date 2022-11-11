@@ -5,74 +5,79 @@
 
 {% block content %}
 <div class="contentCardStyle">
-    <div class="d-flex justify-content-between">
-        <div class="px-4 py-1 cardTitle hoverTransition text-white">
-            <h4>Pendentes</h4>
-        </div>
+  <div class="d-flex justify-content-between">
+    <div class="px-4 py-1 cardTitle hoverTransition text-white">
+      <h4>Pendentes</h4>
     </div>
-    
-    <div class="row justify-content-center p-3">
-        {% for obj in object_list %}
-            
-        <div class="accordion">
-            <div class="accordion-item">
-                <h2 class="accordion-header" >
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion{{forloop.counter}}" >
-                    <img class="img-fluid rounded-xl mx-auto d-block w-25" src={{obj.1.foto.url}} />
+  </div>
 
-                    <h4>{{ obj.0.imovel.titulo }}</h4>
-                  </button>
-                </h2>
-                <div id="accordion{{forloop.counter}}" class="accordion-collapse collapse">
-                  <div class="accordion-body">
-                    <h5>Motivo: {{obj.0.motivo}} </h5>
-                    <h5>Comprovante: 
-                      {% if obj.0.comprovante %}
-                        <a href="{{obj.0.comprovante.url}}" target="_blank" class="text-center">
-                          <i class="fa fa-solid fa-eye fa-md" ></i>
-                        </a> 
-                      {% else %}
-                        Sem Comprovante 
-                      {% endif %}
-                    </h5>
+  <div class="row justify-content-center p-3">
+    <div class="accordion">
+      {% for obj in object_list %}
 
-                    <div class="d-flex justify-content-end">
-                      <a href="{% url 'imovel-view' pk=obj.0.imovel.pk %}" target="_blank" class="btn btn-lg bgSecondColor text-white">Ver detalhes</a>
-                      <a href="{% url 'rejeitar-imovel' historico_pk=obj.0.pk %}" class="btn btn-lg bgDangerColor text-white">Rejeitar</a>
-                      
-                      {% if imovel.2.motivo == 'Publicação de imóvel' %}
-                        <a href="{% url 'aprovar-imovel' pk=obj.0.imovel.pk historico_pk=obj.0.pk destaque=0 %}" class="btn btn-lg bgMainColor text-white">Aprovar</a>
-                      {% else %}
-                        <a href="{% url 'aprovar-imovel' pk=obj.0.imovel.pk historico_pk=obj.0.pk destaque=1 %}" class="btn btn-lg bgMainColor text-white">Aprovar</a>
-                      {% endif %}
-                    </div>
-                    
-                  </div>
-                </div>
-              </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#accordion{{forloop.counter}}">
+            <img class="img-fluid w-50 h-100 movImg rounded me-5" src={{obj.1.foto.url}} />
+            <h4 class="ms-5">{{ obj.0.imovel.titulo }}</h4>
+          </button>
+        </h2>
+        <div id="accordion{{forloop.counter}}" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <h5>Motivo: {{obj.0.motivo}} </h5>
+            <h5>Comprovante:
+              {% if obj.0.comprovante %}
+              <a href="{{obj.0.comprovante.url}}" target="_blank" class="text-center">
+                <i class="fa fa-solid fa-eye fa-md"></i>
+              </a>
+              {% else %}
+              Sem Comprovante
+              {% endif %}
+            </h5>
+
+            <div class="d-flex justify-content-end">
+              <a href="{% url 'imovel-view' pk=obj.0.imovel.pk %}" target="_blank"
+                class="btn btn-lg bgSecondColor text-white">Ver detalhes</a>
+              <a href="{% url 'rejeitar-imovel' historico_pk=obj.0.pk %}"
+                class="btn btn-lg bgDangerColor text-white">Rejeitar</a>
+
+              {% if imovel.2.motivo == 'Publicação de imóvel' %}
+              <a href="{% url 'aprovar-imovel' pk=obj.0.imovel.pk historico_pk=obj.0.pk destaque=0 %}"
+                class="btn btn-lg bgMainColor text-white">Aprovar</a>
+              {% else %}
+              <a href="{% url 'aprovar-imovel' pk=obj.0.imovel.pk historico_pk=obj.0.pk destaque=1 %}"
+                class="btn btn-lg bgMainColor text-white">Aprovar</a>
+              {% endif %}
+            </div>
+
+          </div>
         </div>
-            
-        {% empty %}
-        <h4>Não há imóveis pendentes.</h4>
+      </div>
 
-        {% endfor %}
 
+      {% empty %}
+      <h4>Não há imóveis pendentes.</h4>
+
+      {% endfor %}
     </div>
-    <ul class="pagination" style="justify-content: center;">
-      {% if page_obj.has_previous %}
-          <a class="page-link pageLinkLeft" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Anterior</a>
-      {% else %}
-          <a class="page-link disabled pageLinkLeft" tabindex="-1">Anterior</a>
-      {% endif %}
 
-      <li class="page-item">
-          <a class="btn bgMainColor text-white" style="border-radius: 0;" href="#">{{ page_obj.number }}</a>
-      </li>
-      {% if page_obj.has_next %}
-          <a class="page-link pageLinkRight" href="?page={{ page_obj.next_page_number }}" tabindex="-1">Proxima</a>
-      {% else %}
-          <a class="page-link disabled pageLinkRight" tabindex="-1">Proxima</a>
-      {% endif %}
+  </div>
+  <ul class="pagination" style="justify-content: center;">
+    {% if page_obj.has_previous %}
+    <a class="page-link pageLinkLeft" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Anterior</a>
+    {% else %}
+    <a class="page-link disabled pageLinkLeft" tabindex="-1">Anterior</a>
+    {% endif %}
+
+    <li class="page-item">
+      <a class="btn bgMainColor text-white" style="border-radius: 0;" href="#">{{ page_obj.number }}</a>
+    </li>
+    {% if page_obj.has_next %}
+    <a class="page-link pageLinkRight" href="?page={{ page_obj.next_page_number }}" tabindex="-1">Proxima</a>
+    {% else %}
+    <a class="page-link disabled pageLinkRight" tabindex="-1">Proxima</a>
+    {% endif %}
   </ul>
 </div>
 
