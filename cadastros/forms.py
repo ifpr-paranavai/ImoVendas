@@ -177,6 +177,7 @@ class ImovelFotoForm(ImovelForm):
                         <i class="fa-solid fa-circle-question fa-2xl"></i>
                         Ajuda
                     </a>
+                    <div id="idPreview" class="my-5 col"></div>
                     """
                 ),
                 Column("fotos", css_class="form-group col-sm mb-0"),

@@ -204,7 +204,12 @@ img.img-thumbnail{
   object-fit: cover;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+}
 
+.imgProperty{
+  width: 100%;
+  height: 50vh !important;
+  object-fit: cover;
 }
 
 #imgCoverPay{

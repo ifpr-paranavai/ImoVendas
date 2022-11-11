@@ -100,11 +100,30 @@ Cadastrar Imóvel
 
 {% block scripts %}
 <script>
+  function updatePhotos() {
+    var input_obj = document.getElementById("id_fotos")
+    var preview_imgs = []
+
+    var full_html = ""
+
+    for (let i=0; i<input_obj.files.length; i++){
+      let url = URL.createObjectURL(input_obj.files[i])
+      full_html += "<img class='p-3 img-thumbnail' style='border-radius: 20px; width: 300px;' src=" + url +">"
+    }
+
+
+    $("#idPreview").html(full_html)
+  }
+
   $(document).ready(() => {
     $('#exampleModal').modal("show")
 
     $("#showModal").click(() => {
       $('#exampleModal').modal("show")
+    })
+
+    $("#id_fotos").change(() => {
+      updatePhotos()
     })
   })
 </script>
