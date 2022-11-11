@@ -45,7 +45,7 @@ class Movimentacoes(GroupRequiredMixin, ListView):
     def get_queryset(self):
         lista = []
 
-        imoveis = Imovel.objects.all()
+        imoveis = Imovel.objects.all().order_by("-cadastrado_em")
 
         for imovel in imoveis:
             movimentacoes = Movimentacao.objects.filter(imovel=imovel)

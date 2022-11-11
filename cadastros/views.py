@@ -70,7 +70,7 @@ def imovelFinish(request, pk=None):
         
 class ImovelSearch(ListView):
     template_name = "cadastros/imovel-search.html"
-    paginate_by = 2
+    paginate_by = 6
 
     search_form = None
     
@@ -88,7 +88,7 @@ class ImovelSearch(ListView):
         on_location = self.request.GET.get("local", None)
         from_user = self.request.GET.get("usuario", None)
         
-        imoveis = Imovel.objects.filter(publicado=True, negociado=False)
+        imoveis = Imovel.objects.filter(publicado=True, negociado=False).select_related("cidade", "cidade__estado")
 
         if on_location:
             ip_info = ip("me") 
@@ -122,7 +122,7 @@ class ImovelSearch(ListView):
             imoveis = imoveis.order_by("-cadastrado_em")
 
         for imovel in imoveis:
-            lista.append([imovel, Foto.objects.filter(imovel=imovel)])
+            lista.append([imovel, Foto.objects.filter(imovel=imovel)[:1]])
 
         return lista
 
