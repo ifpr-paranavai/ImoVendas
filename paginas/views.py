@@ -7,6 +7,8 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from geocoder import ip
 
+import urllib.parse
+
 from cadastros.models import Foto, Movimentacao, Imovel, Perfil
 from paginas.forms import MovimentacaoForm
 
@@ -22,7 +24,7 @@ class Index(ListView):
         
         proximos = imoveis_validos.filter(cidade__nome=ip("me").city)[:3]
         destaques = imoveis_validos.filter(destacado=True)[:3]
-        novos = imoveis_validos.filter(negociado=False).order_by('-cadastrado_em')[:3]
+        novos = imoveis_validos.order_by('-cadastrado_em')[:3]
 
         for imovel in proximos:
             lista[0].append([imovel, Foto.objects.filter(imovel=imovel)[:1]])
@@ -49,7 +51,16 @@ class ImovelView(DetailView):
         fotos = Foto.objects.filter(imovel=imovel)
         imovel_count = Imovel.objects.filter(usuario=imovel.usuario).count()
         perfil = Perfil.objects.get(usuario__id=imovel.usuario.id)
-        return [imovel, fotos, imovel_count, perfil]
+
+        msg_content = f"Olá, tenho interesse em seu imóvel publicado em: {self.request.build_absolute_uri()}"
+
+        raw_phone = ''.join(e for e in perfil.celular if e.isalnum())
+        phone_msg = urllib.parse.quote(msg_content)
+        phone_msg = f"https://wa.me/55{raw_phone}?text={phone_msg}"
+
+        email_msg = f"mailto:{imovel.usuario.email}?subject=Sobre seu Imóvel em ImoVendas&body={msg_content}"
+
+        return [imovel, fotos, imovel_count, perfil, phone_msg, email_msg]
 
 
 class ImovelPagar(CreateView):

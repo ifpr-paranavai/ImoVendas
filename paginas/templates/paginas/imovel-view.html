@@ -9,6 +9,40 @@
 
 {% block content %}
 <div class="contentCardStyle">
+
+    <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="margin-right: 0; margin-left: 0;">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-3" id="exampleModalLabel">Contato</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body my-3">
+                    <h4 class="mb-5">O vendedor possui duas informações para contato, celular e e-mail.</h4>
+
+                    <h5>
+                        Celular: {{object.3.celular}}
+                    </h5>
+                    <h5>
+                        E-mail: {{object.0.usuario.email}}
+                    </h5>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ object.4 }}" target="_blank" class="btn bgMainColor text-white hoverTransition fs-5">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        Conversar no Whatsapp
+                    </a>
+                    <a href="{{ object.5 }}" target="_blank" class="btn bgMainColor text-white hoverTransition fs-5">
+                        <i class="fa-solid fa-envelope"></i>
+                        Enviar E-mail
+                    </a>
+                    <button type="button" class="btn bgMainColor text-white hoverTransition fs-5"
+                        data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="d-flex justify-content-between">
         <div class="px-4 py-1 cardTitle hoverTransition text-white">
             <h4>Imóvel</h4>
@@ -21,7 +55,7 @@
         </div>
         {% endif %}
     </div>
-    
+
     <h1 class="mx-4 mt-4">{{ object.0.titulo }}</h1>
 
     <div class="row p-4">
@@ -30,91 +64,104 @@
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-inner shadow-lg rounded-xl">
                     {% for f in object.1 %}
-                        {% if forloop.counter == 1 %}
-                            <div class="carousel-item active">
+                    {% if forloop.counter == 1 %}
+                    <div class="carousel-item active">
                         {% else %}
-                            <div class="carousel-item">
-                        {% endif %}
+                        <div class="carousel-item">
+                            {% endif %}
                             <a href={{f.foto.url}} target="_blank">
                                 <img class="img-fluid mx-auto d-block imgProperty" src={{f.foto.url}} />
                             </a>
                         </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon rounded-xl bgMainColor" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon rounded-xl bgMainColor" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon rounded-xl bgMainColor" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon rounded-xl bgMainColor" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-            
-        <div class="col-lg-4 my-2">
-            <div class="text-center rounded-xl position-relative mx-4 py-3 shadow border" 
-                style="top: 5%; border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
-                <a href="#" class="btn btn-lg bgMainColor text-white hoverTransition mb-3 w-75 shadow fs-4" role="button">Contatar Vendedor</a>
-                
-                <h2>R${{ object.0.preco }}</h2>
             </div>
 
-            <div class="text-left p-4 rounded-xl position-relative bg-white" style="box-shadow: 0 .5rem .5rem rgba(0,0,0,.15);">
-                <p> {{ object.0.descricao }}</p>
-                
-                <p> {{ object.0.cidade }}</p>
+            <div class="col-lg-4 my-2">
+                <div class="text-center rounded-xl position-relative mx-4 py-3 shadow border"
+                    style="top: 5%; border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
+                    <a href="#" class="btn btn-lg bgMainColor text-white hoverTransition mb-3  shadow fs-4"
+                        role="button"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa-solid fa-message"></i>
+                        &ensp;
+                        Contatar Vendedor
+                    </a>
 
-                <p> {{ object.0.tipo }}</p>
+                    <h2>R${{ object.0.preco }}</h2>
+                </div>
 
-                <div class="d-flex">
-                    {% for f in object.0.finalidade_as_list %}
+                <div class="text-left p-4 rounded-xl position-relative bg-white"
+                    style="box-shadow: 0 .5rem .5rem rgba(0,0,0,.15);">
+                    <p> {{ object.0.descricao }}</p>
+
+                    <p> {{ object.0.cidade }}</p>
+
+                    <p> {{ object.0.tipo }}</p>
+
+                    <div class="d-flex">
+                        {% for f in object.0.finalidade_as_list %}
                         {% if f == "Vender" %}
-                            <p class="mx-2 px-3 py-1 rounded-xl bgMainColor text-white">{{f}}</p>
+                        <p class="mx-2 px-3 py-1 rounded-xl bgMainColor text-white">{{f}}</p>
                         {% else %}
-                            <p class="mx-2 px-3 py-1 rounded-xl bgSecondColor text-white">{{f}}</p>
+                        <p class="mx-2 px-3 py-1 rounded-xl bgSecondColor text-white">{{f}}</p>
                         {% endif %}
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
+
+                    <p>Publicado por:
+                        <a href="{% url 'buscar-imovel' %}?usuario={{object.0.usuario.id}}"
+                            class="btn bgMainColor text-white">
+                            {{ object.3.nome }} ({{ object.2 }} anúncios)
+                        </a>
+                    </p>
                 </div>
-                
-                <p>Publicado por: 
-                    <a href="{% url 'buscar-imovel' %}?usuario={{object.0.usuario.id}}" class="btn bgMainColor text-white">
-                        {{ object.3.nome }} ({{ object.2 }} anúncios) 
-                    </a> 
-                </p>
             </div>
+
         </div>
 
+        <div class="row p-4">
+            <div class="col-lg my-2">
+
+                <div class="shadow p-4 h-100 rounded-xl">
+                    <h3>Informações</h3>
+                    <div class="p-3">
+                        <p> {{ object.0.quantidade_quartos }} Quarto(s)</p>
+                        <p> {{ object.0.quantidade_banheiros }} Banheiro(s)</p>
+                        <p>Área: {{ object.0.area }}m<sup>2</sup> </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg my-2">
+                <div class="shadow p-4 h-100 rounded-xl">
+                    <h3>Endereço</h3>
+                    <div class="p-3">
+                        <p>Rua: {{ object.0.rua }}</p>
+                        <p>Bairro: {{ object.0.bairro }}</p>
+                        <p>Número: {{ object.0.numero }}</p>
+                        <p>CEP: {{ object.0.cep }}</p>
+                    </div>
+                    <a class="btn btn-lg bgMainColor text-white hoverTransition"
+                        href="{{ 'https://www.google.com.br/maps/search/'|build_url:object.0.cep }}" target="_blank">
+                        <i class="fa-solid fa-location-dot"></i>
+                        &ensp;
+                        Ver Rua
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="row p-4">
-        <div class="col-lg my-2">
-
-            <div class="shadow p-4 h-100 rounded-xl"> 
-                <h3>Informações</h3>
-                <div class="p-3">
-                    <p> {{ object.0.quantidade_quartos }} Quarto(s)</p>
-                    <p> {{ object.0.quantidade_banheiros }} Banheiro(s)</p>
-                    <p>Área: {{ object.0.area }}m<sup>2</sup> </p>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-lg my-2">
-            <div class="shadow p-4 h-100 rounded-xl"> 
-                <h3>Endereço</h3>
-                <div class="p-3">
-                    <p>Rua: {{ object.0.rua }}</p>
-                    <p>Bairro: {{ object.0.bairro }}</p>
-                    <p>Número: {{ object.0.numero }}</p>
-                    <p>CEP: {{ object.0.cep }}</p>
-                </div>
-                <a class="btn btn-lg bgMainColor text-white" href="{{ 'https://www.google.com.br/maps/search/'|build_url:object.0.cep }}" target="_blank">Ver Rua</a>
-                <!-- <iframe src="https://www.google.com/maps/embed?pb=!4v1668030323509!6m8!1m7!1sFVXJMtvTy9Ezo31Uv5tCnQ!2m2!1d-23.05822614441646!2d-52.46605950666201!3f350.49743046177656!4f0!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
-            </div>
-        </div>
-    </div>
-</div>
-
-{% endblock content %}
-
+    {% endblock content %}
