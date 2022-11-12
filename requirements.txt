@@ -1,0 +1,9 @@
+django
+django-autocomplete-light
+django-debug-toolbar
+django-cleanup
+django-crispy-forms
+crispy-bootstrap5
+django-multiselectfield
+geocoder
+django-braces
