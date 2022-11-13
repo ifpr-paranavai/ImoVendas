@@ -18,6 +18,26 @@ Meus Imóveis
             <h4>Adicionar</h4>
         </a>
     </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-3" id="deleteModalLabel">Contato</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>Esta ação irá marcar o imóvel como negociado e desativá-lo permanentemente. Tem certeza que deseja continuar?</h4>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn bgDangerColor text-white hoverTransition fs-5"
+                        id="deleteImovelButton">SIM</a>
+
+                    <a type="button" class="btn bgMainColor text-white hoverTransition fs-5"
+                        data-bs-dismiss="modal">NÃO</a>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="row justify-content-center p-3">
         {% for imovel in object_list %}
@@ -28,8 +48,7 @@ Meus Imóveis
                 {% else %}
                 <div class="col-sm-3 m-3 shadow-sm rounded-xl propertyCard biggerTransition">  
                 {% endif %}
-
-                    <a href="{% url 'negociar-imovel' pk=imovel.0.pk %}">
+                    <a id="deleteModalButton" data-pk="{{imovel.0.pk}}" data-bs-toggle="modal" data-bs-target="#deleteModal" href="">
                         <i class="fa-solid fa-check p-3 cardIconMirror hoverTransition position-absolute" 
                         style="left: 0;"></i>
                     </a>
@@ -126,3 +145,20 @@ Meus Imóveis
 </div>
 
 {% endblock content %}
+
+
+{% block scripts %}
+
+<script>
+    $(document).ready(() => {
+        $("a[id=deleteModalButton]").click((event) => {
+            var imovel_pk = event.currentTarget.attributes["data-pk"].value
+            var url = "/negociar/imovel/"+imovel_pk
+
+            $("#deleteImovelButton").attr("href", url)
+            return false
+        })
+    })
+</script>
+
+{% endblock %}
