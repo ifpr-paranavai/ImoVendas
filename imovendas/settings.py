@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'crispy_forms',
     'crispy_bootstrap5',
+    'multiselectfield',
 
     'paginas.apps.PaginasConfig',
     'cadastros.apps.CadastrosConfig',
