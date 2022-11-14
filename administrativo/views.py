@@ -21,7 +21,7 @@ class Adm(GroupRequiredMixin, ListView):
     def get_queryset(self):
         lista = []
 
-        movimentacoes = Movimentacao.objects.filter(pendente=True).select_related("imovel")
+        movimentacoes = Movimentacao.objects.filter(pendente=True).select_related("imovel").order_by("-movimentado_em")
 
         if not movimentacoes.exists():
             return lista
@@ -114,7 +114,7 @@ def temPermissao(request):
 
 def aprovarImovel(request, pk=None, historico_pk=None, destaque=False):
     if temPermissao(request):
-        imovel = Imovel.objects.get(usuario=request.user, pk=pk)
+        imovel = Imovel.objects.get(pk=pk)
         historico_atual = Movimentacao.objects.get(pk=historico_pk)
         
         if imovel and historico_atual and historico_atual.pendente:
