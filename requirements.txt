@@ -7,3 +7,4 @@ crispy-bootstrap5==0.6
 django-multiselectfield==0.1.12
 geocoder==1.38.1
 django-braces==1.15.0
+Pillow==9.3.0
