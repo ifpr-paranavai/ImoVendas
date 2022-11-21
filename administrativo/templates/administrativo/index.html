@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load admin_tags %}
+
 
 {% block content %}
 <div class="contentCardStyle">
@@ -42,13 +44,9 @@
               <a href="{% url 'rejeitar-imovel' historico_pk=obj.0.pk %}"
                 class="btn btn-lg bgDangerColor text-white">Rejeitar</a>
 
-              {% if 'Publicação' in imovel.2.motivo %}
-              <a href="{% url 'aprovar-imovel' pk=obj.0.imovel.pk historico_pk=obj.0.pk destaque=0 %}"
+              <a href="{% url 'aprovar-imovel' pk=obj.0.imovel.pk historico_pk=obj.0.pk modo=obj.0.motivo|get_code %}"
                 class="btn btn-lg bgMainColor text-white">Aprovar</a>
-              {% else %}
-              <a href="{% url 'aprovar-imovel' pk=obj.0.imovel.pk historico_pk=obj.0.pk destaque=1 %}"
-                class="btn btn-lg bgMainColor text-white">Aprovar</a>
-              {% endif %}
+              
             </div>
 
           </div>

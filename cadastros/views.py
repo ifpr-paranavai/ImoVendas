@@ -3,9 +3,9 @@ from datetime import date, timedelta
 
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from geocoder import ip
 
@@ -32,6 +32,31 @@ class ImovelCreate(LoginRequiredMixin, CreateView):
 
         historico = Movimentacao.objects.create(imovel=form.instance, movimentado_por=self.request.user)
         historico.motivo = "Publicação de imóvel"
+        historico.save()
+
+        return url
+
+class ImovelUpdate(LoginRequiredMixin, UpdateView):
+    form_class = ImovelFotoForm
+    template_name = "cadastros/imovel-form.html"
+    success_url = reverse_lazy('index')
+
+    def get_queryset(self):
+        return Imovel.objects.filter(pk=self.kwargs["pk"], usuario=self.request.user)
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        form.instance.publicado = False
+        url = super().form_valid(form)
+        
+        arquivos = self.request.FILES.getlist("fotos")
+        for foto in arquivos:
+            ext = foto.name.split(".")[-1]
+            foto.name = f"{uuid.uuid4()}.{ext}" 
+            Foto.objects.create(imovel=form.instance, foto=foto)
+
+        historico = Movimentacao.objects.create(imovel=form.instance, movimentado_por=self.request.user)
+        historico.motivo = "Atualização de imóvel"
         historico.save()
 
         return url

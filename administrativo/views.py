@@ -112,17 +112,22 @@ def temPermissao(request):
     return False
 
 
-def aprovarImovel(request, pk=None, historico_pk=None, destaque=False):
+def aprovarImovel(request, pk=None, historico_pk=None, modo=-1):
     if temPermissao(request):
         imovel = Imovel.objects.get(pk=pk)
         historico_atual = Movimentacao.objects.get(pk=historico_pk)
         
         if imovel and historico_atual and historico_atual.pendente:
-            if destaque and imovel.publicado:
-                imovel.destacado = True
-            else:
+            if modo == 0:
                 imovel.publicado = True
                 imovel.expira_em = date.today() + timedelta(days=30)
+
+            elif modo == 1:
+                imovel.publicado = True
+
+            elif modo == 2:
+                if imovel.publicado:
+                    imovel.destacado = True
 
             imovel.save()
 
