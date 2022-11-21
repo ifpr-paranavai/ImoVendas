@@ -115,8 +115,14 @@ strong {
 .cardIconMirror{
   color: white;
   background-color: var(--dangerColor);
-  border-bottom-right-radius: 20px;
   border-top-left-radius: 20px;
+  
+}
+
+.cardIconMirrorReverse{
+  color: white;
+  background-color: var(--mainColor);
+  border-bottom-right-radius: 20px;
 }
 
 .contentBlock {

@@ -48,10 +48,15 @@ Meus Imóveis
                 {% else %}
                 <div class="col-sm-3 m-3 shadow-sm rounded-xl propertyCard biggerTransition">  
                 {% endif %}
-                    <a id="deleteModalButton" data-pk="{{imovel.0.pk}}" data-bs-toggle="modal" data-bs-target="#deleteModal" href="">
-                        <i class="fa-solid fa-check p-3 cardIconMirror hoverTransition position-absolute" 
-                        style="left: 0;"></i>
-                    </a>
+                    <div class="position-absolute d-flex" style="left: 0;">
+                        <a id="deleteModalButton" data-pk="{{imovel.0.pk}}" data-bs-toggle="modal" data-bs-target="#deleteModal" href="">
+                            <i class="fa-solid fa-check p-3 cardIconMirror hoverTransition " ></i>
+                        </a>
+                        
+                        <a href={% url 'atualizar-imovel' pk=imovel.0.pk %}>
+                            <i class="fa-solid fa-edit p-3 cardIconMirrorReverse hoverTransition"></i>
+                        </a>
+                    </div>
                     {% if imovel.0.destacado %}
                         <i class="fa-solid fa-star p-3 cardIcon position-absolute" 
                         style="right: 0;"></i>
