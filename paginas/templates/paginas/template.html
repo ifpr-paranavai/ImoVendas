@@ -44,18 +44,13 @@
             {% endblock %}
             <hr style="border-width: 1px; opacity: 1; color: white;">
             <ul class="nav nav-pills flex-column mb-auto">
-                {% block search %}
-                <li class="nav-item mb-3">
-                    <form class="input-group" id="search-form">
-                        <input type="text" class="form-control opacity-75 border border-light" placeholder="Buscar cidade" id="search-bar">
-                        <button class="text-white border border-light iconTextButton hoverTransition" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form>
-                </li>
-                {% endblock %}
-
                 {% block items %}
+                <li class="nav-item rounded-xl hoverTransition">
+                    <a href="{% url 'buscar-imovel' %}" class="nav-link text-white text-center">
+                        <i class="fa-solid fa-search fa-xl"></i>
+                        <p>Buscar</p>
+                    </a>
+                </li>
                   
                 <li class="nav-item rounded-xl hoverTransition">
                     <a href="{% url 'buscar-imovel' %}?destacado=True" class="nav-link text-white text-center">
