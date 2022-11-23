@@ -116,7 +116,8 @@ class ImovelSearch(ListView):
         imoveis = Imovel.objects.filter(publicado=True, negociado=False).select_related("cidade", "cidade__estado")
 
         if on_location:
-            ip_info = ip("me") 
+            user_ip = self.request.META.get('HTTP_X_FORWARDED_FOR', '')
+            ip_info = ip(user_ip) 
             cidade = Cidade.objects.get(nome__icontains=ip_info.city, estado__nome__icontains=ip_info.state).pk
 
         if from_user:

@@ -20,9 +20,11 @@ class Index(ListView):
     def get_queryset(self):
         lista = [[], [], []]
 
+        user_ip = self.request.META.get('HTTP_X_FORWARDED_FOR', '')
+
         imoveis_validos = Imovel.objects.filter(negociado=False, publicado=True).select_related("cidade", "cidade__estado")
         
-        proximos = imoveis_validos.filter(cidade__nome=ip("me").city)[:3]
+        proximos = imoveis_validos.filter(cidade__nome=ip(user_ip).city)[:3]
         destaques = imoveis_validos.filter(destacado=True)[:3]
         novos = imoveis_validos.order_by('-cadastrado_em')[:3]
 
@@ -34,6 +36,7 @@ class Index(ListView):
             
         for imovel in novos:
             lista[2].append([imovel, Foto.objects.filter(imovel=imovel)[:1]])
+
 
         return lista
 
